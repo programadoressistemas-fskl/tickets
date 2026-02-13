@@ -1,0 +1,57 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Compiled output
+/tmp
+/out-tsc
+/bazel-out
+
+# Node
+/front-end/node_modules
+/front-end/npm-debug.log
+/front-end/yarn-error.log
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+/front-end/.vscode/*
+/front-end/!.vscode/settings.json
+/front-end/!.vscode/tasks.json
+/front-end/!.vscode/launch.json
+/front-end/!.vscode/extensions.json
+/front-end/.history/*
+
+# Miscellaneous
+/front-end/.angular/cache
+/front-end/.sass-cache/
+/front-end/connect.lock
+/front-end/coverage
+/front-end/libpeerconnection.log
+/front-end/testem.log
+/front-end/typings
+
+# System files
+.DS_Store
+Thumbs.db
+
+#laravel 
+/back-end/node_modules
+/back-end/public/hot
+/back-end/public/storage
+/back-end/storage/*.key
+/back-end/vendor
+/back-end/.env.backup
+/back-end/.phpunit.result.cache
+/back-end/docker-compose.override.yml
+/back-end/Homestead.json
+/back-end/Homestead.yaml
+/back-end/npm-debug.log
+/back-end/yarn-error.log
+/back-end/.idea
+/back-end/.vscode
