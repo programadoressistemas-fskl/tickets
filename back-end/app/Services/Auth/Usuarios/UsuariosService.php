@@ -11,12 +11,12 @@ class UsuariosService
 
     public function __construct(
         UsuariosRepository $UsuariosRepository
-    )
-    {
+    ) {
         $this->usuariosRepository = $UsuariosRepository;
     }
 
-    public function obtenerInformacionUsuarios () {
+    public function obtenerInformacionUsuarios()
+    {
         $usuario = $this->usuariosRepository->obtenerInformacionUsuarios();
 
         return response()->json(
@@ -27,7 +27,8 @@ class UsuariosService
         );
     }
 
-    public function obtenerInformacionUsuariosPorPk ($pkUsuario) {
+    public function obtenerInformacionUsuariosPorPk($pkUsuario)
+    {
         $usuario = $this->usuariosRepository->obtenerInformacionUsuariosPorPk($pkUsuario);
 
         return response()->json(
@@ -38,8 +39,9 @@ class UsuariosService
         );
     }
 
-    public function registrarUsuario ($usuario) {
-        $usuario = $this->usuariosRepository->registrarUsuario ($usuario);
+    public function registrarUsuario($usuario)
+    {
+        $usuario = $this->usuariosRepository->registrarUsuario($usuario);
 
         return response()->json(
             [
@@ -48,6 +50,4 @@ class UsuariosService
             ]
         );
     }
-
-
 }

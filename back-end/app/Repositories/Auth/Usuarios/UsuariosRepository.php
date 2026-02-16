@@ -9,49 +9,52 @@ use Carbon\Carbon;
 class UsuariosRepository
 {
 
-public function obtenerInformacionUsuarios () {
+    public function obtenerInformacionUsuarios()
+    {
         $query = TblUsuarios::select(
-                                'id_usuario', 
-                                'nombre',
-                                'a_paterno',
-                                'a_materno',
-                                'numero_telefono',
-                                'correo_electronico',
-                                'pasword',
-                                'id_area',
-                                'puesto',
-                                'fecha_registro',
-                            )
-                            ->where('activo', 1);
+            'id_usuario',
+            'nombre',
+            'a_paterno',
+            'a_materno',
+            'numero_telefono',
+            'correo_electronico',
+            'pasword',
+            'id_area',
+            'puesto',
+            'fecha_registro',
+        )
+            ->where('activo', 1);
 
         return $query->get();
     }
 
-    public function obtenerInformacionUsuariosPorPk ($pkUsuario) {
+    public function obtenerInformacionUsuariosPorPk($pkUsuario)
+    {
         $query = TblUsuarios::select(
-                                'id_usuario', 
-                                'nombre',
-                                'a_paterno',
-                                'a_materno',
-                                'numero_telefono',
-                                'correo_electronico',
-                                'pasword',
-                                'id_area',
-                                'puesto',
-                                'fecha_registro',
-                                'activo',
-                            )
-                            ->where([
-                                ['id_usuario', $pkUsuario],
-                                ['activo', 1] 
-                            ]);
+            'id_usuario',
+            'nombre',
+            'a_paterno',
+            'a_materno',
+            'numero_telefono',
+            'correo_electronico',
+            'pasword',
+            'id_area',
+            'puesto',
+            'fecha_registro',
+            'activo',
+        )
+            ->where([
+                ['id_usuario', $pkUsuario],
+                ['activo', 1]
+            ]);
 
         return $query->get();
     }
 
-    public function registrarUsuario ($usuario) {
-        $registro = new TblUsuarios(); 
-        
+    public function registrarUsuario($usuario)
+    {
+        $registro = new TblUsuarios();
+
         $registro->nombre = $usuario['nombre'];
         $registro->a_paterno = $usuario['a_paterno'];
         $registro->a_materno = $usuario['a_materno'];

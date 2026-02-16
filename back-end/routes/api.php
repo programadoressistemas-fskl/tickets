@@ -7,16 +7,8 @@ Route::get('/test', function () {
     return response()->json(['ok' => true]);
 });
 
-Route::get('/usuarios/obtenerInformacionUsuarios', 
-    [UsuariosController::class, 'obtenerInformacionUsuarios']
-);
+Route::post('/usuarios/registrarUsuario', [UsuariosController::class, 'registrarUsuario']);
 
-Route::get('/usuarios/obtenerInformacionUsuariosPorPk/{pkUsuario}', 
-    [UsuariosController::class, 'obtenerInformacionUsuariosPorPk']
-);
+Route::get('/usuarios/obtenerInformacionUsuariosPorPk/{pkUsuario}', [UsuariosController::class, 'obtenerInformacionUsuariosPorPk']);
 
-Route::post('/usuarios/registrarUsuario',
-[UsuariosController::class, 'registrarUsuario']
-);
-
-
+Route::get('/usuarios/obtenerInformacionUsuarios', [UsuariosController::class, 'obtenerInformacionUsuarios']);
