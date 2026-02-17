@@ -110,4 +110,22 @@ class UsuariosController extends Controller
             );
         }
     }
+
+    public function login(Request $request)
+    {
+        try {
+            return $this->usuariosService->login($request->all());
+        } catch (\Throwable $error) {
+            Log::alert('*********************************************');
+            Log::alert('Error al iniciar sesión usuario');
+            Log::alert($error);
+            return response()->json(
+                [
+                    'error' => $error,
+                    'mensaje' => 'Ocurrió un error interno'
+                ],
+                500
+            );
+        }
+    }
 }

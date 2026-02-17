@@ -65,11 +65,33 @@ class UsuariosService
     public function cambiarStatusUsuario($id)
     {
         $this->usuariosRepository->cambiarStatusUsuario($id);
-        
+
         return response()->json(
             [
                 'mensaje' => 'Se cambio el status del usuario con exito'
             ]
         );
+    }
+
+    public function login($usuario)
+    {
+        $resultado = $this->usuariosRepository->login($usuario);
+
+        if ($resultado === 'no_usuario') {
+            return response()->json([
+                'mensaje' => 'El usuario no existe o las credenciales son incorrectas'
+            ], 404);
+        }
+
+        if ($resultado === 'mal_contraseña') {
+            return response()->json([
+                'mensaje' => 'Las credenciales son incorrectas'
+            ], 401);
+        }
+
+        return response()->json([
+            'usuarios' => $resultado,
+            'mensaje' => 'Inicio de sesión correctamente el usuario'
+        ]);
     }
 }

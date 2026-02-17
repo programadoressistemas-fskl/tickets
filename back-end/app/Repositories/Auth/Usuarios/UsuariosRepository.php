@@ -4,7 +4,7 @@ namespace App\Repositories\Auth\Usuarios;
 
 use App\Models\TblUsuarios;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Log;
 
 class UsuariosRepository
 {
@@ -88,5 +88,16 @@ class UsuariosRepository
         $usuario = TblUsuarios::findOrFail($id);
         $usuario->activo = $usuario->activo ? 0 : 1;
         $usuario->save();
+    }
+
+    public function login($usuario)
+    {
+        $usuarioEncontrado = TblUsuarios::where('correo_electronico', $usuario['correo_electronico'])
+                                        ->first();
+
+        if (!$usuarioEncontrado) return 'no_usuario';
+        if (!password_verify($usuario['pasword'], $usuarioEncontrado->pasword)) return 'mal_contraseña';;
+
+        return $usuarioEncontrado;
     }
 }
