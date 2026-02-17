@@ -1,0 +1,64 @@
+#layoutAuthentication {
+    background-color: #121416 !important;
+}
+
+.card {
+    border-radius: 10px !important;
+    animation: fadeInUp 0.8s ease-in-out;
+}
+
+/* Efecto de iluminación azul para el Modal */
+.card-glow {
+    box-shadow: 0 0 25px rgba(13, 110, 253, 0.2) !important; /* Brillo azul sutil */
+    border: 1px solid rgba(13, 110, 253, 0.1) !important;
+}
+
+/* Efecto de iluminación para el Logo */
+.logo-glow {
+    filter: drop-shadow(0 0 15px rgba(0, 123, 255, 0.4)); /* Brillo que sigue la forma del logo */
+    transition: filter 0.3s ease;
+}
+
+.logo-glow:hover {
+    filter: drop-shadow(0 0 20px rgba(0, 123, 255, 0.6));
+}
+
+.form-control:focus {
+    border-color: #0d6efd !important; /* Cambiamos a azul el borde al escribir para combinar */
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1) !important;
+}
+
+.btn-dark {
+    background-color: #212529 !important;
+    border: none !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+    background-color: #000000 !important;
+    box-shadow: 0 0 15px rgba(13, 110, 253, 0.3); /* Brillo azul al botón también */
+}
+
+/* Tus animaciones originales */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    #layoutAuthentication_content .mt-5 {
+        margin-top: 2rem !important;
+    }
+    .card-body {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
