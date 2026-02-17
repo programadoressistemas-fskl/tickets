@@ -17,6 +17,24 @@ class UsuariosController extends Controller
         $this->usuariosService =  $UsuariosService;
     }
 
+    public function registrarUsuario(Request $request)
+    {
+        try {
+            return $this->usuariosService->registrarUsuario($request->all());
+        } catch (\Throwable $error) {
+            Log::alert('*********************************************');
+            Log::alert('Error al registrar usuario');
+            Log::alert($error);
+            return response()->json(
+                [
+                    'error' => $error,
+                    'mensaje' => 'Ocurrió un error interno'
+                ],
+                500
+            );
+        }
+    }
+
     public function obtenerInformacionUsuarios()
     {
         try {
@@ -35,10 +53,10 @@ class UsuariosController extends Controller
         }
     }
 
-    public function obtenerInformacionUsuariosPorPk($pkUsuario)
+    public function obtenerDetalleUsuarioPorPk($pkUsuario)
     {
         try {
-            return $this->usuariosService->obtenerInformacionUsuariosPorPk($pkUsuario);
+            return $this->usuariosService->obtenerDetalleUsuarioPorPk($pkUsuario);
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al obtener información de Usuario PorPK');
@@ -53,13 +71,35 @@ class UsuariosController extends Controller
         }
     }
 
-    public function registrarUsuario(Request $request)
+    public function actualizarUsuario(Request $request)
     {
         try {
-            return $this->usuariosService->registrarUsuario($request->all());
+
+            $usuario = $this->usuariosService->actualizarUsuario($request->all());
+
+            return response()->json([
+                'data' => $usuario,
+                'mensaje' => 'Usuario actualizado correctamente'
+            ]);
+        } catch (\Throwable $error) {
+
+            Log::alert('*********************************************');
+            Log::alert('Error al actualizar usuario');
+            Log::alert($error->getMessage());
+
+            return response()->json([
+                'mensaje' => 'Ocurrió un error interno'
+            ], 500);
+        }
+    }
+
+    public function cambiarStatusUsuario($id)
+    {
+        try {
+            return $this->usuariosService->cambiarStatusUsuario($id);
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
-            Log::alert('Error al registrar usuario');
+            Log::alert('Error al cambiar Status Del Usuario');
             Log::alert($error);
             return response()->json(
                 [

@@ -15,6 +15,18 @@ class UsuariosService
         $this->usuariosRepository = $UsuariosRepository;
     }
 
+    public function registrarUsuario($usuario)
+    {
+        $usuario = $this->usuariosRepository->registrarUsuario($usuario);
+
+        return response()->json(
+            [
+                'usuarios' => $usuario,
+                'mensaje' => 'Se registro correctamente el usuario'
+            ]
+        );
+    }
+
     public function obtenerInformacionUsuarios()
     {
         $usuario = $this->usuariosRepository->obtenerInformacionUsuarios();
@@ -27,9 +39,9 @@ class UsuariosService
         );
     }
 
-    public function obtenerInformacionUsuariosPorPk($pkUsuario)
+    public function obtenerDetalleUsuarioPorPk($pkUsuario)
     {
-        $usuario = $this->usuariosRepository->obtenerInformacionUsuariosPorPk($pkUsuario);
+        $usuario = $this->usuariosRepository->obtenerDetalleUsuariosPorPk($pkUsuario);
 
         return response()->json(
             [
@@ -39,14 +51,24 @@ class UsuariosService
         );
     }
 
-    public function registrarUsuario($usuario)
+    public function actualizarUsuario($usuario)
     {
-        $usuario = $this->usuariosRepository->registrarUsuario($usuario);
+        $this->usuariosRepository->actualizarUsuario($usuario['pkUsuario'], $usuario['usuario']);
 
         return response()->json(
             [
-                'usuarios' => $usuario,
-                'mensaje' => 'Se registro correctamente el usuario'
+                'mensaje' => 'Se actualizó correctamente el usuario'
+            ]
+        );
+    }
+
+    public function cambiarStatusUsuario($id)
+    {
+        $this->usuariosRepository->cambiarStatusUsuario($id);
+        
+        return response()->json(
+            [
+                'mensaje' => 'Se cambio el status del usuario con exito'
             ]
         );
     }

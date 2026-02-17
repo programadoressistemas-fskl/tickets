@@ -9,6 +9,23 @@ use Carbon\Carbon;
 class UsuariosRepository
 {
 
+    public function registrarUsuario($usuario)
+    {
+        $registro = new TblUsuarios();
+
+        $registro->nombre              = $usuario['nombre'];
+        $registro->a_paterno           = $usuario['a_paterno'];
+        $registro->a_materno           = $usuario['a_materno'];
+        $registro->numero_telefono     = $usuario['numero_telefono'];
+        $registro->correo_electronico  = $usuario['correo_electronico'];
+        $registro->pasword             = $usuario['pasword'];
+        $registro->id_area             = $usuario['id_area'];
+        $registro->puesto              = $usuario['puesto'];
+        $registro->id_usuario_registro = 1;
+        $registro->fecha_registro      = Carbon::now();
+        $registro->activo              = 1;
+        $registro->save();
+    }
     public function obtenerInformacionUsuarios()
     {
         $query = TblUsuarios::select(
@@ -28,7 +45,7 @@ class UsuariosRepository
         return $query->get();
     }
 
-    public function obtenerInformacionUsuariosPorPk($pkUsuario)
+    public function obtenerDetalleUsuariosPorPk($pkUsuario)
     {
         $query = TblUsuarios::select(
             'id_usuario',
@@ -51,23 +68,25 @@ class UsuariosRepository
         return $query->get();
     }
 
-    public function registrarUsuario($usuario)
+
+    public function actualizarUsuario($id, $usuario)
     {
-        $registro = new TblUsuarios();
+        $actualizar = TblUsuarios::findOrFail($id);
 
-        $registro->nombre = $usuario['nombre'];
-        $registro->a_paterno = $usuario['a_paterno'];
-        $registro->a_materno = $usuario['a_materno'];
-        $registro->numero_telefono = $usuario['numero_telefono'];
-        $registro->correo_electronico = $usuario['correo_electronico'];
-        $registro->pasword = $usuario['pasword'];
-        $registro->id_area = $usuario['id_area'];
-        $registro->puesto = $usuario['puesto'];
-        $registro->id_usuario_registro = 1;
-        $registro->fecha_registro = Carbon::now();
-        $registro->activo = 1;
-        $registro->save();
+        $actualizar->nombre             = $usuario['nombre'];
+        $actualizar->a_paterno          = $usuario['a_paterno'];
+        $actualizar->a_materno          = $usuario['a_materno'];
+        $actualizar->numero_telefono    = $usuario['numero_telefono'];
+        $actualizar->correo_electronico = $usuario['correo_electronico'];
+        $actualizar->id_area            = $usuario['id_area'];
+        $actualizar->puesto             = $usuario['puesto'];
+        $actualizar->save();
+    }
 
-        return $registro->id_usuario;
+    public function cambiarStatusUsuario($id)
+    {
+        $usuario = TblUsuarios::findOrFail($id);
+        $usuario->activo = $usuario->activo ? 0 : 1;
+        $usuario->save();
     }
 }

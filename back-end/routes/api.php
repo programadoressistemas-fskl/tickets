@@ -3,12 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\Usuarios\UsuariosController;
 
-Route::get('/test', function () {
-    return response()->json(['ok' => true]);
-});
+// Modulo Usuarios
 
 Route::post('/usuarios/registrarUsuario', [UsuariosController::class, 'registrarUsuario']);
-
-Route::get('/usuarios/obtenerInformacionUsuariosPorPk/{pkUsuario}', [UsuariosController::class, 'obtenerInformacionUsuariosPorPk']);
-
 Route::get('/usuarios/obtenerInformacionUsuarios', [UsuariosController::class, 'obtenerInformacionUsuarios']);
+Route::get('/usuarios/obtenerInformacionUsuariosPorPk/{pkUsuario}', [UsuariosController::class, 'obtenerInformacionUsuariosPorPk']);
+Route::put('/usuarios/actualizarUsuario', [UsuariosController::class, 'actualizarUsuario']);
+Route::get('/usuarios/cambiarStatusUsuario/{id}', [UsuariosController::class, 'cambiarStatusDeUsuario']);
