@@ -20,9 +20,9 @@
                             </div>
 
                             <div class="card-body px-4 px-md-5 pb-5">
-                                <form>
+                                <form [formGroup]="formLogin" autocomplete="off">
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                                        <input class="form-control" id="inputEmail" type="email" formControlName="correo">
                                         <label for="inputEmail" class="text-muted">
                                             <i class="bi bi-envelope-at me-2"></i>Correo
                                         </label>
