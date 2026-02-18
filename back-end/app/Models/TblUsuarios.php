@@ -19,7 +19,7 @@ class TblUsuarios extends Model
         'a_materno',
         'numero_telefono',
         'correo_electronico',
-        'pasword',
+        'password',
         'id_area',
         'puesto',
         'id_usuario_registro',

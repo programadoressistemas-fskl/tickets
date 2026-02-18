@@ -18,7 +18,7 @@ class UsuariosRepository
         $registro->a_materno           = $usuario['a_materno'];
         $registro->numero_telefono     = $usuario['numero_telefono'];
         $registro->correo_electronico  = $usuario['correo_electronico'];
-        $registro->pasword             = $usuario['pasword'];
+        $registro->password             = $usuario['password'];
         $registro->id_area             = $usuario['id_area'];
         $registro->puesto              = $usuario['puesto'];
         $registro->id_usuario_registro = 1;
@@ -35,7 +35,7 @@ class UsuariosRepository
             'a_materno',
             'numero_telefono',
             'correo_electronico',
-            'pasword',
+            'password',
             'id_area',
             'puesto',
             'fecha_registro',
@@ -54,7 +54,7 @@ class UsuariosRepository
             'a_materno',
             'numero_telefono',
             'correo_electronico',
-            'pasword',
+            'password',
             'id_area',
             'puesto',
             'fecha_registro',
@@ -96,7 +96,7 @@ class UsuariosRepository
                                         ->first();
 
         if (!$usuarioEncontrado) return 'no_usuario';
-        if (!password_verify($usuario['pasword'], $usuarioEncontrado->pasword)) return 'mal_contraseña';;
+        if (!password_verify($usuario['password'], $usuarioEncontrado->password)) return 'mal_contraseña';;
 
         return $usuarioEncontrado;
     }
