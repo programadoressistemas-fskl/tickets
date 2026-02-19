@@ -26,6 +26,7 @@ class UsuariosRepository
         $registro->activo              = 1;
         $registro->save();
     }
+    
     public function obtenerInformacionUsuarios()
     {
         $query = TblUsuarios::select(

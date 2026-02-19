@@ -86,7 +86,7 @@ class UsuariosService
         if ($resultado === 'mal_contraseña') {
             return response()->json([
                 'mensaje' => 'Las credenciales son incorrectas'
-            ], 401);
+            ], 401); 
         }
 
         return response()->json([
