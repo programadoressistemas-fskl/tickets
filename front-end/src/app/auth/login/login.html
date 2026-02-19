@@ -29,7 +29,7 @@
                                     </div>
 
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="inputPassword" type="password" placeholder="Contraseña" />
+                                        <input class="form-control" id="inputPassword" type="password" placeholder="Contraseña" formControlName="password">
                                         <label for="inputPassword" class="text-muted">
                                             <i class="bi bi-pencil-square me-2"></i>Contraseña
                                         </label>
@@ -43,7 +43,7 @@
                                     </div>
 
                                     <div class="d-grid mt-4">
-                                        <button class="btn btn-dark btn-block py-2" type="submit">ENTRAR</button>
+                                        <button class="btn btn-dark btn-block py-2" type="submit" (click)="iniciarSesion()" >ENTRAR</button>
                                     </div>
                                 </form>
                             </div>
