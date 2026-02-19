@@ -26,7 +26,7 @@ class UsuariosRepository
         $registro->activo              = 1;
         $registro->save();
     }
-    
+
     public function obtenerInformacionUsuarios()
     {
         $query = TblUsuarios::select(
@@ -69,7 +69,6 @@ class UsuariosRepository
         return $query->get();
     }
 
-
     public function actualizarUsuario($id, $usuario)
     {
         $actualizar = TblUsuarios::findOrFail($id);
@@ -94,7 +93,7 @@ class UsuariosRepository
     public function login($usuario)
     {
         $usuarioEncontrado = TblUsuarios::where('correo_electronico', $usuario['correo_electronico'])
-                                        ->first();
+            ->first();
 
         if (!$usuarioEncontrado) return 'no_usuario';
         if (!password_verify($usuario['password'], $usuarioEncontrado->password)) return 'mal_contraseña';;

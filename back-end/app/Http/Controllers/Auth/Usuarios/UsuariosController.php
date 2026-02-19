@@ -24,7 +24,7 @@ class UsuariosController extends Controller
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al registrar usuario');
-            Log::alert($error);
+            Log::alert($error); 
             return response()->json(
                 [
                     'error' => $error,

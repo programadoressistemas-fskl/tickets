@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class TblUsuarios extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+    public $timestamps    = false;
     protected $primaryKey = 'id_usuario';
-    protected $table = 'tbl_usuarios';
+    protected $table      = 'tbl_usuarios';
 
-    protected $fillable = [
+    protected $fillable   = [
         'id_usuario',
         'nombre',
         'a_paterno',

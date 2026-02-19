@@ -10,8 +10,8 @@ class PlantasService
 
     public function __construct(
         PlantasRepository $PlantasRepository
-    )
-    {
+    ) {
         $this->plantasRepository = $PlantasRepository;
     }
+
 }

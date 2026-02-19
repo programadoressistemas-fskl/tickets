@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\Catalogos\AreasController;
+use App\Http\Controllers\Admin\Catalogos\PlantasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\Usuarios\UsuariosController;
 
@@ -8,6 +10,20 @@ use App\Http\Controllers\Auth\Usuarios\UsuariosController;
 Route::post('/usuarios/registrarUsuario', [UsuariosController::class, 'registrarUsuario']);
 Route::post('/usuarios/login', [UsuariosController::class, 'login']);
 Route::get('/usuarios/obtenerInformacionUsuarios', [UsuariosController::class, 'obtenerInformacionUsuarios']);
-Route::get('/usuarios/obtenerInformacionUsuariosPorPk/{pkUsuario}', [UsuariosController::class, 'obtenerInformacionUsuariosPorPk']);
+Route::get('/usuarios/obtenerDetalleUsuariosPorPk/{pkUsuario}', [UsuariosController::class, 'obtenerDetalleUsuariosPorPk']);
 Route::put('/usuarios/actualizarUsuario', [UsuariosController::class, 'actualizarUsuario']);
 Route::get('/usuarios/cambiarStatusUsuario/{id}', [UsuariosController::class, 'cambiarStatusDeUsuario']);
+
+// Areas 
+Route::post('/areas/registrarAreas', [AreasController::class, 'registrarAreas']);
+Route::get('/areas/obtenerInformacionAreas', [AreasController::class, 'obtenerInformacionAreas']);
+Route::get('/areas/obtenerDetalleAreasPorPk/{pkAreas}', [AreasController::class, 'obtenerDetalleAreasPorPk']);
+Route::get('/areas/actualizarArea', [AreasController::class, 'actualizarArea']);
+Route::get('/areas/cambiarStatusArea/{id}', [AreasController::class, 'cambiarStatusArea']);
+
+//Plantas
+Route::post('/plantas/registrarPlantas', [PlantasController::class, 'registrarPlantas']);
+Route::get('/plantas/obtenerInformacionPlantas', [PlantasController::class, 'obtenerInformacionPlantas']);
+Route::get('/plantas/obtenerDetallePlantasPorPk/{pkAreaPlantas}', [PlantasController::class, 'obtenerDetallePlantasPorPk']);
+Route::get('/plantas/actualizarPlanta', [PlantasController::class, 'actualizarPlanta']);
+Route::get('/areas/cambiarStatusPlanta/{id}', [PlantasController::class, 'cambiarStatusPlanta']);
