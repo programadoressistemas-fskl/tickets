@@ -49,10 +49,18 @@ export class Login implements OnInit {
 
 		this.loginService.login(credenciales).toPromise().then(
 			respuesta => {
+				if (respuesta.success == 204) {
+					this.messages.mensajeGenerico(respuesta.mensaje, 'warning', respuesta.title);
+					return;
+				}
 				this.router.navigate(['/']);
 				this.messages.cerrarMensajes();
 			}, error => {
-				this.messages.mensajeGenerico(error.error.mensaje, 'warning', 'hola');
+				if (!navigator.onLine){
+					this.messages.mensajeGenerico('No ay conexion a internet', 'warning', 'Upss...!');
+				} else {
+					this.messages.mensajeGenerico('error', 'error');
+				}
 
 			}
 		)
