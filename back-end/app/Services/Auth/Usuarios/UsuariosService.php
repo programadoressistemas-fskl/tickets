@@ -15,8 +15,7 @@ class UsuariosService
         $this->usuariosRepository = $UsuariosRepository;
     }
 
-    public function registrarUsuario($usuario)
-    {
+    public function registrarUsuario($usuario) {
         $usuario = $this->usuariosRepository->registrarUsuario($usuario);
 
         return response()->json(
@@ -27,8 +26,7 @@ class UsuariosService
         );
     }
 
-    public function obtenerInformacionUsuarios()
-    {
+    public function obtenerInformacionUsuarios() {
         $usuario = $this->usuariosRepository->obtenerInformacionUsuarios();
 
         return response()->json(
@@ -39,8 +37,7 @@ class UsuariosService
         );
     }
 
-    public function obtenerDetalleUsuarioPorPk($pkUsuario)
-    {
+    public function obtenerDetalleUsuarioPorPk($pkUsuario) {
         $usuario = $this->usuariosRepository->obtenerDetalleUsuariosPorPk($pkUsuario);
 
         return response()->json(
@@ -51,8 +48,7 @@ class UsuariosService
         );
     }
 
-    public function actualizarUsuario($usuario)
-    {
+    public function actualizarUsuario($usuario) {
         $this->usuariosRepository->actualizarUsuario($usuario['pkUsuario'], $usuario['usuario']);
 
         return response()->json(
@@ -62,8 +58,7 @@ class UsuariosService
         );
     }
 
-    public function cambiarStatusUsuario($id)
-    {
+    public function cambiarStatusUsuario($id) {
         $this->usuariosRepository->cambiarStatusUsuario($id);
 
         return response()->json(
@@ -73,20 +68,23 @@ class UsuariosService
         );
     }
 
-    public function login($usuario)
-    {
+    public function login($usuario) {
         $resultado = $this->usuariosRepository->login($usuario);
 
         if ($resultado === 'no_usuario') {
             return response()->json([
+                'success' => 204,
+                'title'   => 'Usuario no encontrado',
                 'mensaje' => 'El usuario no existe o las credenciales son incorrectas'
-            ], 404);
+            ]);
         }
 
         if ($resultado === 'mal_contraseña') {
             return response()->json([
+                'success' => 204,
+                'title'   => 'Credenciales Incorrectas',
                 'mensaje' => 'Las credenciales son incorrectas'
-            ], 401); 
+            ]); 
         }
 
         return response()->json([
