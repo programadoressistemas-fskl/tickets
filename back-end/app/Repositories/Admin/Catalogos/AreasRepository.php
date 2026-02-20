@@ -27,7 +27,7 @@ class AreasRepository
         return $query->get();
     }
 
-    public function obtenerDetallesAreasPorpk($pkAreas)
+    public function obtenerDetalleAreasPorpk($pkAreas)
     {
         $query = CatAreas::select(
             'id_area',
@@ -42,7 +42,7 @@ class AreasRepository
         return $query->get();
     }
 
-    public function actualizarArea($id, $areas)
+    public function actualizarAreas($id, $areas)
     {
         $actualizar = CatAreas::findOrFail($id);
 

@@ -53,16 +53,56 @@ class AreasController extends Controller
         }
     }
 
-    public function obtenerInformacionAreasPorpk($pkAreas){
+    public function obtenerDetalleAreasPorpk($pkAreas){
         try {
-            return $this->areasService->obtenerInformacionAreasPorPk($pkAreas);
+            return $this->areasService->obtenerDetalleAreasPorPk($pkAreas);
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
-            Log::alert('Error al obtener información de detalle de Areas');
+            Log::alert('Error al obtener información de detalle de Area');
             Log::alert($error);
             return response()->json(
                 [
                     'error' => $error,
+                    'mensaje' => 'Ocurrió un error interno'
+                ],
+                500
+            );
+        }
+    } 
+
+    public function actualizarAreas(Request $request) 
+    {
+        try {
+
+            $usuario = $this->areasService->actualizarAreas($request->all());
+
+            return response()->json([
+                'data' => $usuario,
+                'mensaje' => 'Area actualizada correctamente'
+            ]);
+        } catch (\Throwable $error) {
+
+            Log::alert('*********************************************');
+            Log::alert('Error al actualizar planta');
+            Log::alert($error->getMessage());
+
+            return response()->json([
+                'mensaje' => 'Ocurrió un error interno'
+            ], 500);
+        }
+    }
+
+    public function cambiarStatusArea($id)
+    {
+        try {
+            return $this->areasService->cambiarStatusArea($id);
+        } catch (\Throwable $error) {
+            Log::alert('*********************************************');
+            Log::alert('Error al cambiar Status De Area');
+            Log::alert($error);
+            return response()->json(
+                [
+                    'error'   => $error,
                     'mensaje' => 'Ocurrió un error interno'
                 ],
                 500

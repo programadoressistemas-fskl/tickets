@@ -25,4 +25,53 @@ class TiposServicioService
             ]
         );
     }
+
+     public function obtenerInformaciontiposServicio()
+    {
+        $usuario = $this->tiposServicioRepository->obtenerInformaciontiposServicio();
+
+        return response()->json(
+            [
+                'usuarios' => $usuario,
+                'mensaje' => 'Se obtuvo la informacion correctamente'
+            ]
+        );
+    }
+
+     public function obtenerDetalletiposServicioPorPk($pktiposServicio)
+    {
+        $pktiposServicio = $this->tiposServicioRepository->obtenerDetalletiposServicioPorPk($pktiposServicio);
+
+        return response()->json(
+            [
+                'plantas' => $pktiposServicio,
+                'mensaje' => 'Se obtuvo correctamente la informacion'
+            ]
+        ); 
+    }
+
+    public function actualizartiposServicio($tiposServicio) 
+    {
+        $this->tiposServicioRepository->actualizartiposServicio($tiposServicio['pktipoServicio'], $tiposServicio['tiposServicios']);
+
+        return response()->json( 
+            [
+                'mensaje' => 'Se actualizo correctamente el tipo de servicio'
+            ]
+        );
+    } 
+
+    public function cambiarStatustiposServicio($id) 
+    {
+        $this->tiposServicioRepository->cambiarStatustiposServicio($id);
+
+        return response()->json(
+            [
+                'mensaje' => 'Se cambio el status del tipo servicio con exito',
+            ]
+        );
+    }
+
+
+
 }

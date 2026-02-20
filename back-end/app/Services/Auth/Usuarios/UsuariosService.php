@@ -69,7 +69,7 @@ class UsuariosService
         return response()->json(
             [
                 'mensaje' => 'Se cambio el status del usuario con exito'
-            ]
+            ] 
         );
     }
 

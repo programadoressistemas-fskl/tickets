@@ -69,7 +69,7 @@ class PlantasController extends Controller
                 500
             );
         }
-    }
+    } 
 
     public function actualizarPlanta(Request $request)
     {
@@ -108,6 +108,6 @@ class PlantasController extends Controller
                 ],
                 500
             );
-        }
+        } 
     }
 }

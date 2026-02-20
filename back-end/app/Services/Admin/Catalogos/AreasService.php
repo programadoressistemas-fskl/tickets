@@ -39,9 +39,9 @@ class AreasService
         );
     }
 
-    public function obtenerInformacionAreasPorPk($pkAreas)
+    public function obtenerDetalleAreasPorPk($pkAreas)
     {
-        $areas = $this->areasRepository->obtenerDetallesAreasPorpk($pkAreas);
+        $areas = $this->areasRepository->obtenerDetalleAreasPorpk($pkAreas);
 
         return response()->json(
             [
@@ -51,10 +51,16 @@ class AreasService
         );
     }
 
-    public function actualizarArea($areas)
+    public function actualizarAreas($areas)
     {
-        $this->areasRepository->actualizarArea($areas['pkAreas'], $areas['areas']);
-    }
+        $this->areasRepository->actualizarAreas($areas['pkAreas'], $areas['areas']);
+
+        return response()->json(
+            [
+                'mensajes' => 'Se actualizo correctamente el area'
+            ]
+        ); 
+    } 
 
     public function cambiarStatusArea($id)
     {

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Catalogos\AreasController;
 use App\Http\Controllers\Admin\Catalogos\PlantasController;
+use App\Http\Controllers\Admin\Catalogos\TiposServicioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\Usuarios\UsuariosController;
 
@@ -24,6 +25,16 @@ Route::get('/areas/cambiarStatusArea/{id}', [AreasController::class, 'cambiarSta
 //Plantas
 Route::post('/plantas/registrarPlantas', [PlantasController::class, 'registrarPlantas']);
 Route::get('/plantas/obtenerInformacionPlantas', [PlantasController::class, 'obtenerInformacionPlantas']);
-Route::get('/plantas/obtenerDetallePlantasPorPk/{pkAreaPlantas}', [PlantasController::class, 'obtenerDetallePlantasPorPk']);
+Route::get('/plantas/obtenerDetallePlantasPorPk/{pkPlantas}', [PlantasController::class, 'obtenerDetallePlantasPorPk']);
 Route::get('/plantas/actualizarPlanta', [PlantasController::class, 'actualizarPlanta']);
 Route::get('/areas/cambiarStatusPlanta/{id}', [PlantasController::class, 'cambiarStatusPlanta']);
+
+//Tipos Servicio
+Route::post('/plantas/registrartiposServicio', [TiposServicioController::class, 'registrartiposServicio']);
+Route::get('/plantas/obtenerInformaciontiposServicio', [TiposServicioController::class, 'obtenerInformaciontiposServicio']);
+Route::get('/plantas/obtenerDetalletiposServicioPorPk/{pktiposServicio}', [TiposServicioController::class, 'obtenerDetalletiposServicioPorPk']);
+Route::get('/plantas/actualizartiposServicio', [TiposServicioController::class, 'actualizartiposServicio']);
+Route::get('/areas/cambiarStatustiposServicio/{id}', [TiposServicioController::class, 'cambiarStatustiposServicio']);
+
+
+//Turnos

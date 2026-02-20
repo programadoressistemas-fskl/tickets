@@ -11,9 +11,10 @@ class PlantasRepository
 
         $registro = new CatPlantas();
 
-        $registro->planta  = $plantas['planta'];
-        $registro->abrev   = $plantas['abrev'];
-        $registro->activo  = 1;
+        $registro->planta     = $plantas['planta'];
+        $registro->abrev      = $plantas['abrev'];
+        $registro->direccion  = $plantas['direccion'];
+        $registro->activo     = 1;
         $registro->save();
     }
 
@@ -52,13 +53,14 @@ class PlantasRepository
     {
         $actualizar = CatPlantas::findOrFail($id);
 
-        $actualizar->planta     =$plantas['planta'];
-        $actualizar->abrev      =$plantas['abrev'];
-        $actualizar->direccion  =$plantas['direccion'];
+        $actualizar->planta     = $plantas['planta'];
+        $actualizar->abrev      = $plantas['abrev'];
+        $actualizar->direccion  = $plantas['direccion'];
         $actualizar->save();
     }
 
-    public function cambiarStatusPlanta($id){
+    public function cambiarStatusPlanta($id)
+    {
 
         $plantas = CatPlantas::findOrFail($id);
         $plantas->activo = $plantas->activo ? 0 : 1;
