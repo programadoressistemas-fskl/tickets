@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Catalogos\AreasController;
 use App\Http\Controllers\Admin\Catalogos\PlantasController;
 use App\Http\Controllers\Admin\Catalogos\TiposServicioController;
+use App\Http\Controllers\Admin\Catalogos\TurnosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\Usuarios\UsuariosController;
 
@@ -30,11 +31,15 @@ Route::get('/plantas/actualizarPlanta', [PlantasController::class, 'actualizarPl
 Route::get('/areas/cambiarStatusPlanta/{id}', [PlantasController::class, 'cambiarStatusPlanta']);
 
 //Tipos Servicio
-Route::post('/plantas/registrartiposServicio', [TiposServicioController::class, 'registrartiposServicio']);
-Route::get('/plantas/obtenerInformaciontiposServicio', [TiposServicioController::class, 'obtenerInformaciontiposServicio']);
-Route::get('/plantas/obtenerDetalletiposServicioPorPk/{pktiposServicio}', [TiposServicioController::class, 'obtenerDetalletiposServicioPorPk']);
-Route::get('/plantas/actualizartiposServicio', [TiposServicioController::class, 'actualizartiposServicio']);
-Route::get('/areas/cambiarStatustiposServicio/{id}', [TiposServicioController::class, 'cambiarStatustiposServicio']);
-
+Route::post('/tiposServicio/registrartiposServicio', [TiposServicioController::class, 'registrartiposServicio']);
+Route::get('/tiposServicio/obtenerInformaciontiposServicio', [TiposServicioController::class, 'obtenerInformaciontiposServicio']);
+Route::get('/tiposServicio/obtenerDetalletiposServicioPorPk/{pktiposServicio}', [TiposServicioController::class, 'obtenerDetalletiposServicioPorPk']);
+Route::get('/tiposServicio/actualizartiposServicio', [TiposServicioController::class, 'actualizartiposServicio']);
+Route::get('/tiposServicio/cambiarStatustiposServicio/{id}', [TiposServicioController::class, 'cambiarStatustiposServicio']);
 
 //Turnos
+Route::post('/turnos/registrarTurnos', [TurnosController::class, 'registrarTurnos']);
+Route::get('/turnos/obtenerInformacionTurnos', [TurnosController::class, 'obtenerInformacionTurnos']);
+Route::get('/turnos/obtenerDetalleTurnosPorPk/{pkTurno}', [TurnosController::class, 'obtenerDetalleTurnosPorPk']);
+Route::get('/turnos/actualizarTurno', [TurnosController::class, 'actualizarTurno']);
+Route::get('/turnos/cambiarStatusTurno/{id}', [TurnosController::class, 'cambiarStatusTurno']);
