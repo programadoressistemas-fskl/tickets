@@ -35,7 +35,7 @@ class AreasController extends Controller
         }
     }
 
-    public function obtenerInformacionAreas() 
+    public function obtenerInformacionAreas()
     {
         try {
             return $this->areasService->obtenerInformacionAreas();
@@ -53,7 +53,8 @@ class AreasController extends Controller
         }
     }
 
-    public function obtenerDetalleAreasPorpk($pkAreas){
+    public function obtenerDetalleAreasPorpk($pkAreas)
+    {
         try {
             return $this->areasService->obtenerDetalleAreasPorPk($pkAreas);
         } catch (\Throwable $error) {
@@ -68,10 +69,9 @@ class AreasController extends Controller
                 500
             );
         }
-    } 
+    }
 
-    public function actualizarAreas(Request $request) 
-    {
+    public function actualizarAreas(Request $request) {
         try {
 
             $usuario = $this->areasService->actualizarAreas($request->all());
@@ -83,7 +83,7 @@ class AreasController extends Controller
         } catch (\Throwable $error) {
 
             Log::alert('*********************************************');
-            Log::alert('Error al actualizar planta');
+            Log::alert('Error al actualizar Area');
             Log::alert($error->getMessage());
 
             return response()->json([

@@ -17,8 +17,7 @@ class TiposServicioController extends Controller
         $this->tiposServicioService = $TiposServicioService;
     }
 
-    public function registrartiposServicios(Request $request)
-    {
+    public function registrartiposServicios(Request $request) {
         try {
             return $this->tiposServicioService->registrartiposServicio($request->all());
         } catch (\Throwable $error) {
@@ -27,7 +26,7 @@ class TiposServicioController extends Controller
             Log::alert($error);
             return response()->json(
                 [
-                    'error' => $error,
+                    'error'   => $error,
                     'mensaje' => 'Ocurrió un error interno'
                 ],
                 500
@@ -35,13 +34,29 @@ class TiposServicioController extends Controller
         }
     }
 
-    public function obtenerInformaciontiposServicio()
-    {
+    public function obtenerInformaciontiposServicio() {
         try {
             return $this->tiposServicioService->obtenerInformaciontiposServicio();
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al obtener información del tipo de servicio');
+            Log::alert($error);
+            return response()->json(
+                [
+                    'error'   => $error,
+                    'mensaje' => 'Ocurrió un error interno'
+                ],
+                500
+            );
+        }
+    }
+
+    public function obtenerDetalletiposServicioPorPk($pktiposServicio) {
+        try {
+            return $this->tiposServicioService->obtenerDetalletiposServicioPorPk($pktiposServicio);
+        } catch (\Throwable $error) {
+            Log::alert('*********************************************');
+            Log::alert('Error al obtener información del tipo de servicio por pk}');
             Log::alert($error);
             return response()->json(
                 [
@@ -53,12 +68,11 @@ class TiposServicioController extends Controller
         }
     }
 
-   public function actualizartiposServicio(Request $request)
-   {
+   public function actualizartiposServicio(Request $request) {
        try {
            $tiposServicio= $this->tiposServicioService->actualizartiposServicio($request->all());
            return response()->json([
-               'data' => $tiposServicio,
+               'data'    => $tiposServicio,
                'mensaje' => 'tipo de servicio actualizado correctamente'
            ]);
        } catch (\Throwable $error) {
@@ -71,8 +85,7 @@ class TiposServicioController extends Controller
        }
    }
 
-    public function cambiarStatustiposServicio($id)
-    {
+    public function cambiarStatustiposServicio($id) {
         try {
             return $this->tiposServicioService->cambiarStatustiposServicio($id);
         } catch (\Throwable $error) {

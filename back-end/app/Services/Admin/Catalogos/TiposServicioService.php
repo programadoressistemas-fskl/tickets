@@ -14,8 +14,7 @@ class TiposServicioService
         $this->tiposServicioRepository = $tiposServicioRepository;
     }
 
-    public function registrartiposServicio($tiposServicios)
-    {
+    public function registrartiposServicio($tiposServicios) {
         $this->tiposServicioRepository->registrartiposServicio($tiposServicios);
 
         return response()->json(
@@ -26,8 +25,7 @@ class TiposServicioService
         );
     }
 
-     public function obtenerInformaciontiposServicio()
-    {
+     public function obtenerInformaciontiposServicio() {
         $usuario = $this->tiposServicioRepository->obtenerInformaciontiposServicio();
 
         return response()->json(
@@ -38,20 +36,18 @@ class TiposServicioService
         );
     }
 
-     public function obtenerDetalletiposServicioPorPk($pktiposServicio)
-    {
+     public function obtenerDetalletiposServicioPorPk($pktiposServicio) {
         $pktiposServicio = $this->tiposServicioRepository->obtenerDetalletiposServicioPorPk($pktiposServicio);
 
         return response()->json(
             [
-                'plantas' => $pktiposServicio,
+                'pktiposServicio' => $pktiposServicio,
                 'mensaje' => 'Se obtuvo correctamente la informacion'
             ]
         ); 
     }
 
-    public function actualizartiposServicio($tiposServicio) 
-    {
+    public function actualizartiposServicio($tiposServicio) {
         $this->tiposServicioRepository->actualizartiposServicio($tiposServicio['pktipoServicio'], $tiposServicio['tiposServicios']);
 
         return response()->json( 
@@ -61,8 +57,7 @@ class TiposServicioService
         );
     } 
 
-    public function cambiarStatustiposServicio($id) 
-    {
+    public function cambiarStatustiposServicio($id) {
         $this->tiposServicioRepository->cambiarStatustiposServicio($id);
 
         return response()->json(
