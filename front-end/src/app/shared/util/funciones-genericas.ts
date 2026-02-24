@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
 import { fromEvent, merge, Observable, of, switchMap, take } from 'rxjs';
 import Swal from 'sweetalert2';
 
-@Component({ template: '' })
 
 export default class FGenerico {
     private success = new Audio('assets/sounds/success.mp3');
@@ -210,7 +208,7 @@ export default class FGenerico {
         }
 
         const hasTime = /T\d{2}:\d{2}|\s\d{2}:\d{2}/.test(dateString);
-        
+
         let normalizedDate = dateString;
 
         if (!hasTime && /^\d{4}-\d{2}-\d{2}$/.test(dateString)) {

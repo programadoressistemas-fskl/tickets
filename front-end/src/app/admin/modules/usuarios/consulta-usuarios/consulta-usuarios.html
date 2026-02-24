@@ -23,7 +23,26 @@
             </div>
         </div>
         <div class="col-12">
-            <app-datatable></app-datatable>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                        <th>Puesto</th>
+                        <th>activo</th>
+                    </tr>
+                </thead> 
+                <tbody>
+                    <tr *ngFor="let usuario of datosTabla">
+                        <td>{{usuario.nombre}}</td>
+                        <td>{{usuario.numero_telefono}}</td>
+                        <td>{{usuario.correo}}</td>
+                        <td>{{usuario.puesto}}</td>
+                        <td>{{usuario.activo}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </section>
