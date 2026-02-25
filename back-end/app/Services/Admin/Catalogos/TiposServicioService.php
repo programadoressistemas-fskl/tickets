@@ -36,19 +36,19 @@ class TiposServicioService
         );
     }
 
-     public function obtenerDetalletiposServicio($pktiposServicio) {
-        $pktiposServicio = $this->tiposServicioRepository->obtenerDetalletiposServicio($pktiposServicio);
+     public function obtenerDetalleTipoServicio($pkTipoServicio) {
+        $pkTipoServicio = $this->tiposServicioRepository->obtenerDetalleTipoServicio($pkTipoServicio);
 
         return response()->json(
             [
-                'pktiposServicio' => $pktiposServicio,
+                'pktiposServicio' => $pkTipoServicio,
                 'mensaje' => 'Se obtuvo correctamente la informacion'
             ]
         ); 
     }
 
-    public function actualizartiposServicio($tiposServicio) {
-        $this->tiposServicioRepository->actualizartiposServicio($tiposServicio['pktipoServicio'], $tiposServicio['tiposServicios']);
+    public function actualizarTipoServicio($tiposServicio) {
+        $this->tiposServicioRepository->actualizarTipoServicio($tiposServicio['pktipoServicio'], $tiposServicio['tiposServicios']);
 
         return response()->json( 
             [

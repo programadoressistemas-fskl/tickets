@@ -27,7 +27,7 @@ class TiposServicioRepository
         return $query->get();
     }
 
-    public function obtenerDetalletiposServicio($pktiposServicio) {
+    public function obtenerDetalleTipoServicio($pkTipoServicio) {
         $query = CatTiposServicio::select(
             'id_tipo_servicio',
             'tipo_servicio',
@@ -35,14 +35,14 @@ class TiposServicioRepository
             'activo'
         )
             ->where([
-                ['id_tipo_servicio', $pktiposServicio],
+                ['id_tipo_servicio', $pkTipoServicio],
                 ['activo', 1]
             ]);
 
         return $query->get();
     }
 
-    public function actualizartiposServicio($id, $tiposServicio) {
+    public function actualizarTipoServicio($id, $tiposServicio) {
         $actualizar = CatTiposServicio::findOrFail($id);
 
         $actualizar->tipo_servicio     = $tiposServicio['tipo_servicio'];

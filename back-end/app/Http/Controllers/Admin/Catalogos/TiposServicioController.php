@@ -51,9 +51,9 @@ class TiposServicioController extends Controller
         }
     }
 
-    public function obtenerDetalletiposServicio($pktiposServicio) {
+    public function obtenerDetalleTipoServicio($pkTipoServicio) {
         try {
-            return $this->tiposServicioService->obtenerDetalletiposServicio($pktiposServicio);
+            return $this->tiposServicioService->obtenerDetalleTipoServicio($pkTipoServicio);
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al obtener información del tipo de servicio por pk}');
@@ -68,9 +68,9 @@ class TiposServicioController extends Controller
         }
     }
 
-   public function actualizartiposServicio(Request $request) {
+   public function actualizarTipoServicio(Request $request) {
        try {
-           $tiposServicio= $this->tiposServicioService->actualizartiposServicio($request->all());
+           $tiposServicio= $this->tiposServicioService->actualizarTipoServicio($request->all());
            return response()->json([
                'data'    => $tiposServicio,
                'mensaje' => 'tipo de servicio actualizado correctamente'
