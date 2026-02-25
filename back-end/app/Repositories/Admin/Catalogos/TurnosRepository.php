@@ -14,7 +14,7 @@ class TurnosRepository
         $registro->save();
     }
 
-    public function obtnerInformacionTurnos() {
+    public function obtenerListaTurnos() {
         $query = CatTurnos::select(
             'id_turnos',
             'turno',
@@ -25,7 +25,7 @@ class TurnosRepository
         return $query->get();
     }
 
-    public function obtenerDetalleTurnosPorPk() {
+    public function obtenerDetalleTurno() {
         $query  = CatTurnos::select(
             'id_turnos',
             'turno',

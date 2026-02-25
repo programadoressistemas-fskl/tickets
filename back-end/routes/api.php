@@ -39,7 +39,7 @@ Route::get('/tiposServicio/cambiarStatustiposServicio/{id}', [TiposServicioContr
 
 //Turnos
 Route::post('/turnos/registrarTurnos', [TurnosController::class, 'registrarTurnos']);
-Route::get('/turnos/obtenerInformacionTurnos', [TurnosController::class, 'obtenerInformacionTurnos']);
-Route::get('/turnos/obtenerDetalleTurnosPorPk/{pkTurno}', [TurnosController::class, 'obtenerDetalleTurnosPorPk']);
+Route::get('/turnos/obtenerListaTurnos', [TurnosController::class, 'obtenerListaTurnos']);
+Route::get('/turnos/obtenerDetalleTurno/{pkTurno}', [TurnosController::class, 'obtenerDetalleTurno']);
 Route::get('/turnos/actualizarTurno', [TurnosController::class, 'actualizarTurno']);
 Route::get('/turnos/cambiarStatusTurno/{id}', [TurnosController::class, 'cambiarStatusTurno']);

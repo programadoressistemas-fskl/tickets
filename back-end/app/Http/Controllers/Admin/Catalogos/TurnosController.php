@@ -34,9 +34,9 @@ class TurnosController extends Controller
         }
     }
 
-    public function obtnerInformacionTurnos() {
+    public function obtenerListaTurnos() {
         try {
-            return $this->turnosService->obtnerInformacionTurnos();
+            return $this->turnosService->obtenerListaTurnos();
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al obtener información de los turnos');
@@ -51,9 +51,9 @@ class TurnosController extends Controller
         }
     }
 
-    public function obtenerDetalleTurnosPorPk($pkTurno) {
+    public function obtenerDetalleTurno($pkTurno) {
         try {
-            return $this->turnosService->obtenerDetalleTurnosPorPk($pkTurno);
+            return $this->turnosService->obtenerDetalleTurno($pkTurno);
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al obtener información del turno');
