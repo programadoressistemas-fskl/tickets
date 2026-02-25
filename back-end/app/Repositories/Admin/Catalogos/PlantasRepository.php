@@ -6,8 +6,7 @@ use App\Models\CatPlantas;
 
 class PlantasRepository
 {
-    public function registrarPlantas($plantas)
-    {
+    public function registrarPlantas($plantas) {
 
         $registro = new CatPlantas();
 
@@ -18,8 +17,7 @@ class PlantasRepository
         $registro->save();
     }
 
-    public function obtenerInformacionPlantas()
-    {
+    public function obtenerInformacionPlantas() {
         $query = CatPlantas::select(
             'id_planta',
             'planta',
@@ -32,8 +30,7 @@ class PlantasRepository
         return $query->get();
     }
 
-    public function obtenerInformacionPlantasPorPk($pkPlantas)
-    {
+    public function obtenerInformacionPlantasPorPk($pkPlantas) {
         $query = CatPlantas::select(
             'id_planta',
             'planta',
@@ -49,8 +46,7 @@ class PlantasRepository
         return $query->get();
     }
 
-    public function actualizarPlanta($id, $plantas)
-    {
+    public function actualizarPlanta($id, $plantas) {
         $actualizar = CatPlantas::findOrFail($id);
 
         $actualizar->planta     = $plantas['planta'];
@@ -59,8 +55,7 @@ class PlantasRepository
         $actualizar->save();
     }
 
-    public function cambiarStatusPlanta($id)
-    {
+    public function cambiarStatusPlanta($id) {
 
         $plantas = CatPlantas::findOrFail($id);
         $plantas->activo = $plantas->activo ? 0 : 1;

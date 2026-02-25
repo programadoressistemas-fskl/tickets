@@ -27,7 +27,7 @@ class UsuariosRepository
         $registro->save();
     }
 
-    public function obtenerInformacionUsuarios()
+    public function obtenerListaUsuarios()
     {
         $query = TblUsuarios::select(
             'id_usuario',
@@ -46,7 +46,7 @@ class UsuariosRepository
         return $query->get();
     }
 
-    public function obtenerDetalleUsuariosPorPk($pkUsuario)
+    public function obtenerDetalleUsuario($pkUsuario)
     {
         $query = TblUsuarios::select(
             'id_usuario',

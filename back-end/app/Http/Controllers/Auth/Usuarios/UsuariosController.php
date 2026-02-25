@@ -24,7 +24,7 @@ class UsuariosController extends Controller
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al registrar usuario');
-            Log::alert($error); 
+            Log::alert($error);
             return response()->json(
                 [
                     'error' => $error,
@@ -35,10 +35,10 @@ class UsuariosController extends Controller
         }
     }
 
-    public function obtenerInformacionUsuarios()
+    public function obtenerListaUsuarios()
     {
         try {
-            return $this->usuariosService->obtenerInformacionUsuarios();
+            return $this->usuariosService->obtenerListaUsuarios();
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al obtener información de Usuario');
@@ -53,10 +53,10 @@ class UsuariosController extends Controller
         }
     }
 
-    public function obtenerDetalleUsuarioPorPk($pkUsuario)
+    public function obtenerDetalleUsuario($pkUsuario)
     {
         try {
-            return $this->usuariosService->obtenerDetalleUsuarioPorPk($pkUsuario);
+            return $this->usuariosService->obtenerDetalleUsuario($pkUsuario);
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al obtener información de Usuario PorPK');

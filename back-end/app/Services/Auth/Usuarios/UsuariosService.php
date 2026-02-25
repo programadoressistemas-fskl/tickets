@@ -26,8 +26,8 @@ class UsuariosService
         );
     }
 
-    public function obtenerInformacionUsuarios() {
-        $usuario = $this->usuariosRepository->obtenerInformacionUsuarios();
+    public function obtenerListaUsuarios() {
+        $usuario = $this->usuariosRepository->obtenerListaUsuarios();
 
         return response()->json(
             [
@@ -37,8 +37,8 @@ class UsuariosService
         );
     }
 
-    public function obtenerDetalleUsuarioPorPk($pkUsuario) {
-        $usuario = $this->usuariosRepository->obtenerDetalleUsuariosPorPk($pkUsuario);
+    public function obtenerDetalleUsuario($pkUsuario) {
+        $usuario = $this->usuariosRepository->obtenerDetalleUsuario($pkUsuario);
 
         return response()->json(
             [

@@ -6,8 +6,7 @@ use App\Models\CatAreas;
 
 class AreasRepository
 {
-    public function registrarAreas($areas)
-    {
+    public function registrarAreas($areas) {
         $registro = new CatAreas();
 
         $registro->area     = $areas['area'];
@@ -15,8 +14,7 @@ class AreasRepository
         $registro->save();
     }
 
-    public function obtenerInformacionAreas()
-    {
+    public function obtenerInformacionAreas() {
         $query = CatAreas::select(
             'id_area',
             'area',
@@ -27,8 +25,7 @@ class AreasRepository
         return $query->get();
     }
 
-    public function obtenerDetalleAreasPorpk($pkAreas)
-    {
+    public function obtenerDetalleAreasPorpk($pkAreas) {
         $query = CatAreas::select(
             'id_area',
             'area',
@@ -42,16 +39,14 @@ class AreasRepository
         return $query->get();
     }
 
-    public function actualizarAreas($id, $areas)
-    {
+    public function actualizarAreas($id, $areas) {
         $actualizar = CatAreas::findOrFail($id);
 
         $actualizar->area            = $areas['area'];
         $actualizar->save();
     }
 
-    public function cambiarStatusArea($id)
-    {
+    public function cambiarStatusArea($id) {
         $areas = CatAreas::findOrFail($id);
         $areas->activo = $areas->activo ? 0 : 1;
         $areas->save();

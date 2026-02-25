@@ -6,8 +6,7 @@ use App\Models\CatTiposServicio;
 
 class TiposServicioRepository
 {
-    public function registrartiposServicio($tiposServicio)
-    {
+    public function registrartiposServicio($tiposServicio) {
         $registro = new CatTiposServicio();
 
         $registro->tipoServicio = $tiposServicio['tiposServicio'];
@@ -16,8 +15,7 @@ class TiposServicioRepository
         $registro->save();
     }
 
-    public function obtenerInformaciontiposServicio()
-    {
+    public function obtenerInformaciontiposServicio() {
         $query = CatTiposServicio::select(
             'id_tipo_servicio',
             'tipo_servicio',
@@ -29,8 +27,7 @@ class TiposServicioRepository
         return $query->get();
     }
 
-    public function obtenerDetalletiposServicioPorPk($pktiposServicio)
-    {
+    public function obtenerDetalletiposServicioPorPk($pktiposServicio) {
         $query = CatTiposServicio::select(
             'id_tipo_servicio',
             'tipo_servicio',
@@ -45,8 +42,7 @@ class TiposServicioRepository
         return $query->get();
     }
 
-    public function actualizartiposServicio($id, $tiposServicio)
-    {
+    public function actualizartiposServicio($id, $tiposServicio) {
         $actualizar = CatTiposServicio::findOrFail($id);
 
         $actualizar->tipo_servicio     = $tiposServicio['tipo_servicio'];
@@ -54,8 +50,7 @@ class TiposServicioRepository
         $actualizar->save();
     }
 
-    public function cambiarStatustiposServicio($id)
-    {
+    public function cambiarStatustiposServicio($id) {
 
         $tiposServicio = CatTiposServicio::findOrFail($id);
         $tiposServicio->activo = $tiposServicio->activo ? 0 : 1;

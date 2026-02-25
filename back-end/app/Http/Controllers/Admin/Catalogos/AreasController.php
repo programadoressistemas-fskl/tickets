@@ -17,8 +17,7 @@ class AreasController extends Controller
         $this->areasService = $AreasService;
     }
 
-    public function registrarAreas(Request $request)
-    {
+    public function registrarAreas(Request $request){
         try {
             return $this->areasService->registrarAreas($request->all());
         } catch (\Throwable $error) {
@@ -35,8 +34,7 @@ class AreasController extends Controller
         }
     }
 
-    public function obtenerInformacionAreas()
-    {
+    public function obtenerInformacionAreas() {
         try {
             return $this->areasService->obtenerInformacionAreas();
         } catch (\Throwable $error) {
@@ -53,8 +51,7 @@ class AreasController extends Controller
         }
     }
 
-    public function obtenerDetalleAreasPorpk($pkAreas)
-    {
+    public function obtenerDetalleAreasPorpk($pkAreas) {
         try {
             return $this->areasService->obtenerDetalleAreasPorPk($pkAreas);
         } catch (\Throwable $error) {
@@ -92,8 +89,7 @@ class AreasController extends Controller
         }
     }
 
-    public function cambiarStatusArea($id)
-    {
+    public function cambiarStatusArea($id) {
         try {
             return $this->areasService->cambiarStatusArea($id);
         } catch (\Throwable $error) {

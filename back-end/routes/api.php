@@ -11,8 +11,8 @@ use App\Http\Controllers\Auth\Usuarios\UsuariosController;
 
 Route::post('/usuarios/registrarUsuario', [UsuariosController::class, 'registrarUsuario']);
 Route::post('/usuarios/login', [UsuariosController::class, 'login']);
-Route::get('/usuarios/obtenerInformacionUsuarios', [UsuariosController::class, 'obtenerInformacionUsuarios']);
-Route::get('/usuarios/obtenerDetalleUsuariosPorPk/{pkUsuario}', [UsuariosController::class, 'obtenerDetalleUsuariosPorPk']);
+Route::get('/usuarios/obtenerListaUsuarios', [UsuariosController::class, 'obtenerListaUsuarios']);
+Route::get('/usuarios/obtenerDetalleUsuario/{pkUsuario}', [UsuariosController::class, 'obtenerDetalleUsuario']);
 Route::put('/usuarios/actualizarUsuario', [UsuariosController::class, 'actualizarUsuario']);
 Route::get('/usuarios/cambiarStatusUsuario/{id}', [UsuariosController::class, 'cambiarStatusDeUsuario']);
 

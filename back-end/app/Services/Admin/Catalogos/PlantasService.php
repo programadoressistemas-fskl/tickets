@@ -14,9 +14,7 @@ class PlantasService
         $this->plantasRepository = $PlantasRepository;
     }
 
-    public function registrarPlantas($plantas)
-    {
-
+    public function registrarPlantas($plantas) {
         $this->plantasRepository->registrarPlantas($plantas);
 
         return response()->json(
@@ -27,8 +25,7 @@ class PlantasService
         );
     }
 
-    public function obtenerInformacionPlantas()
-    {
+    public function obtenerInformacionPlantas() {
         $plantas = $this->plantasRepository->obtenerInformacionPlantas();
 
         return response()->json(
@@ -39,8 +36,7 @@ class PlantasService
         );
     }
 
-    public function obtenerDetallePlantasPorPk($pkPlantas)
-    {
+    public function obtenerDetallePlantasPorPk($pkPlantas) {
         $plantas = $this->plantasRepository->obtenerInformacionPlantas($pkPlantas);
 
         return response()->json(
@@ -51,8 +47,7 @@ class PlantasService
         );
     }
 
-    public function actualizarPlanta($plantas) 
-    {
+    public function actualizarPlanta($plantas) {
         $this->plantasRepository->actualizarPlanta($plantas['pkPlantas'], $plantas['plantas']);
 
         return response()->json(
@@ -62,8 +57,7 @@ class PlantasService
         );
     }
 
-    public function cambiarStatusPlanta($id) 
-    {
+    public function cambiarStatusPlanta($id) {
         $this->plantasRepository->cambiarStatusPlanta($id);
 
         return response()->json(

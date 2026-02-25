@@ -17,8 +17,7 @@ class PlantasController extends Controller
         $this->plantasService = $PlantasService;
     }
 
-    public function registrarPlantas(Request $request)
-    {
+    public function registrarPlantas(Request $request) {
         try {
             return $this->plantasService->registrarPlantas($request->all());
         } catch (\Throwable $error) {
@@ -35,8 +34,7 @@ class PlantasController extends Controller
         }
     }
 
-    public function obtenerInformacionPlantas()
-    {
+    public function obtenerInformacionPlantas() {
         try {
             return $this->plantasService->obtenerInformacionPlantas();
         } catch (\Throwable $error) {
@@ -53,8 +51,7 @@ class PlantasController extends Controller
         }
     }
 
-    public function obtenerDetallePlantasPorPk($pkPlantas)
-    {
+    public function obtenerDetallePlantasPorPk($pkPlantas) {
         try {
             return $this->plantasService->obtenerDetallePlantasPorPk($pkPlantas);
         } catch (\Throwable $error) {
@@ -71,8 +68,7 @@ class PlantasController extends Controller
         }
     } 
 
-    public function actualizarPlanta(Request $request)
-    {
+    public function actualizarPlanta(Request $request) {
         try {
 
             $usuario = $this->plantasService->actualizarPlanta($request->all());
@@ -93,8 +89,7 @@ class PlantasController extends Controller
         }
     }
 
-    public function cambiarStatusPlanta($id)
-    {
+    public function cambiarStatusPlanta($id) {
         try {
             return $this->plantasService->cambiarStatusPlanta($id);
         } catch (\Throwable $error) {
