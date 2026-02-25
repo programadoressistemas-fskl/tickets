@@ -34,9 +34,9 @@ class PlantasController extends Controller
         }
     }
 
-    public function obtenerInformacionPlantas() {
+    public function obtenerListaPlantas() {
         try {
-            return $this->plantasService->obtenerInformacionPlantas();
+            return $this->plantasService->obtenerListaPlantas();
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al obtener información de Planta');
@@ -51,9 +51,9 @@ class PlantasController extends Controller
         }
     }
 
-    public function obtenerDetallePlantasPorPk($pkPlantas) {
+    public function obtenerDetallePlanta($pkPlantas) {
         try {
-            return $this->plantasService->obtenerDetallePlantasPorPk($pkPlantas);
+            return $this->plantasService->obtenerDetallePlanta($pkPlantas);
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al obtener detalle de la Planta PorPK');

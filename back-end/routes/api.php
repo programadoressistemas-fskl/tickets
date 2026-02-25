@@ -25,14 +25,14 @@ Route::get('/areas/cambiarStatusArea/{id}', [AreasController::class, 'cambiarSta
 
 //Plantas
 Route::post('/plantas/registrarPlantas', [PlantasController::class, 'registrarPlantas']);
-Route::get('/plantas/obtenerInformacionPlantas', [PlantasController::class, 'obtenerInformacionPlantas']);
-Route::get('/plantas/obtenerDetallePlantasPorPk/{pkPlantas}', [PlantasController::class, 'obtenerDetallePlantasPorPk']);
+Route::get('/plantas/obtenerListaPlantas', [PlantasController::class, 'obtenerListaPlantas']);
+Route::get('/plantas/obtenerDetallePlanta/{pkPlantas}', [PlantasController::class, 'obtenerDetallePlanta']);
 Route::get('/plantas/actualizarPlanta', [PlantasController::class, 'actualizarPlanta']);
 Route::get('/areas/cambiarStatusPlanta/{id}', [PlantasController::class, 'cambiarStatusPlanta']);
 
 //Tipos Servicio
 Route::post('/tiposServicio/registrartiposServicio', [TiposServicioController::class, 'registrartiposServicio']);
-Route::get('/tiposServicio/obtenerInformaciontiposServicio', [TiposServicioController::class, 'obtenerInformaciontiposServicio']);
+Route::get('/tiposServicio/obtenerListatiposServicio', [TiposServicioController::class, 'obtenerListatiposServicio']);
 Route::get('/tiposServicio/obtenerDetalletiposServicioPorPk/{pktiposServicio}', [TiposServicioController::class, 'obtenerDetalletiposServicioPorPk']);
 Route::get('/tiposServicio/actualizartiposServicio', [TiposServicioController::class, 'actualizartiposServicio']);
 Route::get('/tiposServicio/cambiarStatustiposServicio/{id}', [TiposServicioController::class, 'cambiarStatustiposServicio']);

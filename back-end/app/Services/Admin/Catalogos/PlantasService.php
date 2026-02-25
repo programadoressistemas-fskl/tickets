@@ -25,8 +25,8 @@ class PlantasService
         );
     }
 
-    public function obtenerInformacionPlantas() {
-        $plantas = $this->plantasRepository->obtenerInformacionPlantas();
+    public function obtenerListaPlantas() {
+        $plantas = $this->plantasRepository->obtenerListaPlantas();
 
         return response()->json(
             [
@@ -36,8 +36,8 @@ class PlantasService
         );
     }
 
-    public function obtenerDetallePlantasPorPk($pkPlantas) {
-        $plantas = $this->plantasRepository->obtenerInformacionPlantas($pkPlantas);
+    public function obtenerDetallePlanta($pkPlantas) {
+        $plantas = $this->plantasRepository->obtenerDetallePlanta($pkPlantas);
 
         return response()->json(
             [

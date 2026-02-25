@@ -17,7 +17,7 @@ class PlantasRepository
         $registro->save();
     }
 
-    public function obtenerInformacionPlantas() {
+    public function obtenerListaPlantas() {
         $query = CatPlantas::select(
             'id_planta',
             'planta',
@@ -30,7 +30,7 @@ class PlantasRepository
         return $query->get();
     }
 
-    public function obtenerInformacionPlantasPorPk($pkPlantas) {
+    public function obtenerDetallePlanta($pkPlantas) {
         $query = CatPlantas::select(
             'id_planta',
             'planta',

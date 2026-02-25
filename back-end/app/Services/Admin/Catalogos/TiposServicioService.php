@@ -25,8 +25,8 @@ class TiposServicioService
         );
     }
 
-     public function obtenerInformaciontiposServicio() {
-        $usuario = $this->tiposServicioRepository->obtenerInformaciontiposServicio();
+     public function obtenerListatiposServicio() {
+        $usuario = $this->tiposServicioRepository->obtenerListatiposServicio();
 
         return response()->json(
             [

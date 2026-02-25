@@ -34,9 +34,9 @@ class TiposServicioController extends Controller
         }
     }
 
-    public function obtenerInformaciontiposServicio() {
+    public function obtenerListatiposServicio() {
         try {
-            return $this->tiposServicioService->obtenerInformaciontiposServicio();
+            return $this->tiposServicioService->obtenerListatiposServicio();
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al obtener información del tipo de servicio');

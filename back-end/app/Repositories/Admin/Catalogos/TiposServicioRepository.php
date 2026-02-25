@@ -15,7 +15,7 @@ class TiposServicioRepository
         $registro->save();
     }
 
-    public function obtenerInformaciontiposServicio() {
+    public function obtenerListatiposServicio() {
         $query = CatTiposServicio::select(
             'id_tipo_servicio',
             'tipo_servicio',
