@@ -51,9 +51,9 @@ class TiposServicioController extends Controller
         }
     }
 
-    public function obtenerDetalletiposServicioPorPk($pktiposServicio) {
+    public function obtenerDetalletiposServicio($pktiposServicio) {
         try {
-            return $this->tiposServicioService->obtenerDetalletiposServicioPorPk($pktiposServicio);
+            return $this->tiposServicioService->obtenerDetalletiposServicio($pktiposServicio);
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al obtener información del tipo de servicio por pk}');

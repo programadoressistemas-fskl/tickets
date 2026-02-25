@@ -27,7 +27,7 @@ class TiposServicioRepository
         return $query->get();
     }
 
-    public function obtenerDetalletiposServicioPorPk($pktiposServicio) {
+    public function obtenerDetalletiposServicio($pktiposServicio) {
         $query = CatTiposServicio::select(
             'id_tipo_servicio',
             'tipo_servicio',

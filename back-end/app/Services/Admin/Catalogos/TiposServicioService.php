@@ -36,8 +36,8 @@ class TiposServicioService
         );
     }
 
-     public function obtenerDetalletiposServicioPorPk($pktiposServicio) {
-        $pktiposServicio = $this->tiposServicioRepository->obtenerDetalletiposServicioPorPk($pktiposServicio);
+     public function obtenerDetalletiposServicio($pktiposServicio) {
+        $pktiposServicio = $this->tiposServicioRepository->obtenerDetalletiposServicio($pktiposServicio);
 
         return response()->json(
             [

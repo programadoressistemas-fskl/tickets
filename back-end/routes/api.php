@@ -33,7 +33,7 @@ Route::get('/areas/cambiarStatusPlanta/{id}', [PlantasController::class, 'cambia
 //Tipos Servicio
 Route::post('/tiposServicio/registrartiposServicio', [TiposServicioController::class, 'registrartiposServicio']);
 Route::get('/tiposServicio/obtenerListatiposServicio', [TiposServicioController::class, 'obtenerListatiposServicio']);
-Route::get('/tiposServicio/obtenerDetalletiposServicioPorPk/{pktiposServicio}', [TiposServicioController::class, 'obtenerDetalletiposServicioPorPk']);
+Route::get('/tiposServicio/obtenerDetalletiposServicio/{pktiposServicio}', [TiposServicioController::class, 'obtenerDetalletiposServicio']);
 Route::get('/tiposServicio/actualizartiposServicio', [TiposServicioController::class, 'actualizartiposServicio']);
 Route::get('/tiposServicio/cambiarStatustiposServicio/{id}', [TiposServicioController::class, 'cambiarStatustiposServicio']);
 
