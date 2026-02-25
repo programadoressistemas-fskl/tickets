@@ -2,16 +2,16 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-consulta-areas', 
+  selector: 'app-consulta-turnos',
   imports: [CommonModule],
   standalone: true,
-  templateUrl: './consulta-areas.html',
-  styleUrl: './consulta-areas.css',
+  templateUrl: './consulta-turnos.html',
+  styleUrl: './consulta-turnos.css',
 })
-export class ConsultaAreas {
+export class ConsultaTurnos {
   protected datosTabla = [
     {
-      area: 'Faske', 
+      turno: 'vespertino',
       activo: '1'
     }
   ]

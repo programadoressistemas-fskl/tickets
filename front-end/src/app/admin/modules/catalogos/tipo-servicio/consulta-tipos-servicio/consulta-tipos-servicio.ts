@@ -2,17 +2,18 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-consulta-areas', 
+  selector: 'app-consulta-tipos-servicio',
   imports: [CommonModule],
   standalone: true,
-  templateUrl: './consulta-areas.html',
-  styleUrl: './consulta-areas.css',
+  templateUrl: './consulta-tipos-servicio.html',
+  styleUrl: './consulta-tipos-servicio.css',
 })
-export class ConsultaAreas {
+export class ConsultaTiposServicio {
   protected datosTabla = [
     {
-      area: 'Faske', 
+      tipo_servicio: 'Internet',
       activo: '1'
     }
   ]
+
 }

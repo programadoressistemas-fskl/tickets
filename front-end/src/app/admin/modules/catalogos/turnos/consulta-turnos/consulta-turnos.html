@@ -1,0 +1,42 @@
+<div class="pagetitle">
+    <h1>Turnos</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Turnos</li>
+            <li class="breadcrumb-item active">Consulta Turnos</li>
+        </ol>
+    </nav>
+</div>
+
+<section class="section dashboard">
+    <div class="row">
+        <div class="col-12">
+
+            <div class="card">
+                <div class="card-body row g-3">
+                    <div class="botonera">
+                        <button class="btn btn-success btn-sm">
+                            Exportar 
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Turno</th>
+                        <th>activo</th>
+                    </tr>
+                </thead> 
+                <tbody>
+                    <tr *ngFor="let turno of datosTabla">
+                        <td>{{turno.turno}}</td>
+                        <td>{{turno.activo}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
