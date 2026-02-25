@@ -14,9 +14,9 @@ class AreasService
         $this->areasRepository = $AreasRepository;
     }
 
-    public function registrarAreas($areas) {
+    public function registrarArea($areas) {
 
-        $areas = $this->areasRepository->registrarAreas($areas);
+        $areas = $this->areasRepository->registrarArea($areas);
 
         return response()->json(
             [
@@ -37,8 +37,8 @@ class AreasService
         );
     }
 
-    public function obtenerDetalleArea($pkAreas) {
-        $areas = $this->areasRepository->obtenerDetalleArea($pkAreas);
+    public function obtenerDetalleArea($pkArea) {
+        $areas = $this->areasRepository->obtenerDetalleArea($pkArea);
 
         return response()->json(
             [
@@ -49,7 +49,7 @@ class AreasService
     }
 
     public function actualizarAreas($areas) {
-        $this->areasRepository->actualizarAreas($areas['pkAreas'], $areas['areas']);
+        $this->areasRepository->actualizarAreas($areas['pkArea'], $areas['areas']);
 
         return response()->json(
             [
@@ -58,8 +58,8 @@ class AreasService
         ); 
     } 
 
-    public function cambiarStatusArea($id) {
-        $this->areasRepository->cambiarStatusArea($id);
+    public function cambiarStatusArea($pkArea) {
+        $this->areasRepository->cambiarStatusArea($pkArea);
 
         return response()->json(
             [

@@ -6,7 +6,7 @@ use App\Models\CatTurnos;
 
 class TurnosRepository
 {
-    public function registrarTurnos($turnos) {
+    public function registrarTurno($turnos) {
         $registro = new CatTurnos();
 
         $registro->turno  = $turnos['turno'];
@@ -46,9 +46,9 @@ class TurnosRepository
         $actualizar->save();
     }
 
-    public function cambiarStatusTurno($id) {
-        $turno = CatTurnos::findOrFail($id);
+    public function cambiarStatusTurno($pkTurno) {
+        $turno = CatTurnos::findOrFail($pkTurno);
         $turno->activo = $turno->activo ? 0 : 1;
-        $turno->save();
+        $turno->save(); 
     }
 }

@@ -17,9 +17,9 @@ class TurnosController extends Controller
         $this->turnosService = $TurnosService;
     }
 
-    public function registrarTurnos(Request $request) {
+    public function registrarTurno(Request $request) {
         try {
-            return $this->turnosService->registrarTurnos($request->all());
+            return $this->turnosService->registrarTurno($request->all());
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al registrar turnos');
@@ -89,9 +89,9 @@ class TurnosController extends Controller
         }
     }
 
-    public function cambiarStatusTurno($id) {
+    public function cambiarStatusTurno($pkTurno) {
         try {
-            return $this->turnosService->cambiarStatusTurno($id);
+            return $this->turnosService->cambiarStatusTurno($pkTurno);
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al cambiar Status De Turno');

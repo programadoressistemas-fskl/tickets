@@ -15,8 +15,8 @@ class TurnosService
         $this->turnosRepository = $TurnosRepository;
     }
 
-    public function registrarTurnos($turnos) {
-        $turnos = $this->turnosRepository->registrarTurnos($turnos);
+    public function registrarTurno($turnos) {
+        $turnos = $this->turnosRepository->registrarTurno($turnos);
 
         return response()->json(
             [
@@ -58,8 +58,8 @@ class TurnosService
         );
     }
 
-    public function cambiarStatusTurno($id) {
-        $this->turnosRepository->cambiarStatusTurno($id);
+    public function cambiarStatusTurno($pkTurno) {
+        $this->turnosRepository->cambiarStatusTurno($pkTurno);
 
         return response()->json(
             [

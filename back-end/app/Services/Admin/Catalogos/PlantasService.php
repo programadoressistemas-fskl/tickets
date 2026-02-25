@@ -57,8 +57,8 @@ class PlantasService
         );
     }
 
-    public function cambiarStatusPlanta($id) {
-        $this->plantasRepository->cambiarStatusPlanta($id);
+    public function cambiarStatusPlanta($pkPlantas) {
+        $this->plantasRepository->cambiarStatusPlanta($pkPlantas);
 
         return response()->json(
             [

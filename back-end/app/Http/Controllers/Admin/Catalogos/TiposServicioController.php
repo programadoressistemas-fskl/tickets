@@ -17,9 +17,9 @@ class TiposServicioController extends Controller
         $this->tiposServicioService = $TiposServicioService;
     }
 
-    public function registrartiposServicios(Request $request) {
+    public function registrarTipoServicio(Request $request) {
         try {
-            return $this->tiposServicioService->registrartiposServicio($request->all());
+            return $this->tiposServicioService->registrarTipoServicio($request->all());
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al registrar tipos de servicio');
@@ -34,9 +34,9 @@ class TiposServicioController extends Controller
         }
     }
 
-    public function obtenerListatiposServicio() {
+    public function obtenerListaTipoServicio() {
         try {
-            return $this->tiposServicioService->obtenerListatiposServicio();
+            return $this->tiposServicioService->obtenerListaTipoServicio();
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al obtener información del tipo de servicio');
@@ -85,9 +85,9 @@ class TiposServicioController extends Controller
        }
    }
 
-    public function cambiarStatustiposServicio($id) {
+    public function cambiarStatustiposServicio($pkTipoServicio) {
         try {
-            return $this->tiposServicioService->cambiarStatustiposServicio($id);
+            return $this->tiposServicioService->cambiarStatustiposServicio($pkTipoServicio);
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al cambiar Status De tipo de servicio ');

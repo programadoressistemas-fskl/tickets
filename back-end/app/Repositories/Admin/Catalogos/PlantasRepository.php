@@ -55,9 +55,9 @@ class PlantasRepository
         $actualizar->save();
     }
 
-    public function cambiarStatusPlanta($id) {
+    public function cambiarStatusPlanta($pkPlantas) {
 
-        $plantas = CatPlantas::findOrFail($id);
+        $plantas = CatPlantas::findOrFail($pkPlantas);
         $plantas->activo = $plantas->activo ? 0 : 1;
         $plantas->save();
     }

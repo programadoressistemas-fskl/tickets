@@ -89,9 +89,9 @@ class PlantasController extends Controller
         }
     }
 
-    public function cambiarStatusPlanta($id) {
+    public function cambiarStatusPlanta($pkPlantas) {
         try {
-            return $this->plantasService->cambiarStatusPlanta($id);
+            return $this->plantasService->cambiarStatusPlanta($pkPlantas);
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al cambiar Status De Planta');

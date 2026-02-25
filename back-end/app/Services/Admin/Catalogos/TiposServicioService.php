@@ -14,8 +14,8 @@ class TiposServicioService
         $this->tiposServicioRepository = $tiposServicioRepository;
     }
 
-    public function registrartiposServicio($tiposServicios) {
-        $this->tiposServicioRepository->registrartiposServicio($tiposServicios);
+    public function registrarTipoServicio($tiposServicios) {
+        $this->tiposServicioRepository->registrarTipoServicio($tiposServicios);
 
         return response()->json(
             [
@@ -25,8 +25,8 @@ class TiposServicioService
         );
     }
 
-     public function obtenerListatiposServicio() {
-        $usuario = $this->tiposServicioRepository->obtenerListatiposServicio();
+     public function obtenerListaTipoServicio() {
+        $usuario = $this->tiposServicioRepository->obtenerListaTipoServicio();
 
         return response()->json(
             [
@@ -57,14 +57,14 @@ class TiposServicioService
         );
     } 
 
-    public function cambiarStatustiposServicio($id) {
-        $this->tiposServicioRepository->cambiarStatustiposServicio($id);
+    public function cambiarStatustiposServicio($pkTipoServicio) {
+        $this->tiposServicioRepository->cambiarStatustiposServicio($pkTipoServicio);
 
         return response()->json(
             [
                 'mensaje' => 'Se cambio el status del tipo servicio con exito',
             ]
-        );
+        ); 
     }
 
 
