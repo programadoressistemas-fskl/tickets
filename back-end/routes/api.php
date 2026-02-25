@@ -18,8 +18,8 @@ Route::get('/usuarios/cambiarStatusUsuario/{id}', [UsuariosController::class, 'c
 
 // Areas 
 Route::post('/areas/registrarAreas', [AreasController::class, 'registrarAreas']);
-Route::get('/areas/obtenerInformacionAreas', [AreasController::class, 'obtenerInformacionAreas']);
-Route::get('/areas/obtenerDetalleAreasPorPk/{pkAreas}', [AreasController::class, 'obtenerDetalleAreasPorPk']);
+Route::get('/areas/obtenerListaAreas', [AreasController::class, 'obtenerListaAreas']);
+Route::get('/areas/obtenerDetalleArea/{pkAreas}', [AreasController::class, 'obtenerDetalleArea']);
 Route::get('/areas/actualizarArea', [AreasController::class, 'actualizarArea']);
 Route::get('/areas/cambiarStatusArea/{id}', [AreasController::class, 'cambiarStatusArea']);
 

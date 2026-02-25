@@ -14,7 +14,7 @@ class AreasRepository
         $registro->save();
     }
 
-    public function obtenerInformacionAreas() {
+    public function obtenerListaAreas() {
         $query = CatAreas::select(
             'id_area',
             'area',
@@ -25,7 +25,7 @@ class AreasRepository
         return $query->get();
     }
 
-    public function obtenerDetalleAreasPorpk($pkAreas) {
+    public function obtenerDetalleArea($pkAreas) {
         $query = CatAreas::select(
             'id_area',
             'area',

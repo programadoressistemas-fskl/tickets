@@ -34,9 +34,9 @@ class AreasController extends Controller
         }
     }
 
-    public function obtenerInformacionAreas() {
+    public function obtenerListaAreas() {
         try {
-            return $this->areasService->obtenerInformacionAreas();
+            return $this->areasService->obtenerListaAreas();
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al obtener información de Areas');
@@ -51,9 +51,9 @@ class AreasController extends Controller
         }
     }
 
-    public function obtenerDetalleAreasPorpk($pkAreas) {
+    public function obtenerDetalleArea($pkAreas) {
         try {
-            return $this->areasService->obtenerDetalleAreasPorPk($pkAreas);
+            return $this->areasService->obtenerDetalleArea($pkAreas);
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al obtener información de detalle de Area');

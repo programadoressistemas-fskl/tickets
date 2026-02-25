@@ -26,8 +26,8 @@ class AreasService
         );
     }
 
-    public function obtenerInformacionAreas() {
-        $areas = $this->areasRepository->obtenerInformacionAreas();
+    public function obtenerListaAreas() {
+        $areas = $this->areasRepository->obtenerListaAreas();
 
         return response()->json(
             [
@@ -37,8 +37,8 @@ class AreasService
         );
     }
 
-    public function obtenerDetalleAreasPorPk($pkAreas) {
-        $areas = $this->areasRepository->obtenerDetalleAreasPorpk($pkAreas);
+    public function obtenerDetalleArea($pkAreas) {
+        $areas = $this->areasRepository->obtenerDetalleArea($pkAreas);
 
         return response()->json(
             [
