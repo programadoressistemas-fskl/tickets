@@ -30,16 +30,16 @@
                         <th>Telefono</th>
                         <th>Correo</th>
                         <th>Puesto</th>
-                        <th>activo</th>
+                        <th>Activo</th>
                     </tr>
-                </thead> 
+                </thead>
                 <tbody>
                     <tr *ngFor="let usuario of datosTabla">
                         <td>{{usuario.nombre}}</td>
                         <td>{{usuario.numero_telefono}}</td>
-                        <td>{{usuario.correo}}</td>
+                        <td>{{usuario.correo_electronico}}</td>
                         <td>{{usuario.puesto}}</td>
-                        <td>{{usuario.activo}}</td>
+                        <td>{{usuario.estado}}</td>
                     </tr>
                 </tbody>
             </table>

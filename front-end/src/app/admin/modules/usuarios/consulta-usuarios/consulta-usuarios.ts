@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { UsuariosService } from '../../../services/api/usuarios/usuarios';
 
 @Component({
 	selector: 'app-consulta-usuarios',
@@ -8,38 +9,25 @@ import { CommonModule } from '@angular/common';
 	templateUrl: './consulta-usuarios.html',
 	styleUrl: './consulta-usuarios.css',
 })
-export class ConsultaUsuarios {
-	protected datosTabla = [
-		{
-			nombre: 'neitan',
-			numero_telefono: '7293479153',
-			correo: 'neitan616',
-			puesto: 'practicante',
-			activo: '1'
-		},
+export class ConsultaUsuarios implements OnInit {
+	protected datosTabla: any = [];
 
-		{
-			nombre: 'fabi',
-			numero_telefono: '7297494501',
-			correo: 'chakalita13',
-			puesto: 'Ingeniera',
-			activo: '1'
-		},
+	constructor(
+		private usuarios: UsuariosService,
+		private ch: ChangeDetectorRef
+	) { }
 
-		{
-			nombre: 'karen',
-			numero_telefono: '7127301829',
-			correo: 'karen16',
-			puesto: 'practicante',
-			activo: '1'
-		},
+	ngOnInit(): void {
+		this.obtenerListaUsuarios();
+	}
 
-		{
-			nombre: 'Adrian',
-			numero_telefono: '7293912457',
-			correo: 'fornite15',
-			puesto: 'Ingeniero',
-			activo: '1'
-		}
-	]
+	public async obtenerListaUsuarios(): Promise<any> {
+		return this.usuarios.obtenerListaUsuarios().toPromise().then(
+			respuesta => {
+				console.log(respuesta.usuarios);
+				this.datosTabla = respuesta.usuarios;
+				this.ch.markForCheck();
+			}
+		);
+	}
 }

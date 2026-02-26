@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { AreasService } from '../../../../services/api/areas/areas';
 
 @Component({
   selector: 'app-consulta-areas', 
@@ -9,10 +10,24 @@ import { Component } from '@angular/core';
   styleUrl: './consulta-areas.css',
 })
 export class ConsultaAreas {
-  protected datosTabla = [
-    {
-      area: 'Faske', 
-      activo: '1'
-    }
-  ]
+  protected datosTabla: any = [];
+
+  constructor(
+    private areas: AreasService,
+    private ch: ChangeDetectorRef
+  ) { }
+
+  ngOnInit(): void {
+    this.obtenerListaAreas();
+  }
+
+  public async obtenerListaAreas(): Promise<any>{
+    return this.areas.obtenerListaAreas().toPromise().then(
+      respuesta => {
+        console.log(respuesta.areas);
+        this.datosTabla = respuesta.areas;
+        this.ch.markForCheck();
+      }
+    ) 
+  }
 }
