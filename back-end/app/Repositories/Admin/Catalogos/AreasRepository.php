@@ -3,6 +3,7 @@
 namespace App\Repositories\Admin\Catalogos;
 
 use App\Models\CatAreas;
+use Illuminate\Support\Facades\DB;
 
 class AreasRepository
 {
@@ -19,8 +20,13 @@ class AreasRepository
             'id_area',
             'area',
             'activo',
-        )
-            ->where('activo', 1);
+            DB::raw("
+            CASE 
+                WHEN activo = 1 THEN 'Activo'
+                ELSE 'Inactivo'
+            END as estado
+        ")
+        );
 
         return $query->get();
     }

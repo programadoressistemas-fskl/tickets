@@ -3,6 +3,7 @@
 namespace App\Repositories\Admin\Catalogos;
 
 use App\Models\CatTiposServicio;
+use Illuminate\Support\Facades\DB;
 
 class TiposServicioRepository
 {
@@ -20,9 +21,14 @@ class TiposServicioRepository
             'id_tipo_servicio',
             'tipo_servicio',
             'descripcion',
-            'activo'
-        )
-            ->where('activo', 1);
+            'activo',
+            DB::raw("
+            CASE 
+                WHEN activo = 1 THEN 'Activo'
+                ELSE 'Inactivo'
+            END as estado
+        ")
+        );
 
         return $query->get();
     }

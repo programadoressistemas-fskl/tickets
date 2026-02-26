@@ -3,6 +3,7 @@
 namespace App\Repositories\Admin\Catalogos;
 
 use App\Models\CatTurnos;
+use Illuminate\Support\Facades\DB;
 
 class TurnosRepository
 {
@@ -18,9 +19,14 @@ class TurnosRepository
         $query = CatTurnos::select(
             'id_turnos',
             'turno',
-            'activo'
-        )
-            ->where('activo', 1);
+            'activo',
+            DB::raw("
+            CASE 
+                WHEN activo = 1 THEN 'Activo'
+                ELSE 'Inactivo'
+            END as estado
+        ")
+        );
 
         return $query->get();
     }

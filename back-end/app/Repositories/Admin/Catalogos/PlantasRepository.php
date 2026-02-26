@@ -3,6 +3,7 @@
 namespace App\Repositories\Admin\Catalogos;
 
 use App\Models\CatPlantas;
+use Illuminate\Support\Facades\DB;
 
 class PlantasRepository
 {
@@ -23,9 +24,14 @@ class PlantasRepository
             'planta',
             'abrev',
             'direccion',
-            'activo'
-        )
-            ->where('activo', 1);
+            'activo',
+            DB::raw("
+            CASE 
+                WHEN activo = 1 THEN 'Activo'
+                ELSE 'Inactivo'
+            END as estado
+        ")
+        );
 
         return $query->get();
     }

@@ -4,6 +4,7 @@ namespace App\Repositories\Auth\Usuarios;
 
 use App\Models\TblUsuarios;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class UsuariosRepository
@@ -40,9 +41,14 @@ class UsuariosRepository
             'id_area',
             'puesto',
             'fecha_registro',
-        )
-            ->where('activo', 1);
-
+            'activo',
+            DB::raw("
+            CASE 
+                WHEN activo = 1 THEN 'Activo'
+                ELSE 'Inactivo'
+            END as estado
+        ")
+        );
         return $query->get();
     }
 
@@ -59,12 +65,9 @@ class UsuariosRepository
             'id_area',
             'puesto',
             'fecha_registro',
-            'activo',
-        )
-            ->where([
-                ['id_usuario', $pkUsuario],
-                ['activo', 1]
-            ]);
+            'activo'
+    )
+    ->where('id_usuario', $pkUsuario);
 
         return $query->get();
     }
@@ -88,7 +91,7 @@ class UsuariosRepository
         $usuario = TblUsuarios::findOrFail($id);
         $usuario->activo = $usuario->activo ? 0 : 1;
         $usuario->save();
-    }
+    } 
 
     public function login($usuario)
     {
