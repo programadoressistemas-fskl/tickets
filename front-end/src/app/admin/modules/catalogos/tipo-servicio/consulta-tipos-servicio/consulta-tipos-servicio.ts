@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { TiposServicioService } from '../../../../services/api/tipos-servicio/tipos-servicio';
 
 @Component({
   selector: 'app-consulta-tipos-servicio',
@@ -9,11 +10,24 @@ import { Component } from '@angular/core';
   styleUrl: './consulta-tipos-servicio.css',
 })
 export class ConsultaTiposServicio {
-  protected datosTabla = [
-    {
-      tipo_servicio: 'Internet',
-      activo: '1'
-    }
-  ]
+  protected datosTabla: any = [];
+
+  constructor(
+    private tiposServicio: TiposServicioService,
+    private ch: ChangeDetectorRef
+  ) { }
+
+  ngOnInit(): void {
+    this.obtenerListaTipoServicio();
+  }
+
+  public async obtenerListaTipoServicio(): Promise<any>{
+    return this.tiposServicio.obtenerListaTipoServicio().toPromise().then(
+      respuesta => {
+        this.datosTabla = respuesta.tiposServicio;
+        this.ch.markForCheck();
+      }
+    )
+  }
 
 }
