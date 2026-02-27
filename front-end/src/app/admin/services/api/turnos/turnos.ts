@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { api } from '../../../../../environments/environments';
 
 @Injectable({
-  providedIn: 'root',
+	providedIn: 'root',
 })
 export class TurnosService {
-  constructor(
-    private http: HttpClient
-  ) { }
+	constructor(
+		private http: HttpClient
+	) { }
 
-  public obtenerListaTurnos(): Observable<any>{
-    return this.http.get<any>(`${api}/turnos/obtenerListaTurnos`);
-  }
+	public obtenerListaTurnos(): Observable<any> {
+		return this.http.get<any>(`${api}/turnos/obtenerListaTurnos`);
+	}
 }

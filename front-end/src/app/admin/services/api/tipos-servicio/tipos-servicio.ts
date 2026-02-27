@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { api } from '../../../../../environments/environments';
 
 @Injectable({
-  providedIn: 'root',
+	providedIn: 'root',
 })
 export class TiposServicioService {
-  constructor(
-    private http: HttpClient
-  ) { }
+	constructor(
+		private http: HttpClient
+	) { }
 
-  public obtenerListaTipoServicio(): Observable<any> {
-    return this.http.get<any>(`${api}/tiposServicio/obtenerListaTipoServicio`)
-  }
+	public obtenerListaTipoServicio(): Observable<any> {
+		return this.http.get<any>(`${api}/tiposServicio/obtenerListaTipoServicio`)
+	}
 }

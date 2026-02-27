@@ -56,7 +56,7 @@ export class Login implements OnInit {
 				this.router.navigate(['/']);
 				this.messages.cerrarMensajes();
 			}, error => {
-				if (!navigator.onLine){
+				if (!navigator.onLine) {
 					this.messages.mensajeGenerico('No ay conexion a internet', 'warning', 'Upss...!');
 				} else {
 					this.messages.mensajeGenerico('error', 'error');
