@@ -26,11 +26,11 @@ class TiposServicioService
     }
 
      public function obtenerListaTipoServicio() {
-        $usuario = $this->tiposServicioRepository->obtenerListaTipoServicio();
+        $tiposServicio = $this->tiposServicioRepository->obtenerListaTipoServicio();
 
         return response()->json(
             [
-                'usuarios' => $usuario,
+                'tiposServicio' => $tiposServicio,
                 'mensaje' => 'Se obtuvo la informacion correctamente'
             ]
         );

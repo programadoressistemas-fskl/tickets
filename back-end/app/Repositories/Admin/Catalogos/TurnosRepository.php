@@ -9,7 +9,6 @@ class TurnosRepository
 {
     public function registrarTurno($turnos) {
         $registro = new CatTurnos();
-
         $registro->turno  = $turnos['turno'];
         $registro->activo = 1;
         $registro->save();
@@ -17,37 +16,32 @@ class TurnosRepository
 
     public function obtenerListaTurnos() {
         $query = CatTurnos::select(
-            'id_turnos',
-            'turno',
-            'activo',
-            DB::raw("
-            CASE 
-                WHEN activo = 1 THEN 'Activo'
-                ELSE 'Inactivo'
-            END as estado
-        ")
-        );
+                              'id_turno',
+                              'turno',
+                              DB::raw("
+                                  CASE 
+                                      WHEN activo = 1 THEN 'Activo'
+                                      ELSE 'Inactivo'
+                                  END as estado
+                              ")
+                          );
 
         return $query->get();
     }
 
-    public function obtenerDetalleTurno() {
+    public function obtenerDetalleTurno($pkTurno) {
         $query  = CatTurnos::select(
-            'id_turnos',
-            'turno',
-            'activo'
-        )
-            ->where([
-                ['id_turno', 'pkTurno'],
-                ['activo', 1]
-            ]);
+                                'id_turno',
+                                'turno',
+                                'activo'
+                            )
+                            ->where('id_turno', $pkTurno);        
 
-        return $query->get();
-    }
+                            return $query->get();
+                        }
 
     public function actualizarTurno($id, $turno) {
         $actualizar = CatTurnos::finOrFail($id);
-
         $actualizar->turno = $turno['turno'];
         $actualizar->save();
     }

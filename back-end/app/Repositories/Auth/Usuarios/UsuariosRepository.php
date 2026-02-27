@@ -30,47 +30,46 @@ class UsuariosRepository
 
     public function obtenerListaUsuarios()
     {
-        $query = TblUsuarios::select(
-            'id_usuario',
-            'nombre',
-            'a_paterno',
-            'a_materno',
-            'numero_telefono',
-            'correo_electronico',
-            'password',
-            'id_area',
-            'puesto',
-            'fecha_registro',
-            'activo',
-            DB::raw("
-            CASE 
-                WHEN activo = 1 THEN 'Activo'
-                ELSE 'Inactivo'
-            END as estado
-        ")
-        );
-        return $query->get();
-    }
+     $query = TblUsuarios::select(
+                             'id_usuario',
+                             'nombre',
+                             'a_paterno',
+                             'a_materno',
+                             'numero_telefono',
+                             'correo_electronico',
+                             'password',
+                             'id_area',
+                             'puesto',
+                             'fecha_registro',
+                             DB::raw("
+                             CASE 
+                                 WHEN activo = 1 THEN 'Activo'
+                                 ELSE 'Inactivo'
+                             END as estado
+                         ")
+                         );
+                            return $query->get();
+                        }
 
     public function obtenerDetalleUsuario($pkUsuario)
     {
         $query = TblUsuarios::select(
-            'id_usuario',
-            'nombre',
-            'a_paterno',
-            'a_materno',
-            'numero_telefono',
-            'correo_electronico',
-            'password',
-            'id_area',
-            'puesto',
-            'fecha_registro',
-            'activo'
-    )
-    ->where('id_usuario', $pkUsuario);
+                                'id_usuario',
+                                'nombre',
+                                'a_paterno',
+                                'a_materno',
+                                'numero_telefono',
+                                'correo_electronico',
+                                'password',
+                                'id_area',
+                                'puesto',
+                                'fecha_registro',
+                                'activo'
+                        )
+                        ->where('id_usuario', $pkUsuario);
 
-        return $query->get();
-    }
+                         return $query->get();
+                     }
 
     public function actualizarUsuario($id, $usuario)
     {

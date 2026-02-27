@@ -9,6 +9,7 @@ class CatTiposServicio extends Model
 {
     use HasFactory;
     public  $timestamps = false;
+    protected $primaryKey = 'id_tipo_servicio';
     public  $table      = 'cat_tipo_servicio';
 
     protected $fillable = [

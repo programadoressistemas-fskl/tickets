@@ -9,7 +9,8 @@ class CatTurnos extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    public $table      = 'cat_turnos';
+    protected $primaryKey = 'id_turno';
+    public $table = 'cat_turnos';
 
     public $fillable   = [
         'id_turno',

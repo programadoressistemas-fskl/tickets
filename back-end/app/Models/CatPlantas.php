@@ -9,6 +9,7 @@ class CatPlantas extends Model
 {
     use HasFactory;
     public $timestamps  = false;
+    protected $primaryKey = 'id_planta';
     public $table       = 'cat_plantas';
 
     protected $fillable = [

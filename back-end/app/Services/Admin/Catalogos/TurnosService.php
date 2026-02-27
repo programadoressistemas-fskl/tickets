@@ -27,18 +27,18 @@ class TurnosService
     } 
 
     public function obtenerListaTurnos() {
-         $turno = $this->turnosRepository->obtenerListaTurnos();
+         $turnos = $this->turnosRepository->obtenerListaTurnos();
 
         return response()->json(
             [
-                'turno' => $turno,
+                'turnos' => $turnos,
                 'mensaje' => 'Se obtuvo la informacion correctamente'
             ]
         );
     }
 
     public function obtenerDetalleTurno($pkTurno) {
-        $pkTurno = $this->turnosRepository->obtenerDetalleTurno();
+        $pkTurno = $this->turnosRepository->obtenerDetalleTurno($pkTurno);
 
         return response()->json(
             [
