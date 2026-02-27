@@ -11,7 +11,6 @@ import { TiposServicioService } from '../../../../services/api/tipos-servicio/ti
 })
 export class ConsultaTiposServicio {
   protected datosTabla: any = [];
-
   constructor(
     private tiposServicio: TiposServicioService,
     private ch: ChangeDetectorRef
@@ -21,7 +20,7 @@ export class ConsultaTiposServicio {
     this.obtenerListaTipoServicio();
   }
 
-  public async obtenerListaTipoServicio(): Promise<any>{
+  public async obtenerListaTipoServicio(): Promise<any> {
     return this.tiposServicio.obtenerListaTipoServicio().toPromise().then(
       respuesta => {
         this.datosTabla = respuesta.tiposServicio;

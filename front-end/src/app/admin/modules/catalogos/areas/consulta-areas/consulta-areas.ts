@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { AreasService } from '../../../../services/api/areas/areas';
 
 @Component({
-  selector: 'app-consulta-areas', 
+  selector: 'app-consulta-areas',
   imports: [CommonModule],
   standalone: true,
   templateUrl: './consulta-areas.html',
@@ -11,7 +11,6 @@ import { AreasService } from '../../../../services/api/areas/areas';
 })
 export class ConsultaAreas {
   protected datosTabla: any = [];
-
   constructor(
     private areas: AreasService,
     private ch: ChangeDetectorRef
@@ -21,13 +20,13 @@ export class ConsultaAreas {
     this.obtenerListaAreas();
   }
 
-  public async obtenerListaAreas(): Promise<any>{
+  public async obtenerListaAreas(): Promise<any> {
     return this.areas.obtenerListaAreas().toPromise().then(
       respuesta => {
         console.log(respuesta.areas);
         this.datosTabla = respuesta.areas;
         this.ch.markForCheck();
       }
-    ) 
+    )
   }
 }

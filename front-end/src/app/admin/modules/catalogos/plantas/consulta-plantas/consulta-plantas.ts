@@ -11,10 +11,9 @@ import { PlantasService } from '../../../../services/api/plantas/plantas';
 })
 export class ConsultaPlantas implements OnInit {
   protected datosTabla: any = [];
-
   constructor(
     private plantas: PlantasService,
-    private ch: ChangeDetectorRef
+    private ch: ChangeDetectorRef 
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +24,7 @@ export class ConsultaPlantas implements OnInit {
     return this.plantas.obtenerListaPlantas().toPromise().then(
       respuesta=> {
         this.datosTabla = respuesta.plantas;
-        this.ch.markForCheck();
+        this.ch.markForCheck(); 
       }
     )
   }

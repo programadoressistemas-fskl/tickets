@@ -10,7 +10,7 @@ export class PlantasService {
   constructor(
     private http: HttpClient
   ) { }
-  
+   
   public obtenerListaPlantas(): Observable<any>{
     return this.http.get<any>(`${api}/plantas/obtenerListaPlantas`);
   }

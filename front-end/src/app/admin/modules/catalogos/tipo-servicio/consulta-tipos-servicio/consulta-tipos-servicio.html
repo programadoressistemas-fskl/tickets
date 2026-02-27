@@ -16,7 +16,7 @@
                 <div class="card-body row g-3">
                     <div class="botonera">
                         <button class="btn btn-success btn-sm">
-                            Exportar 
+                            Exportar
                         </button>
                     </div>
                 </div>
@@ -27,13 +27,15 @@
                 <thead>
                     <tr>
                         <th>tipo servicio</th>
+                        <th>descripcion</th>
                         <th>activo</th>
                     </tr>
-                </thead> 
+                </thead>
                 <tbody>
-                    <tr *ngFor="let tipo_servicio of datosTabla">
-                        <td>{{tipo_servicio.tipo_servicio}}</td>
-                        <td>{{tipo_servicio.activo}}</td>
+                    <tr *ngFor="let tiposServicio of datosTabla">
+                        <td>{{tiposServicio.tipo_servicio}}</td>
+                        <td>{{tiposServicio.descripcion}}</td>
+                        <td>{{tiposServicio.estado}}</td>
                     </tr>
                 </tbody>
             </table>
