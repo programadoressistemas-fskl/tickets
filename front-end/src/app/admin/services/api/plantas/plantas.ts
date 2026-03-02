@@ -11,6 +11,10 @@ export class PlantasService {
 		private http: HttpClient
 	) { }
 
+		public registrarPlanta(planta: any): Observable<any> {
+		return this.http.post<any>(`${api}/plantas/registrarPlanta`, planta);
+	}
+
 	public obtenerListaPlantas(): Observable<any> {
 		return this.http.get<any>(`${api}/plantas/obtenerListaPlantas`);
 	}
