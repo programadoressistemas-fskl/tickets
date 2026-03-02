@@ -11,6 +11,7 @@ import { PlantasService } from '../../../../services/api/plantas/plantas';
 })
 export class ConsultaPlantas implements OnInit {
 	protected datosTabla: any = [];
+	
 	constructor(
 		private plantas: PlantasService,
 		private ch: ChangeDetectorRef

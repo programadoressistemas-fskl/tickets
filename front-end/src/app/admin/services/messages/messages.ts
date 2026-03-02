@@ -45,7 +45,28 @@ export class MessagesService {
 		Swal.fire(data);
 
 		document.body.style.paddingRight = '';
-	} 
+	}
+
+	public mensajeConfirmacionCustom(mensaje: string, tipo: any, titulo: string = '', btnConfirmar = 'Continuar', btnCancelar = 'Cancelar', btnDenegado = 'Denegar', showDeny = false) {
+		return Swal.fire({
+			title: titulo,
+			html: mensaje,
+			icon: tipo,
+			showDenyButton: showDeny,
+			showCancelButton: true,
+			confirmButtonText: btnConfirmar,
+			cancelButtonText: btnCancelar,
+			denyButtonText: btnDenegado,
+			buttonsStyling: false,
+			allowOutsideClick: false,
+			customClass: {
+				confirmButton: 'order-1 btn btn-sm btn-primary me-2',
+				cancelButton: 'order-2 btn btn-sm btn-danger',
+				denyButton: 'order-3'
+			},
+			allowEscapeKey: false
+		});
+	}
 
 	public cerrarMensajes(){
 		Swal.close();

@@ -11,6 +11,10 @@ export class UsuariosService {
 		private http: HttpClient
 	) { }
 
+	public registrarUsuario(usuario: any): Observable<any> {
+		return this.http.post<any>(`${api}/usuarios/registrarUsuario`, usuario);
+	}
+	
 	public obtenerListaUsuarios(): Observable<any> {
 		return this.http.get<any>(`${api}/usuarios/obtenerListaUsuarios`);
 	}

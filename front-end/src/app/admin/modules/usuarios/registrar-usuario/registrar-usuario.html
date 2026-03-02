@@ -32,14 +32,14 @@
                                 placeholder="Apellido materno" formControlName="a_materno">
                         </div>
                         <div class="col-lg-8">
-                            <label for="correo" class="form-label">Correo:</label>
-                            <input id="correo" type="email" class="form-control form-control-sm" placeholder="Correo"
-                                formControlName="correo">
+                            <label for="correo_electronico" class="form-label">Correo:</label>
+                            <input id="correo_electronico" type="email" class="form-control form-control-sm" placeholder="correo_electronico"
+                                formControlName="correo_electronico">
                         </div>
                         <div class="col-lg-4">
-                            <label for="telefono" class="form-label">Teléfono:</label>
-                            <input id="telefono" type="tel" class="form-control form-control-sm" placeholder="Teléfono"
-                                formControlName="telefono">
+                            <label for="numero_telefono" class="form-label">Teléfono:</label>
+                            <input id="numero_telefono" type="tel" class="form-control form-control-sm" placeholder="numero_telefono"
+                                formControlName="numero_telefono">
                         </div>
                         <div class="col-lg-4">
                             <label for="password" class="form-label">Contraseña:</label>
@@ -49,7 +49,7 @@
                         <div class="col-lg-4">
                             <label for="area" class="form-label">Area:</label>
                             <select name="area" id="area" class="form-select form-select-sm" formControlName="id_area">
-                                <option *ngFor="let area of listaAreas" [value]="area.id">
+                                <option *ngFor="let area of listaAreas" [value]="area.id_area">
                                     {{ area.area }}
                                 </option>
                                 <option style="display: none; visibility: hidden;" value="">Selecciona una opción
@@ -69,7 +69,7 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-sm btn-primary">
+    <button class="btn btn-sm btn-primary" (click)="registrarUsuario()">
         Registrar
     </button>
     <button class="btn btn-sm btn-danger" (click)="cerrarModal()">
