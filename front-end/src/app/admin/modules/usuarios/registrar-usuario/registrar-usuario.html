@@ -15,44 +15,52 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <form class="row g-3" autocomplete="off">
+                    <form [formGroup]="formUsuario" class="row g-3" autocomplete="off">
                         <div class="col-lg-4">
                             <label for="nombre" class="form-label">Nombre:</label>
-                            <input type="text" class="form-control form-control-sm" placeholder="Nombre">
+                            <input id="nombre" type="text" class="form-control form-control-sm" placeholder="Nombre"
+                                formControlName="nombre">
                         </div>
                         <div class="col-lg-4">
                             <label for="a_paterno" class="form-label">Apellido paterno:</label>
-                            <input type="text" class="form-control form-control-sm" placeholder="Apellido paterno">
+                            <input id="a_paterno" type="text" class="form-control form-control-sm"
+                                placeholder="Apellido paterno" formControlName="a_paterno">
                         </div>
                         <div class="col-lg-4">
                             <label for="a_materno" class="form-label">Apellido materno:</label>
-                            <input type="text" class="form-control form-control-sm" placeholder="Apellido materno">
+                            <input id="a_materno" type="text" class="form-control form-control-sm"
+                                placeholder="Apellido materno" formControlName="a_materno">
                         </div>
                         <div class="col-lg-8">
                             <label for="correo" class="form-label">Correo:</label>
-                            <input type="email" class="form-control form-control-sm" placeholder="Correo">
+                            <input id="correo" type="email" class="form-control form-control-sm" placeholder="Correo"
+                                formControlName="correo">
                         </div>
                         <div class="col-lg-4">
                             <label for="telefono" class="form-label">Teléfono:</label>
-                            <input type="tel" class="form-control form-control-sm" placeholder="Teléfono">
+                            <input id="telefono" type="tel" class="form-control form-control-sm" placeholder="Teléfono"
+                                formControlName="telefono">
                         </div>
                         <div class="col-lg-4">
                             <label for="password" class="form-label">Contraseña:</label>
-                            <input type="password" class="form-control form-control-sm" placeholder="Contraseña">
+                            <input id="password" type="password" class="form-control form-control-sm"
+                                placeholder="Contraseña" formControlName="password">
                         </div>
                         <div class="col-lg-4">
                             <label for="area" class="form-label">Area:</label>
-                            <select name="area" id="area" class="form-select form-select-sm">
+                            <select name="area" id="area" class="form-select form-select-sm" formControlName="id_area">
                                 <option *ngFor="let area of listaAreas" [value]="area.id">
                                     {{ area.area }}
                                 </option>
-                                <option style="display: none; visibility: hidden;" value="">Selecciona una opción</option>
+                                <option style="display: none; visibility: hidden;" value="">Selecciona una opción
+                                </option>
                             </select>
                         </div>
 
                         <div class="col-lg-4">
                             <label for="puesto" class="form-label">Puesto:</label>
-                            <input type="text" class="form-control form-control-sm" placeholder="Puesto">
+                            <input id="puesto" type="text" class="form-control form-control-sm" placeholder="Puesto"
+                                formControlName="puesto">
                         </div>
                     </form>
                 </div>

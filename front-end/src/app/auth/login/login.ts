@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ɵInternalFormsSharedModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OnInit } from '@angular/core';
 import { LoginService } from '../services/login/login';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 @Component({
 	selector: 'app-login',
 	standalone: true,
-	imports: [CommonModule, ɵInternalFormsSharedModule, ReactiveFormsModule],
+	imports: [CommonModule, ReactiveFormsModule],
 	templateUrl: './login.html',
 	styleUrl: './login.css',
 })
