@@ -1,0 +1,70 @@
+import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ModalService } from '../../../../services/modal/modal';
+import { MessagesService } from '../../../../services/messages/messages';
+import { AreasService } from '../../../../services/api/areas/areas';
+
+@Component({
+	selector: 'app-registrar-area',
+	standalone: true,
+	imports: [CommonModule, ReactiveFormsModule],
+	templateUrl: './registrar-area.html',
+	styleUrl: './registrar-area.css',
+})
+export class RegistrarArea implements OnInit {
+
+	protected formArea!: FormGroup;
+
+	constructor(
+		private modal: ModalService,
+		private ch: ChangeDetectorRef,
+		private fb: FormBuilder,
+		private messages: MessagesService,
+		private areas: AreasService
+	) { }
+
+	ngOnInit(): void {
+		this.crearFormAreas();
+	}
+
+	protected crearFormAreas(): void {
+		this.formArea = this.fb.group({
+			area: [null, [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$')]
+			]
+		});
+	}
+
+	protected registrarArea(): void {
+
+		if (this.formArea.invalid) {
+			this.messages.mensajeGenerico('Aún hay campos vacíos o que no cumplen con la estructura correcta.',
+				'info', 'Los campos requeridos están marcados con un *'
+			);
+			return;
+		}
+
+		this.messages
+			.mensajeConfirmacionCustom('¿Está seguro de continuar con el registro del área?',
+				'question', 'Registrar área'
+			).then(res => {
+
+				if (!res.isConfirmed) return;
+
+				const area: any = this.formArea.value;
+
+				this.areas.registrarArea(area).toPromise().then(
+					respuesta => {
+						this.messages.mensajeGenerico(respuesta.mensaje, 'success');
+					},
+					error => {
+						this.messages.mensajeGenerico('error', 'error');
+					}
+				);
+			});
+	}
+
+	public cerrarModal(): void {
+		this.modal.cerrarModal();
+	}
+}

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ModalService } from '../../services/modal/modal';
 import { RegistrarUsuario } from '../../modules/usuarios/registrar-usuario/registrar-usuario';
+import { RegistrarArea } from '../../modules/catalogos/areas/registrar-area/registrar-area';
 
 @Component({
 	selector: 'app-sidenav',
@@ -17,5 +18,9 @@ export class Sidenav {
 
 	public abrirModalRegistrarUsuario(): void {
 		this.modal.abrirModalConComponente(RegistrarUsuario, {}, 'lg-modal');
+	} 
+
+	public abrirModalRegistroArea(): void {
+		this.modal.abrirModalConComponente(RegistrarArea, {}, 'lg-modal');
 	}
 }

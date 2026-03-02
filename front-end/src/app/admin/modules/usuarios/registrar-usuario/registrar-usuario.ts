@@ -34,14 +34,14 @@ export class RegistrarUsuario {
 
 	private crearFormUsuario(): void {
 		this.formUsuario = this.fb.group({
-			nombre:    [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
+			nombre: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
 			a_paterno: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
 			a_materno: [null, [Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
-			correo_electronico: [null, [Validators.required, Validators.email ,Validators.pattern('[a-zA-Zá-úÁ-Ú0-9 .,-_@#$%&+{}()?¿!¡\n\r\t]*')]], 
-			numero_telefono:  [null, [Validators.pattern('^[0-9]+(\.[0-9]+)?$'), Validators.minLength(10), Validators.maxLength(10)]],
-			password:  [null, [Validators.pattern('[a-zA-Zá-úÁ-Ú0-9 .,-_@#$%&+{}()?¿!¡\n\r\t]*')]],
-			id_area:   ['', [Validators.required]],
-			puesto:    [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú0-9 .,-_@#$%&+{}()?¿!¡\n\r\t]*')]]
+			correo_electronico: [null, [Validators.required, Validators.email, Validators.pattern('[a-zA-Zá-úÁ-Ú0-9 .,-_@#$%&+{}()?¿!¡\n\r\t]*')]],
+			numero_telefono: [null, [Validators.pattern('^[0-9]+(\.[0-9]+)?$'), Validators.minLength(10), Validators.maxLength(10)]],
+			password: [null, [Validators.pattern('[a-zA-Zá-úÁ-Ú0-9 .,-_@#$%&+{}()?¿!¡\n\r\t]*')]],
+			id_area: ['', [Validators.required]],
+			puesto: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú0-9 .,-_@#$%&+{}()?¿!¡\n\r\t]*')]]
 		});
 	}
 
@@ -60,7 +60,8 @@ export class RegistrarUsuario {
 			return;
 		}
 
-		this.messages.mensajeConfirmacionCustom('¿Está seguro de continuar con el registro del usuario?', 'question', 'Registrar usuario').then(
+		this.messages.mensajeConfirmacionCustom('¿Está seguro de continuar con el registro del usuario?',
+			 'question', 'Registrar usuario').then(
 			res => {
 				if (!res.isConfirmed) return;
 
