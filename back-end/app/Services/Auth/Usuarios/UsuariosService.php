@@ -16,12 +16,12 @@ class UsuariosService
     }
 
     public function registrarUsuario($usuario) {
-        $usuario = $this->usuariosRepository->registrarUsuario($usuario);
+        $this->usuariosRepository->registrarUsuario($usuario);
 
         return response()->json(
             [
-                'usuarios' => $usuario,
-                'mensaje' => 'Se registro correctamente el usuario'
+                'mensaje' => 'Se registro correctamente el usuario',
+                'title'   => 'Registro exitoso'
             ]
         );
     }

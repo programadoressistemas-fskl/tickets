@@ -19,7 +19,7 @@ class UsuariosRepository
         $registro->a_materno           = $usuario['a_materno'];
         $registro->numero_telefono     = $usuario['numero_telefono'];
         $registro->correo_electronico  = $usuario['correo_electronico'];
-        $registro->password             = $usuario['password'];
+        $registro->password            = bcrypt($usuario['password']);
         $registro->id_area             = $usuario['id_area'];
         $registro->puesto              = $usuario['puesto'];
         $registro->id_usuario_registro = 1;
