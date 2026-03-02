@@ -4,6 +4,7 @@ import { ModalService } from '../../services/modal/modal';
 import { RegistrarUsuario } from '../../modules/usuarios/registrar-usuario/registrar-usuario';
 import { RegistrarArea } from '../../modules/catalogos/areas/registrar-area/registrar-area';
 import { RegistrarPlanta } from '../../modules/catalogos/plantas/registrar-planta/registrar-planta';
+import { RegistrarTipoServicio } from '../../modules/catalogos/tipo-servicio/registrar-tipo-servicio/registrar-tipo-servicio';
 
 @Component({
 	selector: 'app-sidenav',
@@ -27,5 +28,9 @@ export class Sidenav {
 
 	public abrirModalRegistroPlanta(): void {
 		this.modal.abrirModalConComponente(RegistrarPlanta, {}, 'lg-modal')
+	} 
+
+	public abrirModalRegistroTipoServicio(): void {
+		this.modal.abrirModalConComponente(RegistrarTipoServicio, {}, 'lg-modal')
 	}
 }

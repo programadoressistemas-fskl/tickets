@@ -11,6 +11,10 @@ export class TiposServicioService {
 		private http: HttpClient
 	) { }
 
+	public registrarTipoServicio(tiposServicio: any): Observable<any> {
+		return this.http.post<any>(`${api}/tiposServicio/registrarTipoServicio`, tiposServicio);
+	}
+
 	public obtenerListaTipoServicio(): Observable<any> {
 		return this.http.get<any>(`${api}/tiposServicio/obtenerListaTipoServicio`)
 	}

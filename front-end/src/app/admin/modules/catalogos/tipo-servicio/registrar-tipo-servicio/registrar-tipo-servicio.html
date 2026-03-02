@@ -1,0 +1,42 @@
+<div class="modal-body dashboard">
+    <div class="pagetitle">
+        <h4 class="t-bold">
+            Registrar tipo servicio
+        </h4>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Tipos Servicio</li>
+                <li class="breadcrumb-item active">Registrar tipo servicio</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="formTipoServicio" class="row g-3" autocomplete="off">
+                        <div class="col-lg-4">
+                            <label for="tipo_servicio" class="form-label">Tipo Servicio:</label>
+                            <input id="tipo_servicio" type="text" class="form-control form-control-sm" placeholder="Tipo Servicio"
+                                formControlName="tipo_servicio">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="descripcion" class="form-label">Descripcion:</label>
+                            <input id="descripcion" type="text" class="form-control form-control-sm" placeholder="Descripcion"
+                                formControlName="descripcion">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sm btn-primary" (click)="registrarTipoServicio()">
+        Registrar
+    </button>
+    <button class="btn btn-sm btn-danger" (click)="cerrarModal()">
+        Cerrar
+    </button>
+</div>
