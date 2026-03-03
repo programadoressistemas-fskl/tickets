@@ -17,9 +17,9 @@ class PlantasController extends Controller
         $this->plantasService = $PlantasService;
     }
 
-    public function registrarPlantas(Request $request) {
+    public function registrarPlanta(Request $request) {
         try {
-            return $this->plantasService->registrarPlantas($request->all());
+            return $this->plantasService->registrarPlanta($request->all());
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al registrar planta');

@@ -20,8 +20,8 @@ class AreasService
 
         return response()->json(
             [
-                'areas' => $areas, 
-                'mensaje' => 'Se Registro Correctamente el Area'
+                'mensaje' => 'Se Registro Correctamente el Area',
+                'title'   => 'Registro exitoso'
             ]
         );
     }

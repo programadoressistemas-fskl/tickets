@@ -14,13 +14,13 @@ class PlantasService
         $this->plantasRepository = $PlantasRepository;
     }
 
-    public function registrarPlantas($plantas) {
-        $this->plantasRepository->registrarPlantas($plantas);
+    public function registrarPlanta($plantas) {
+        $this->plantasRepository->registrarPlanta($plantas);
 
         return response()->json(
             [
-                'plantas' => $plantas,
-                'mensaje' => 'Se registro correctamente la planta'
+                'mensaje' => 'Se registro correctamente la planta',
+                'title'   => 'Registro exitoso'
             ]
         );
     }

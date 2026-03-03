@@ -9,7 +9,7 @@ class TiposServicioRepository
 {
     public function registrarTipoServicio($tiposServicio) {
         $registro = new CatTiposServicio();
-        $registro->tipoServicio = $tiposServicio['tiposServicio'];
+        $registro->tipo_servicio = $tiposServicio['tipo_servicio'];
         $registro->descripcion  = $tiposServicio['descripcion'];
         $registro->activo       = 1;
         $registro->save();

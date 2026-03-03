@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class PlantasRepository
 {
-    public function registrarPlantas($plantas) {
+    public function registrarPlanta($plantas) {
         $registro = new CatPlantas();
         $registro->planta     = $plantas['planta'];
         $registro->abrev      = $plantas['abrev'];

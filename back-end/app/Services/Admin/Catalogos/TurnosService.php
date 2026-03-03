@@ -31,8 +31,8 @@ class TurnosService
 
         return response()->json(
             [
-                'turnos' => $turnos,
-                'mensaje' => 'Se obtuvo la informacion correctamente'
+                'mensaje' => 'Se obtuvo la informacion correctamente',
+                'title'   => 'Registro exitoso'
             ]
         );
     }

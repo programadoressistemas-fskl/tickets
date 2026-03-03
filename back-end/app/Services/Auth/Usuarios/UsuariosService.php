@@ -15,7 +15,18 @@ class UsuariosService
         $this->usuariosRepository = $UsuariosRepository;
     }
 
-    public function registrarUsuario($usuario) {
+    public function registrarUsuario($usuario)
+    {
+        $resultado = $this->usuariosRepository->validarUsuarioExistente($usuario['correo_electronico']);
+
+        if ($resultado > 0) {
+            return response()->json([
+                'success'  => 204,
+                'title'    => 'El correo electronico existente',
+                'mensaje' => 'Ya existe un registro con el correo electronico escrito'
+            ]);
+        }
+
         $this->usuariosRepository->registrarUsuario($usuario);
 
         return response()->json(
@@ -26,7 +37,8 @@ class UsuariosService
         );
     }
 
-    public function obtenerListaUsuarios() {
+    public function obtenerListaUsuarios()
+    {
         $usuario = $this->usuariosRepository->obtenerListaUsuarios();
 
         return response()->json(
@@ -37,7 +49,8 @@ class UsuariosService
         );
     }
 
-    public function obtenerDetalleUsuario($pkUsuario) {
+    public function obtenerDetalleUsuario($pkUsuario)
+    {
         $usuario = $this->usuariosRepository->obtenerDetalleUsuario($pkUsuario);
 
         return response()->json(
@@ -48,7 +61,8 @@ class UsuariosService
         );
     }
 
-    public function actualizarUsuario($usuario) {
+    public function actualizarUsuario($usuario)
+    {
         $this->usuariosRepository->actualizarUsuario($usuario['pkUsuario'], $usuario['usuario']);
 
         return response()->json(
@@ -58,17 +72,19 @@ class UsuariosService
         );
     }
 
-    public function cambiarStatusUsuario($id) {
+    public function cambiarStatusUsuario($id)
+    {
         $this->usuariosRepository->cambiarStatusUsuario($id);
 
         return response()->json(
             [
                 'mensaje' => 'Se cambio el status del usuario con exito'
-            ] 
+            ]
         );
     }
 
-    public function login($usuario) {
+    public function login($usuario)
+    {
         $resultado = $this->usuariosRepository->login($usuario);
 
         if ($resultado === 'no_usuario') {
@@ -84,7 +100,7 @@ class UsuariosService
                 'success' => 204,
                 'title'   => 'Credenciales Incorrectas',
                 'mensaje' => 'Las credenciales son incorrectas'
-            ]); 
+            ]);
         }
 
         return response()->json([
