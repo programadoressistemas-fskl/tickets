@@ -26,7 +26,6 @@ export class ConsultaAreas {
 	public async obtenerListaAreas(): Promise<any> {
 		return this.areas.obtenerListaAreas().toPromise().then(
 			respuesta => {
-				console.log(respuesta.areas);
 				this.datosTabla = respuesta.areas;
 				this.ch.markForCheck();
 			}
