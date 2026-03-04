@@ -28,12 +28,18 @@
                     <tr>
                         <th>Area</th>
                         <th>activo</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let area of datosTabla">
                         <td>{{area.area}}</td>
                         <td>{{area.estado}}</td>
+                        <td class="text-medium">
+                            <button class="btn btn-sm btn-outline-primary" (click)="abrirModalRegistrarArea()">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

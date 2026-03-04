@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { AreasService } from '../../../../services/api/areas/areas';
+import { ModalService } from '../../../../services/modal/modal';
+import { RegistrarArea } from '../registrar-area/registrar-area';
 
 @Component({
 	selector: 'app-consulta-areas',
@@ -12,6 +14,7 @@ import { AreasService } from '../../../../services/api/areas/areas';
 export class ConsultaAreas {
 	protected datosTabla: any = [];
 	constructor(
+		private modal: ModalService,
 		private areas: AreasService,
 		private ch: ChangeDetectorRef
 	) { }
@@ -28,5 +31,9 @@ export class ConsultaAreas {
 				this.ch.markForCheck();
 			}
 		)
+	}
+
+	public abrirModalRegistrarArea(): void {
+		this.modal.abrirModalConComponente(RegistrarArea, {}, 'lg-modal');
 	}
 }

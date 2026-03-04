@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TurnosService } from '../../../../services/api/turnos/turnos';
+import { ModalService } from '../../../../services/modal/modal';
+import { RegistrarTurno } from '../registrar-turno/registrar-turno';
 
 @Component({
 	selector: 'app-consulta-turnos',
@@ -13,6 +15,7 @@ export class ConsultaTurnos implements OnInit {
 	protected datosTabla: any = []
 
 	constructor(
+		private modal: ModalService,
 		private turnos: TurnosService,
 		private ch: ChangeDetectorRef
 	) { }
@@ -28,5 +31,9 @@ export class ConsultaTurnos implements OnInit {
 				this.ch.markForCheck();
 			}
 		)
+	}
+
+	public abrirModalRegistrarTurno(): void {
+		this.modal.abrirModalConComponente(RegistrarTurno, {}, 'lg-modal')
 	}
 }

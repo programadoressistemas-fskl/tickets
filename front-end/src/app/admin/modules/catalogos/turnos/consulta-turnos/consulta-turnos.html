@@ -16,7 +16,7 @@
                 <div class="card-body row g-3">
                     <div class="botonera">
                         <button class="btn btn-success btn-sm">
-                            Exportar 
+                            Exportar
                         </button>
                     </div>
                 </div>
@@ -28,12 +28,18 @@
                     <tr>
                         <th>Turno</th>
                         <th>activo</th>
+                        <th>Acciones</th>
                     </tr>
-                </thead> 
+                </thead>
                 <tbody>
                     <tr *ngFor="let turno of datosTabla">
                         <td>{{turno.turno}}</td>
                         <td>{{turno.estado}}</td>
+                        <td class="text-medium">
+                            <button class="btn btn-sm btn-outline-primary" (click)="abrirModalRegistrarTurno()">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

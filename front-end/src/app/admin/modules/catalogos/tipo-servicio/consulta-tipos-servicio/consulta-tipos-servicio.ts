@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { TiposServicioService } from '../../../../services/api/tipos-servicio/tipos-servicio';
+import { ModalService } from '../../../../services/modal/modal';
+import { RegistrarTipoServicio } from '../registrar-tipo-servicio/registrar-tipo-servicio';
 
 @Component({
 	selector: 'app-consulta-tipos-servicio',
@@ -12,6 +14,7 @@ import { TiposServicioService } from '../../../../services/api/tipos-servicio/ti
 export class ConsultaTiposServicio {
 	protected datosTabla: any = [];
 	constructor(
+		private modal: ModalService,
 		private tiposServicio: TiposServicioService,
 		private ch: ChangeDetectorRef
 	) { }
@@ -27,6 +30,10 @@ export class ConsultaTiposServicio {
 				this.ch.markForCheck();
 			}
 		)
+	}
+
+	public abrirModalRegistrarTipoServicio(): void {
+		this.modal.abrirModalConComponente(RegistrarTipoServicio, {}, 'lg-modal')
 	}
 
 }

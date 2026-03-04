@@ -54,7 +54,7 @@ export class RegistrarUsuario {
 		)
 	}
 
-	protected registrarUsuario(): void {
+	protected registrarUsuario(): void { 
 		if (this.formUsuario.invalid) {
 			this.messages.mensajeGenerico('Aún hay campos vacíos o que no cumplen con la estructura correcta.', 'info', 'Los campos requeridos están marcados con un *');
 			return;
@@ -69,6 +69,11 @@ export class RegistrarUsuario {
 
 				this.usuarios.registrarUsuario(usuario).toPromise().then(
 					respuesta => {
+						if(respuesta.success == 204) {
+							this.messages.mensajeGenerico(respuesta.mensaje, 'warning', respuesta.title);
+							return;
+						}
+						
 						this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
 					}, error => {
 						this.messages.mensajeGenerico('error', 'error');

@@ -14,23 +14,27 @@ import { RegistrarTipoServicio } from '../../modules/catalogos/tipo-servicio/reg
 	styleUrl: './sidenav.css',
 })
 export class Sidenav {
-	constructor (
+	constructor(
 		private modal: ModalService
-	) {}
+	) { }
 
 	public abrirModalRegistrarUsuario(): void {
 		this.modal.abrirModalConComponente(RegistrarUsuario, {}, 'lg-modal');
-	} 
+	}
 
-	public abrirModalRegistroArea(): void {
+	public abrirModalRegistrarArea(): void {
 		this.modal.abrirModalConComponente(RegistrarArea, {}, 'lg-modal');
-	} 
+	}
 
-	public abrirModalRegistroPlanta(): void {
+	public abrirModalRegistrarPlanta(): void {
 		this.modal.abrirModalConComponente(RegistrarPlanta, {}, 'lg-modal')
-	} 
+	}
 
-	public abrirModalRegistroTipoServicio(): void {
+	public abrirModalRegistrarTipoServicio(): void {
+		this.modal.abrirModalConComponente(RegistrarTipoServicio, {}, 'lg-modal')
+	}
+
+	public abrirModalRegistrarTurno(): void {
 		this.modal.abrirModalConComponente(RegistrarTipoServicio, {}, 'lg-modal')
 	}
 }

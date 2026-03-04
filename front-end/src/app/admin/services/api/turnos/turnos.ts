@@ -11,6 +11,10 @@ export class TurnosService {
 		private http: HttpClient
 	) { }
 
+	public registrarTurno(turno: any): Observable<any> {
+		return this.http.post<any>(`${api}/usuarios/registrarUsuario`, turno);
+	}
+
 	public obtenerListaTurnos(): Observable<any> {
 		return this.http.get<any>(`${api}/turnos/obtenerListaTurnos`);
 	}

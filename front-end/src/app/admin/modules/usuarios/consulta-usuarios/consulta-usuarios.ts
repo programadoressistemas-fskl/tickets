@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsuariosService } from '../../../services/api/usuarios/usuarios';
+import { ModalService } from '../../../services/modal/modal';
+import { RegistrarUsuario } from '../registrar-usuario/registrar-usuario';
 
 @Component({
 	selector: 'app-consulta-usuarios',
@@ -13,6 +15,7 @@ export class ConsultaUsuarios implements OnInit {
 	protected datosTabla: any = [];
 
 	constructor(
+		private modal: ModalService,
 		private usuarios: UsuariosService,
 		private ch: ChangeDetectorRef
 	) { }
@@ -29,5 +32,9 @@ export class ConsultaUsuarios implements OnInit {
 				this.ch.markForCheck();
 			}
 		);
+	}
+
+	public abrirModalRegistrarUsuario(): void {
+		this.modal.abrirModalConComponente(RegistrarUsuario, {}, 'lg-modal');
 	}
 }

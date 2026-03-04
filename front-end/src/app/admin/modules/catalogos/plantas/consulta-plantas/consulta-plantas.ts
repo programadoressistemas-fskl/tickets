@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { PlantasService } from '../../../../services/api/plantas/plantas';
+import { ModalService } from '../../../../services/modal/modal';
+import { RegistrarPlanta } from '../registrar-planta/registrar-planta';
 
 @Component({
 	selector: 'app-consulta-plantas',
@@ -11,8 +13,9 @@ import { PlantasService } from '../../../../services/api/plantas/plantas';
 })
 export class ConsultaPlantas implements OnInit {
 	protected datosTabla: any = [];
-	
+
 	constructor(
+		private modal: ModalService,
 		private plantas: PlantasService,
 		private ch: ChangeDetectorRef
 	) { }
@@ -28,5 +31,9 @@ export class ConsultaPlantas implements OnInit {
 				this.ch.markForCheck();
 			}
 		)
+	}
+
+	public abrirModalRegistrarPlanta(): void {
+		this.modal.abrirModalConComponente(RegistrarPlanta, {}, 'lg-modal')
 	}
 }

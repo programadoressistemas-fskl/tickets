@@ -29,6 +29,7 @@
                         <th>tipo servicio</th>
                         <th>descripcion</th>
                         <th>activo</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,6 +37,11 @@
                         <td>{{tiposServicio.tipo_servicio}}</td>
                         <td>{{tiposServicio.descripcion}}</td>
                         <td>{{tiposServicio.estado}}</td>
+                        <td class="text-medium">
+                            <button class="btn btn-sm btn-outline-primary" (click)="abrirModalRegistrarTipoServicio()">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
