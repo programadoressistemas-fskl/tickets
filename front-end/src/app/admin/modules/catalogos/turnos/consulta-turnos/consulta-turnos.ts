@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { TurnosService } from '../../../../services/api/turnos/turnos';
 import { ModalService } from '../../../../services/modal/modal';
 import { RegistrarTurno } from '../registrar-turno/registrar-turno';
+import { MessagesService } from '../../../../services/messages/messages';
 
 @Component({
 	selector: 'app-consulta-turnos',
@@ -11,17 +12,31 @@ import { RegistrarTurno } from '../registrar-turno/registrar-turno';
 	templateUrl: './consulta-turnos.html',
 	styleUrl: './consulta-turnos.css',
 })
-export class ConsultaTurnos implements OnInit {
-	protected datosTabla: any = []
+export class ConsultaTurnos implements OnDestroy {
+	protected datosTabla: any = [];
+
+	private intervalo: any;
 
 	constructor(
 		private modal: ModalService,
 		private turnos: TurnosService,
+		private messages: MessagesService,
 		private ch: ChangeDetectorRef
 	) { }
 
-	ngOnInit(): void {
-		this.obtenerListaTurnos();
+	async ngOnInit(): Promise<any> {
+		this.messages.mensajeEsperar();
+
+		await this.obtenerListaTurnos();
+		this.repetitiveInstruction();
+
+		this.messages.cerrarMensajes();
+	}
+
+	private repetitiveInstruction(): void {
+		this.intervalo = setInterval(() => {
+			this.obtenerListaTurnos();
+		}, 10000);
 	}
 
 	public async obtenerListaTurnos(): Promise<any> {
@@ -35,5 +50,9 @@ export class ConsultaTurnos implements OnInit {
 
 	public abrirModalRegistrarTurno(): void {
 		this.modal.abrirModalConComponente(RegistrarTurno, {}, 'lg-modal')
+	}
+
+	ngOnDestroy(): void {
+		clearInterval(this.intervalo);
 	}
 }

@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { AreasService } from '../../../../services/api/areas/areas';
 import { ModalService } from '../../../../services/modal/modal';
 import { RegistrarArea } from '../registrar-area/registrar-area';
+import { MessagesService } from '../../../../services/messages/messages';
 
 @Component({
 	selector: 'app-consulta-areas',
@@ -11,16 +12,31 @@ import { RegistrarArea } from '../registrar-area/registrar-area';
 	templateUrl: './consulta-areas.html',
 	styleUrl: './consulta-areas.css',
 })
-export class ConsultaAreas {
+export class ConsultaAreas implements OnDestroy {
 	protected datosTabla: any = [];
+
+	private intervalo: any;
+
 	constructor(
 		private modal: ModalService,
 		private areas: AreasService,
+		private messages: MessagesService,
 		private ch: ChangeDetectorRef
 	) { }
 
-	ngOnInit(): void {
-		this.obtenerListaAreas();
+	async ngOnInit(): Promise<any> {
+		this.messages.mensajeEsperar();
+
+		await this.obtenerListaAreas();
+		this.repetitiveInstruction();
+
+		this.messages.cerrarMensajes();
+	}
+
+	public repetitiveInstruction(): void {
+		this.intervalo = setInterval(() => {
+			this.obtenerListaAreas();
+		}, 10000);
 	}
 
 	public async obtenerListaAreas(): Promise<any> {
@@ -34,5 +50,9 @@ export class ConsultaAreas {
 
 	public abrirModalRegistrarArea(): void {
 		this.modal.abrirModalConComponente(RegistrarArea, {}, 'lg-modal');
+	}
+
+	ngOnDestroy(): void {
+		clearInterval(this.intervalo);
 	}
 }

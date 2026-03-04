@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { TiposServicioService } from '../../../../services/api/tipos-servicio/tipos-servicio';
 import { ModalService } from '../../../../services/modal/modal';
 import { RegistrarTipoServicio } from '../registrar-tipo-servicio/registrar-tipo-servicio';
+import { MessagesService } from '../../../../services/messages/messages';
 
 @Component({
 	selector: 'app-consulta-tipos-servicio',
@@ -11,16 +12,31 @@ import { RegistrarTipoServicio } from '../registrar-tipo-servicio/registrar-tipo
 	templateUrl: './consulta-tipos-servicio.html',
 	styleUrl: './consulta-tipos-servicio.css',
 })
-export class ConsultaTiposServicio {
+export class ConsultaTiposServicio implements OnDestroy {
 	protected datosTabla: any = [];
+
+	private intervalo: any;
+
 	constructor(
 		private modal: ModalService,
 		private tiposServicio: TiposServicioService,
+		private messages: MessagesService,
 		private ch: ChangeDetectorRef
 	) { }
 
-	ngOnInit(): void {
-		this.obtenerListaTipoServicio();
+	async ngOnInit(): Promise<any> {
+		this.messages.mensajeEsperar();
+
+		await this.obtenerListaTipoServicio();
+		this.repetitiveInstruction();
+
+		this.messages.cerrarMensajes();
+	}
+
+	private repetitiveInstruction(): void {
+		this.intervalo = setInterval(() => {
+			this.obtenerListaTipoServicio();
+		}, 10000);
 	}
 
 	public async obtenerListaTipoServicio(): Promise<any> {
@@ -29,11 +45,14 @@ export class ConsultaTiposServicio {
 				this.datosTabla = respuesta.tiposServicio;
 				this.ch.markForCheck();
 			}
-		)
+		);
 	}
 
 	public abrirModalRegistrarTipoServicio(): void {
 		this.modal.abrirModalConComponente(RegistrarTipoServicio, {}, 'lg-modal')
 	}
 
+	ngOnDestroy(): void {
+		clearInterval(this.intervalo);
+	}
 }

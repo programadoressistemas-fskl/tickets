@@ -5,6 +5,7 @@ import { RegistrarUsuario } from '../../modules/usuarios/registrar-usuario/regis
 import { RegistrarArea } from '../../modules/catalogos/areas/registrar-area/registrar-area';
 import { RegistrarPlanta } from '../../modules/catalogos/plantas/registrar-planta/registrar-planta';
 import { RegistrarTipoServicio } from '../../modules/catalogos/tipo-servicio/registrar-tipo-servicio/registrar-tipo-servicio';
+import { RegistrarTurno } from '../../modules/catalogos/turnos/registrar-turno/registrar-turno';
 
 @Component({
 	selector: 'app-sidenav',
@@ -35,6 +36,6 @@ export class Sidenav {
 	}
 
 	public abrirModalRegistrarTurno(): void {
-		this.modal.abrirModalConComponente(RegistrarTipoServicio, {}, 'lg-modal')
+		this.modal.abrirModalConComponente(RegistrarTurno, {}, 'lg-modal')
 	}
 }
