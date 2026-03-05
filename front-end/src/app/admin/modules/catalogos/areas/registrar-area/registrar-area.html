@@ -1,18 +1,18 @@
 <div class="modal-body dashboard">
     <div class="pagetitle">
         <h4 class="t-bold">
-            Registrar area
+            {{pkArea == null ? 'Registrar' : 'Actualziar'}} area
         </h4>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Area</li>
-                <li class="breadcrumb-item active">Registrar area</li>
+                <li class="breadcrumb-item active"> {{pkArea == null ? 'Registrar' : 'Actualziar'}} area</li>
             </ol>
         </nav>
     </div>
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-12" style="margin-top: 20px !important;">
             <div class="card">
                 <div class="card-body">
                     <form [formGroup]="formArea" class="row g-3" autocomplete="off">
