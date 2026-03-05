@@ -71,10 +71,10 @@ class AreasController extends Controller
     public function actualizarAreas(Request $request) {
         try {
 
-            $usuario = $this->areasService->actualizarAreas($request->all());
+            $area = $this->areasService->actualizarAreas($request->all());
 
             return response()->json([
-                'data' => $usuario,
+                'data' => $area,
                 'mensaje' => 'Area actualizada correctamente'
             ]);
         } catch (\Throwable $error) {

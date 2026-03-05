@@ -42,7 +42,7 @@ class TurnosService
 
         return response()->json(
             [
-                'pkTurno' => '$pkTurno',
+                'pkTurno' => $pkTurno,
                 'mensaje' => ' Se obtuvo corectamente la informacion'
             ]
         );

@@ -55,7 +55,7 @@ class UsuariosService
 
         return response()->json(
             [
-                'usuarios' => $usuario,
+                'usuario' => $usuario[0],
                 'mensaje' => 'Se obtuvo la informacion correctamente'
             ]
         );

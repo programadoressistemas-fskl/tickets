@@ -43,7 +43,7 @@ class PlantasRepository
                                 'activo'
                             )
                             ->where([
-                            ['id_area', $pkPlantas],
+                            ['id_planta', $pkPlantas],
                             ['activo', 1]
                             ]);
 

@@ -71,10 +71,10 @@ class PlantasController extends Controller
     public function actualizarPlanta(Request $request) {
         try {
 
-            $usuario = $this->plantasService->actualizarPlanta($request->all());
+            $planta = $this->plantasService->actualizarPlanta($request->all());
 
             return response()->json([
-                'data' => $usuario,
+                'data' => $planta,
                 'mensaje' => 'Planta actualizado correctamente'
             ]);
         } catch (\Throwable $error) {

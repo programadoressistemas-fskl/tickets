@@ -38,11 +38,11 @@ class AreasService
     }
 
     public function obtenerDetalleArea($pkArea) {
-        $areas = $this->areasRepository->obtenerDetalleArea($pkArea);
+        $area = $this->areasRepository->obtenerDetalleArea($pkArea);
 
         return response()->json(
             [
-                'areas' => $areas,
+                'area' => $area[0],
                 'mensaje' => 'Se obtuvo la informacion correcta'
             ]
         );
@@ -55,8 +55,8 @@ class AreasService
             [
                 'mensajes' => 'Se actualizo correctamente el area'
             ]
-        ); 
-    } 
+        );
+    }
 
     public function cambiarStatusArea($pkArea) {
         $this->areasRepository->cambiarStatusArea($pkArea);
