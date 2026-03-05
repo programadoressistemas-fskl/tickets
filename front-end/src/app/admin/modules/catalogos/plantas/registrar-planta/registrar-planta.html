@@ -1,12 +1,12 @@
 <div class="modal-body dashboard">
     <div class="pagetitle">
         <h4 class="t-bold">
-            Registrar planta
+             {{pkPlanta == null ? 'Registrar' : 'Actualizar'}} planta
         </h4>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Plantas</li>
-                <li class="breadcrumb-item active">Registrar planta</li>
+                <li class="breadcrumb-item active">{{pkPlanta == null ? 'Registrar' : 'Actualizar'}} planta</li>
             </ol>
         </nav>
     </div>
