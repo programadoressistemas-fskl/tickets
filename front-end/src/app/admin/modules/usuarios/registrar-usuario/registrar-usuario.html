@@ -1,12 +1,12 @@
 <div class="modal-body dashboard">
     <div class="pagetitle">
         <h4 class="t-bold">
-            Registrar usuario
+            {{pkUsuario == null ? 'Registrar' : 'Actualizar'}} usuario
         </h4> 
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Usuarios</li>
-                <li class="breadcrumb-item active">Registrar usuario</li>
+                <li class="breadcrumb-item active">{{pkUsuario == null ? 'Registrar' : 'Actualizar'}} usuario</li>
             </ol>
         </nav>
     </div>
