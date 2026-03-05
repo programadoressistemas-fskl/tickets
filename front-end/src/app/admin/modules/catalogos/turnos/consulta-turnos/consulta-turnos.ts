@@ -53,7 +53,7 @@ export class ConsultaTurnos implements OnDestroy {
 			pkTurno: pkTurno
 		};
 
-		this.modal.abrirModalConComponente(RegistrarTurno, data, 'lg-modal')
+		this.modal.abrirModalConComponente(RegistrarTurno, data, 'md-modal')
 	}
 
 	ngOnDestroy(): void {

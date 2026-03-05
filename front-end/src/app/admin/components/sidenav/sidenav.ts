@@ -24,7 +24,7 @@ export class Sidenav {
 	}
 
 	public abrirModalRegistrarArea(): void {
-		this.modal.abrirModalConComponente(RegistrarArea, {}, 'lg-modal');
+		this.modal.abrirModalConComponente(RegistrarArea, {}, 'md-modal');
 	}
 
 	public abrirModalRegistrarPlanta(): void {
@@ -36,6 +36,6 @@ export class Sidenav {
 	}
 
 	public abrirModalRegistrarTurno(): void {
-		this.modal.abrirModalConComponente(RegistrarTurno, {}, 'lg-modal')
+		this.modal.abrirModalConComponente(RegistrarTurno, {}, 'md-modal')
 	}
 }
