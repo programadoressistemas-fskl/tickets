@@ -38,11 +38,11 @@ class TurnosService
     }
 
     public function obtenerDetalleTurno($pkTurno) {
-        $pkTurno = $this->turnosRepository->obtenerDetalleTurno($pkTurno);
+        $turno = $this->turnosRepository->obtenerDetalleTurno($pkTurno);
 
         return response()->json(
             [
-                'pkTurno' => $pkTurno,
+                'turno' => $turno[0],
                 'mensaje' => ' Se obtuvo corectamente la informacion'
             ]
         );
