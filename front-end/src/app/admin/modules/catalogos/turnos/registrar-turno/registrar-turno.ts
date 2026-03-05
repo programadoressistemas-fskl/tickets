@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalService } from '../../../../services/modal/modal';
 import { MessagesService } from '../../../../services/messages/messages';
@@ -13,6 +13,8 @@ import { CommonModule } from '@angular/common';
 	styleUrl: './registrar-turno.css',
 })
 export class RegistrarTurno {
+	@Input() pkTurno: any = null;
+
 	protected formTurno!: FormGroup;
 
 	protected listaAreas: any[] = [];
@@ -24,14 +26,29 @@ export class RegistrarTurno {
 		private turnos: TurnosService
 	) { }
 
-	ngOnInit(): void {
+	async ngOnInit(): Promise<any> {
+		this.messages.mensajeEsperar();
+
 		this.crearFormTurno();
+		if (this.pkTurno != null) await this.obtenerDetalleTurno(this.pkTurno);
+
+		this.messages.cerrarMensajes();
 	}
 
 	private crearFormTurno(): void {
 		this.formTurno = this.fb.group({
 			turno: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
 		});
+	}
+
+	public async obtenerDetalleTurno(pkTurno: number): Promise<any> {
+		return this.turnos.obtenerDetalleTurno(pkTurno).toPromise().then(
+			respuesta => {
+				const turno = respuesta.turno;
+
+				this.formTurno.get('turno')?.setValue(turno.turno);
+			}
+		)
 	}
 
 	protected registrarTurno(): void {
