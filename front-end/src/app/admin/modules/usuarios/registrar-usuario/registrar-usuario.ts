@@ -74,6 +74,7 @@ export class RegistrarUsuario {
 				this.formUsuario.get('numero_telefono')?.setValue(usuario.numero_telefono);
 				this.formUsuario.get('password')?.setValue(usuario.password);
 				this.formUsuario.get('puesto')?.setValue(usuario.puesto);
+				this.formUsuario.get('id_area')?.setValue(usuario.id_area);
 				
 			}
 		)

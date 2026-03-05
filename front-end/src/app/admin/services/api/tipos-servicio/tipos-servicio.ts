@@ -18,4 +18,8 @@ export class TiposServicioService {
 	public obtenerListaTipoServicio(): Observable<any> {
 		return this.http.get<any>(`${api}/tiposServicio/obtenerListaTipoServicio`)
 	}
+
+	public obtenerDetalleTipoServicio(pkTipoServicio: number): Observable<any> {
+		return this.http.get<any>(`${api}/tiposServicio/obtenerDetalleTipoServicio/${pkTipoServicio}`)
+	}
 }

@@ -48,8 +48,12 @@ export class ConsultaTiposServicio implements OnDestroy {
 		);
 	}
 
-	public abrirModalRegistrarTipoServicio(): void {
-		this.modal.abrirModalConComponente(RegistrarTipoServicio, {}, 'lg-modal')
+	public abrirModalRegistrarTipoServicio(pkTipoServicio: number): void {
+		const data: any = {
+			pkTipoServicio: pkTipoServicio
+		};
+
+		this.modal.abrirModalConComponente(RegistrarTipoServicio, data, 'lg-modal')
 	}
 
 	ngOnDestroy(): void {

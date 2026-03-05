@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalService } from '../../../../services/modal/modal';
 import { TiposServicioService } from '../../../../services/api/tipos-servicio/tipos-servicio';
@@ -13,6 +13,8 @@ import { MessagesService } from '../../../../services/messages/messages';
   styleUrl: './registrar-tipo-servicio.css',
 })
 export class RegistrarTipoServicio {
+  @Input() pkTipoServicio: any = null;
+
   protected formTipoServicio!: FormGroup;
 
   constructor(
@@ -22,8 +24,13 @@ export class RegistrarTipoServicio {
     private messages: MessagesService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<any> {
+    this.messages.mensajeEsperar();
+
     this.crearFormTipoServicio();
+    if (this.pkTipoServicio != null) await this.obtenerDetalleTipoServicio(this.pkTipoServicio);
+
+    this.messages.cerrarMensajes();
   }
 
   private crearFormTipoServicio(): void {
@@ -31,6 +38,18 @@ export class RegistrarTipoServicio {
       tipo_servicio: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
       descripcion: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]]
     })
+  }
+
+
+  public async obtenerDetalleTipoServicio(pkTipoServicio: number): Promise<any> {
+    return this.tiposServicio.obtenerDetalleTipoServicio(pkTipoServicio).toPromise().then(
+      respuesta => {
+        const tipoServicio = respuesta.tipoServicio;
+
+        this.formTipoServicio.get('tipo_servicio')?.setValue(tipoServicio.tipo_servicio);
+        this.formTipoServicio.get('descripcion')?.setValue(tipoServicio.descripcion);
+      }
+    )
   }
 
   protected registrarTipoServicio(): void {
