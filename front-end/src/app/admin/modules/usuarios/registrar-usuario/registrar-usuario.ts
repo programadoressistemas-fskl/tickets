@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { ModalService } from '../../../services/modal/modal';
 import { CommonModule } from '@angular/common';
 import { AreasService } from '../../../services/api/areas/areas';
@@ -14,6 +14,8 @@ import { UsuariosService } from '../../../services/api/usuarios/usuarios';
 	styleUrl: './registrar-usuario.css',
 })
 export class RegistrarUsuario {
+	@Input() pkUsuario: any = null;
+
 	protected formUsuario!: FormGroup;
 
 	protected listaAreas: any[] = [];
@@ -27,9 +29,15 @@ export class RegistrarUsuario {
 		private usuarios: UsuariosService
 	) { }
 
-	ngOnInit(): void {
+	async ngOnInit(): Promise<any> {
+		this.messages.mensajeEsperar();
+
 		this.crearFormUsuario();
 		this.obtenerListaAreas();
+
+		if (this.pkUsuario != null) await this.obtenerDetalleUsuario(this.pkUsuario);
+
+		this.messages.cerrarMensajes();
 	}
 
 	private crearFormUsuario(): void {
@@ -54,33 +62,50 @@ export class RegistrarUsuario {
 		)
 	}
 
-	protected registrarUsuario(): void { 
+	public async obtenerDetalleUsuario(pkUsuario: number): Promise<any> {
+		return this.usuarios.obtenerDetalleUsuario(pkUsuario).toPromise().then(
+			respuesta => {
+				const usuario = respuesta.usuario;
+
+				this.formUsuario.get('nombre')?.setValue(usuario.nombre);
+				this.formUsuario.get('a_paterno')?.setValue(usuario.a_paterno);
+				this.formUsuario.get('a_materno')?.setValue(usuario.a_materno);
+				this.formUsuario.get('correo_electronico')?.setValue(usuario.correo_electronico);
+				this.formUsuario.get('numero_telefono')?.setValue(usuario.numero_telefono);
+				this.formUsuario.get('password')?.setValue(usuario.password);
+				this.formUsuario.get('puesto')?.setValue(usuario.puesto);
+				
+			}
+		)
+	}
+
+	protected registrarUsuario(): void {
 		if (this.formUsuario.invalid) {
 			this.messages.mensajeGenerico('Aún hay campos vacíos o que no cumplen con la estructura correcta.', 'info', 'Los campos requeridos están marcados con un *');
 			return;
 		}
 
 		this.messages.mensajeConfirmacionCustom('¿Está seguro de continuar con el registro del usuario?',
-			 'question', 'Registrar usuario').then(
-			res => {
-				if (!res.isConfirmed) return;
+			'question', 'Registrar usuario').then(
+				res => {
+					if (!res.isConfirmed) return;
 
-				const usuario: any = this.formUsuario.value;
+					const usuario: any = this.formUsuario.value;
 
-				this.usuarios.registrarUsuario(usuario).toPromise().then(
-					respuesta => {
-						if(respuesta.success == 204) {
-							this.messages.mensajeGenerico(respuesta.mensaje, 'warning', respuesta.title);
-							return;
+					this.usuarios.registrarUsuario(usuario).toPromise().then(
+						respuesta => {
+							if (respuesta.success == 204) {
+								this.messages.mensajeGenerico(respuesta.mensaje, 'warning', respuesta.title);
+								return;
+							}
+
+							this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
+						}, error => {
+							this.messages.mensajeGenerico('error', 'error');
 						}
-						
-						this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
-					}, error => {
-						this.messages.mensajeGenerico('error', 'error');
-					}
-				);
-			}
-		);
+					);
+				}
+			);
 	}
 
 	public cerrarModal(): void {

@@ -48,8 +48,12 @@ export class ConsultaAreas implements OnDestroy {
 		)
 	}
 
-	public abrirModalRegistrarArea(): void {
-		this.modal.abrirModalConComponente(RegistrarArea, {}, 'lg-modal');
+	public abrirModalRegistrarArea($pkArea: number): void {
+		const data: any = {
+			pkArea: $pkArea
+		};
+
+		this.modal.abrirModalConComponente(RegistrarArea, data, 'lg-modal');
 	}
 
 	ngOnDestroy(): void {

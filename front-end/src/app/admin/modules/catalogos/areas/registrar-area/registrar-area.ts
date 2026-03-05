@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalService } from '../../../../services/modal/modal';
 import { MessagesService } from '../../../../services/messages/messages';
@@ -13,6 +13,7 @@ import { AreasService } from '../../../../services/api/areas/areas';
 	styleUrl: './registrar-area.css',
 })
 export class RegistrarArea implements OnInit {
+	@Input() pkArea: any = null;
 
 	protected formArea!: FormGroup;
 
@@ -24,8 +25,14 @@ export class RegistrarArea implements OnInit {
 		private areas: AreasService
 	) { }
 
-	ngOnInit(): void {
+	async ngOnInit(): Promise<any> {
+		this.messages.mensajeEsperar();
+
 		this.crearFormAreas();
+
+		if (this.pkArea != null) await this.obtenerDetalleArea(this.pkArea);
+
+		this.messages.cerrarMensajes();
 	}
 
 	protected crearFormAreas(): void {
@@ -33,6 +40,20 @@ export class RegistrarArea implements OnInit {
 			area: [null, [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$')]
 			]
 		});
+	}
+
+	public async obtenerDetalleArea(PkArea: number): Promise<any> {
+
+		return this.areas.obtenerDetalleArea(PkArea).toPromise().then(
+			respuesta => {
+
+				const area = respuesta.area;
+
+				this.formArea.get('area')?.setValue(area.area);
+
+			}
+		);
+
 	}
 
 	protected registrarArea(): void {

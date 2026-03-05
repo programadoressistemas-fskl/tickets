@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalService } from '../../../../services/modal/modal';
 import { MessagesService } from '../../../../services/messages/messages';
@@ -13,6 +13,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './registrar-planta.css',
 })
 export class RegistrarPlanta {
+  @Input() pkPlanta: any = null;
+
   protected formPlanta!: FormGroup;
 
   constructor(
@@ -22,8 +24,14 @@ export class RegistrarPlanta {
     private plantas: PlantasService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<any> {
+    this.messages.mensajeEsperar();
+
     this.crearFormPlanta();
+
+    if (this.pkPlanta != null) await this.obtenerDetallePlanta(this.pkPlanta);
+
+    this.messages.cerrarMensajes();
   }
 
   private crearFormPlanta(): void {
@@ -32,7 +40,19 @@ export class RegistrarPlanta {
       abrev: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
       direccion: [null, [Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
     })
-  }
+  }  
+
+  public async obtenerDetallePlanta(pkPlanta: number): Promise<any> {
+		return this.plantas.obtenerDetallePlanta(pkPlanta).toPromise().then(
+			respuesta => {
+				const planta = respuesta.planta;
+
+				this.formPlanta.get('planta')?.setValue(planta.planta);
+				this.formPlanta.get('abrev')?.setValue(planta.abrev);
+				this.formPlanta.get('direccion')?.setValue(planta.direccion);
+			}
+		)
+	}
 
   protected registrarPlanta(): void {
     if (this.formPlanta.invalid) {
@@ -57,7 +77,7 @@ export class RegistrarPlanta {
         }
       )
   }
-  
+
   public cerrarModal(): void {
     this.modal.cerrarModal();
   }

@@ -19,4 +19,8 @@ export class AreasService {
 	public obtenerListaAreas(): Observable<any> {
 		return this.http.get<any>(`${api}/areas/obtenerListaAreas`);
 	}
+
+		public obtenerDetalleArea(pkArea: number): Observable<any> {
+		return this.http.get<any>(`${api}/areas/obtenerDetalleArea/${pkArea}`);
+	}
 }

@@ -48,8 +48,12 @@ export class ConsultaPlantas implements OnDestroy {
 		)
 	}
 
-	public abrirModalRegistrarPlanta(): void {
-		this.modal.abrirModalConComponente(RegistrarPlanta, {}, 'lg-modal')
+	public abrirModalRegistrarPlanta(pkPlanta: number): void {
+		const data: any = {
+			pkPlanta: pkPlanta
+		};
+
+		this.modal.abrirModalConComponente(RegistrarPlanta, data, 'lg-modal')
 	}
 
 	ngOnDestroy(): void {

@@ -17,5 +17,9 @@ export class UsuariosService {
 	
 	public obtenerListaUsuarios(): Observable<any> {
 		return this.http.get<any>(`${api}/usuarios/obtenerListaUsuarios`);
-	}
+	} 
+
+	public obtenerDetalleUsuario(pkUsuario: number): Observable<any> {
+		return this.http.get<any>(`${api}/usuarios/obtenerDetalleUsuario/${pkUsuario}`);
+	} 
 }

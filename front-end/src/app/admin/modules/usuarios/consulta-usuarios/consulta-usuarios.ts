@@ -48,8 +48,12 @@ export class ConsultaUsuarios implements OnDestroy {
 		);
 	}
 
-	public abrirModalRegistrarUsuario(): void {
-		this.modal.abrirModalConComponente(RegistrarUsuario, {}, 'lg-modal');
+	public abrirModalRegistrarUsuario(pkUsuario: number): void {
+		const data: any = {
+			pkUsuario: pkUsuario
+		};
+
+		this.modal.abrirModalConComponente(RegistrarUsuario, data, 'lg-modal');
 	}
 
 	ngOnDestroy(): void {
