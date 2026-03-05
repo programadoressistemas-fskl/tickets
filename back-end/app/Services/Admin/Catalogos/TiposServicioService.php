@@ -37,11 +37,11 @@ class TiposServicioService
     }
 
      public function obtenerDetalleTipoServicio($pkTipoServicio) {
-        $pkTipoServicio = $this->tiposServicioRepository->obtenerDetalleTipoServicio($pkTipoServicio);
+        $tipoServicio = $this->tiposServicioRepository->obtenerDetalleTipoServicio($pkTipoServicio);
 
         return response()->json(
             [
-                'pktiposServicio' => $pkTipoServicio,
+                'tipoServicio' => $tipoServicio[0],
                 'mensaje' => 'Se obtuvo correctamente la informacion'
             ]
         ); 
