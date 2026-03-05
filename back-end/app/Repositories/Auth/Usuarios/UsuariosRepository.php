@@ -32,6 +32,8 @@ public function validarUsuarioExistente($correo)
         $registro->fecha_registro      = Carbon::now();
         $registro->activo              = 1;
         $registro->save();
+
+        return $registro->id_usuario;
     }
 
 

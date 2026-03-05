@@ -27,12 +27,13 @@ class UsuariosService
             ]);
         }
 
-        $this->usuariosRepository->registrarUsuario($usuario);
+        $pkUsuario = $this->usuariosRepository->registrarUsuario($usuario);
 
         return response()->json(
             [
-                'mensaje' => 'Se registro correctamente el usuario',
-                'title'   => 'Registro exitoso'
+                'pkUsuario' => $pkUsuario,
+                'mensaje'   => 'Se registro correctamente el usuario',
+                'title'     => 'Registro exitoso'
             ]
         );
     }
