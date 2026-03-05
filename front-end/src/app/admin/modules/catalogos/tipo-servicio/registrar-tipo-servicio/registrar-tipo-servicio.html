@@ -1,12 +1,12 @@
 <div class="modal-body dashboard">
     <div class="pagetitle">
         <h4 class="t-bold">
-            Registrar tipo servicio
+             {{pkTipoServicio == null ? 'Registrar' : 'Actualizar'}} tiposServicio
         </h4>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Tipos Servicio</li>
-                <li class="breadcrumb-item active">Registrar tipo servicio</li>
+                <li class="breadcrumb-item active">{{pkTipoServicio == null ? 'Registrar' : 'Actualizar'}} tiposServicio</li>
             </ol>
         </nav>
     </div>
