@@ -90,6 +90,8 @@ export class RegistrarUsuario {
 				res => {
 					if (!res.isConfirmed) return;
 
+					this.messages.mensajeEsperar();
+
 					const usuario: any = this.formUsuario.value;
 
 					this.usuarios.registrarUsuario(usuario).toPromise().then(
@@ -99,7 +101,10 @@ export class RegistrarUsuario {
 								return;
 							}
 
-							this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
+							this.pkUsuario = respuesta.pkUsuario;
+							this.obtenerDetalleUsuario(respuesta.pkUsuario).then(() => {
+								this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
+							});
 						}, error => {
 							this.messages.mensajeGenerico('error', 'error');
 						}
@@ -108,7 +113,26 @@ export class RegistrarUsuario {
 			);
 	}
 
+	get cambiosForm(): boolean {
+		return this.formUsuario.dirty;
+	}
+
 	public cerrarModal(): void {
-		this.modal.cerrarModal();
+		if (!this.cambiosForm) {
+			this.modal.cerrarModal();
+			return;
+		}
+
+		this.messages.mensajeConfirmacionCustom(
+			'¿Está seguro de cerrar sin guardar cambios?',
+			'question',
+			'Cancelar registro'
+		).then(
+			res => {
+				if (!res.isConfirmed) return;
+
+				this.modal.cerrarModal();
+			}
+		);
 	}
 }
