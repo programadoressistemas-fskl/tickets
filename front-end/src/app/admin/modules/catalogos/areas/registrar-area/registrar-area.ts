@@ -79,6 +79,7 @@ export class RegistrarArea implements OnInit {
 					respuesta => {
 
 						this.pkArea = respuesta.pkArea;
+						this.ch.markForCheck();
 
 						this.obtenerDetalleArea(respuesta.pkArea).then(() => {
 							this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);

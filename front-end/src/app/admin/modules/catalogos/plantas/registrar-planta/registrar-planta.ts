@@ -20,6 +20,7 @@ export class RegistrarPlanta {
 	constructor(
 		private modal: ModalService,
 		private fb: FormBuilder,
+		private ch: ChangeDetectorRef,
 		private messages: MessagesService,
 		private plantas: PlantasService
 	) { }
@@ -71,8 +72,11 @@ export class RegistrarPlanta {
 					this.plantas.registrarPlanta(planta).toPromise().then(
 						respuesta => {
 							this.pkPlanta = respuesta.pkPlanta;
+							this.ch.markForCheck();
 
-							this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
+							this.obtenerDetallePlanta(respuesta.pkPlanta).then(() => {
+								this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
+							});
 						}, error => {
 							this.messages.mensajeGenerico('error', 'error');
 						}
