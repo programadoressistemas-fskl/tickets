@@ -69,8 +69,11 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-sm btn-primary" (click)="registrarUsuario()">
+    <button *ngIf="pkUsuario == null" class="btn btn-sm btn-primary" (click)="registrarUsuario()">
         Registrar
+    </button>
+    <button *ngIf="pkUsuario != null" class="btn btn-sm btn-warning">
+        Actualizar
     </button>
     <button class="btn btn-sm btn-danger" (click)="cerrarModal()">
         {{cambiosForm || pkUsuario != null ? 'Cancelar' : 'Cerrar'}}
