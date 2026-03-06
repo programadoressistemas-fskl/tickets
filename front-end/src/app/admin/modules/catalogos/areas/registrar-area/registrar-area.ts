@@ -92,6 +92,37 @@ export class RegistrarArea implements OnInit {
 			});
 	}
 
+	protected actualizarArea(): void {
+		if (this.formArea.invalid) {
+			this.messages.mensajeGenerico('Aún hay campos vacíos o que no cumplen con la estructura correcta.', 'info', 'Los campos requeridos están marcados con un *');
+			return;
+		} 
+
+		this.messages.mensajeConfirmacionCustom('¿Está seguro de continuar con el registro del area?',
+			'question', 'Actualizar area').then(
+				res => {
+					if(!res.isConfirmed) return; 
+
+					this.messages.mensajeEsperar();
+
+					const data: any = {
+						pkArea: this.pkArea,
+						area: this.formArea.value
+					};
+
+					this.areas.actualizarArea(data).toPromise().then(
+						respuesta => {
+							this.obtenerDetalleArea(this.pkArea).then(() => {
+								this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title)
+							});
+						}, error => {
+							this.messages.mensajeGenerico('error', 'error');
+						}
+					)
+				}
+			);
+	}
+
 	get cambiosForm(): boolean {
 		return this.formArea.dirty;
 	}
@@ -108,7 +139,7 @@ export class RegistrarArea implements OnInit {
 			'Cancelar registro'
 		).then(
 			res => {
-				if(!res.isConfirmed) return; 
+				if (!res.isConfirmed) return;
 
 				this.modal.cerrarModal();
 			}

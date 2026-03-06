@@ -20,7 +20,11 @@ export class AreasService {
 		return this.http.get<any>(`${api}/areas/obtenerListaAreas`);
 	}
 
-		public obtenerDetalleArea(pkArea: number): Observable<any> {
+	public obtenerDetalleArea(pkArea: number): Observable<any> {
 		return this.http.get<any>(`${api}/areas/obtenerDetalleArea/${pkArea}`);
+	}
+
+	public actualizarArea(area: any): Observable<any> {
+		return this.http.put<any>(`${api}/areas/actualizarArea`, area);
 	}
 }
