@@ -71,12 +71,8 @@ class PlantasController extends Controller
     public function actualizarPlanta(Request $request) {
         try {
 
-            $planta = $this->plantasService->actualizarPlanta($request->all());
+            return $this->plantasService->actualizarPlanta($request->all());
 
-            return response()->json([
-                'data' => $planta,
-                'mensaje' => 'Planta actualizado correctamente'
-            ]);
         } catch (\Throwable $error) {
 
             Log::alert('*********************************************');

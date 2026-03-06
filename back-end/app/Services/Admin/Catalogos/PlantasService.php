@@ -48,11 +48,12 @@ class PlantasService
         );
     }
 
-    public function actualizarPlanta($plantas) {
-        $this->plantasRepository->actualizarPlanta($plantas['pkPlantas'], $plantas['plantas']);
+    public function actualizarPlanta($planta) {
+        $this->plantasRepository->actualizarPlanta($planta['pkPlanta'], $planta['planta']);
 
         return response()->json(
             [
+                'title'   => 'Actualización exitosa',
                 'mensaje' => 'Se actualizo correctamente la planta'
             ]
         );

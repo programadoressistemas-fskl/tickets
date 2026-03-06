@@ -52,11 +52,11 @@ class PlantasRepository
         return $query->get();
     }
 
-    public function actualizarPlanta($id, $plantas) {
+    public function actualizarPlanta($id, $planta) {
         $actualizar = CatPlantas::findOrFail($id);
-        $actualizar->planta    = $plantas['planta'];
-        $actualizar->abrev     = $plantas['abrev'];
-        $actualizar->direccion = $plantas['direccion'];
+        $actualizar->planta    = $planta['planta'];
+        $actualizar->abrev     = $planta['abrev'];
+        $actualizar->direccion = $planta['direccion'];
         $actualizar->save();
     }
 
