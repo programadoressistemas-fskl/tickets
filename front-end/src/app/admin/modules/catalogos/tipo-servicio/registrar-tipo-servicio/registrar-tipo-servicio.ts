@@ -62,22 +62,44 @@ export class RegistrarTipoServicio {
       'question', 'Registrar tipo servicio').then(
         res => {
           if (!res.isConfirmed) return;
+          this.messages.mensajeEsperar();
 
           const tiposServicio: any = this.formTipoServicio.value;
 
           this.tiposServicio.registrarTipoServicio(tiposServicio).toPromise().then(
-            respuesta => {
+            respuesta => { 
+
+              this.pkTipoServicio = respuesta.pkTipoServicio; 
+              
               this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
             }, error => {
               this.messages.mensajeGenerico('error', 'error');
             }
           );
-        }
-      )
+        });
+  }
+
+  get cambiosForm(): boolean {
+    return this.formTipoServicio.dirty;
   }
 
   public cerrarModal(): void {
-    this.modal.cerrarModal();
+    if (!this.cambiosForm) {
+      this.modal.cerrarModal();
+      return;
+    }
+
+    this.messages.mensajeConfirmacionCustom(
+      '¿Está seguro de cerrar sin guardar cambios?',
+      'question',
+      'Cancelar registro'
+    ).then (
+      res => {
+        if(!res.isConfirmed) return;
+
+        this.modal.cerrarModal();
+      }
+    )
   }
 
 }
