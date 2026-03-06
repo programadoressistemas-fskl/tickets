@@ -20,14 +20,14 @@ Route::get('/usuarios/cambiarStatusUsuario/{id}', [UsuariosController::class, 'c
 Route::post('/areas/registrarArea', [AreasController::class, 'registrarArea']);
 Route::get('/areas/obtenerListaAreas', [AreasController::class, 'obtenerListaAreas']);
 Route::get('/areas/obtenerDetalleArea/{pkArea}', [AreasController::class, 'obtenerDetalleArea']);
-Route::get('/areas/actualizarArea', [AreasController::class, 'actualizarArea']);
+Route::put('/areas/actualizarArea', [AreasController::class, 'actualizarArea']);
 Route::get('/areas/cambiarStatusArea/{pkArea}', [AreasController::class, 'cambiarStatusArea']);
 
 //Plantas
 Route::post('/plantas/registrarPlanta', [PlantasController::class, 'registrarPlanta']);
 Route::get('/plantas/obtenerListaPlantas', [PlantasController::class, 'obtenerListaPlantas']);
 Route::get('/plantas/obtenerDetallePlanta/{pkPlantas}', [PlantasController::class, 'obtenerDetallePlanta']);
-Route::get('/plantas/actualizarPlanta', [PlantasController::class, 'actualizarPlanta']);
+Route::put('/plantas/actualizarPlanta', [PlantasController::class, 'actualizarPlanta']);
 Route::get('/plantas/cambiarStatusPlanta/{pkPlantas}', [PlantasController::class, 'cambiarStatusPlanta']);
 
 //Tipos Servicio

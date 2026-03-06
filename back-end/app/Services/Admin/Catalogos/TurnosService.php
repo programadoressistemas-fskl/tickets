@@ -16,12 +16,13 @@ class TurnosService
     }
 
     public function registrarTurno($turnos) {
-        $turnos = $this->turnosRepository->registrarTurno($turnos);
+        $pkTurno = $this->turnosRepository->registrarTurno($turnos);
 
         return response()->json(
             [
-                'turnos'  => $turnos,
+                'pkTurno' => $pkTurno,
                 'mensaje' => 'Se registro corectamente el turno',
+                'title'   => 'Registro exitoso'
             ]
         );
     } 

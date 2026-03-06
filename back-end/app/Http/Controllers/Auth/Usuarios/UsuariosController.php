@@ -75,12 +75,7 @@ class UsuariosController extends Controller
     {
         try {
 
-            $usuario = $this->usuariosService->actualizarUsuario($request->all());
-
-            return response()->json([
-                'data' => $usuario,
-                'mensaje' => 'Usuario actualizado correctamente'
-            ]);
+            return $this->usuariosService->actualizarUsuario($request->all());
         } catch (\Throwable $error) {
 
             Log::alert('*********************************************');

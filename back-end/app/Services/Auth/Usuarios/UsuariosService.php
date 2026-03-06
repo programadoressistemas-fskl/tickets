@@ -68,6 +68,7 @@ class UsuariosService
 
         return response()->json(
             [
+                'title'   => 'Actualización exitosa',
                 'mensaje' => 'Se actualizó correctamente el usuario'
             ]
         );

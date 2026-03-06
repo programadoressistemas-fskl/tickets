@@ -48,10 +48,10 @@ class AreasRepository
         return $query->get();
     }
 
-    public function actualizarAreas($id, $areas)
+    public function actualizarArea($id, $area)
     {
         $actualizar = CatAreas::findOrFail($id);
-        $actualizar->area  = $areas['area'];
+        $actualizar->area  = $area['area'];
         $actualizar->save();
     }
 

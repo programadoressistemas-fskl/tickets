@@ -49,11 +49,12 @@ class AreasService
         );
     }
 
-    public function actualizarAreas($areas) {
-        $this->areasRepository->actualizarAreas($areas['pkArea'], $areas['areas']);
+    public function actualizarArea($area) {
+        $this->areasRepository->actualizarArea($area['pkArea'], $area['area']);
 
         return response()->json(
             [
+                'title'    => 'Actualización exitosa',
                 'mensajes' => 'Se actualizo correctamente el area'
             ]
         );

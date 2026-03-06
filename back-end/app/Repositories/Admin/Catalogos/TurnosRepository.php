@@ -12,6 +12,8 @@ class TurnosRepository
         $registro->turno  = $turnos['turno'];
         $registro->activo = 1;
         $registro->save();
+
+        return $registro->id_turno;
     }
 
     public function obtenerListaTurnos() {
