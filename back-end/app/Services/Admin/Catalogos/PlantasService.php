@@ -15,12 +15,13 @@ class PlantasService
     }
 
     public function registrarPlanta($plantas) {
-        $this->plantasRepository->registrarPlanta($plantas);
+       $pkPlanta = $this->plantasRepository->registrarPlanta($plantas);
 
         return response()->json(
             [
-                'mensaje' => 'Se registro correctamente la planta',
-                'title'   => 'Registro exitoso'
+                'pkPlanta' => $pkPlanta,
+                'mensaje'  => 'Se registro correctamente la planta',
+                'title'    => 'Registro exitoso'
             ]
         );
     }

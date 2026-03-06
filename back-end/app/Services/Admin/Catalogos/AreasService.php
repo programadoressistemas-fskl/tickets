@@ -16,10 +16,11 @@ class AreasService
 
     public function registrarArea($areas) {
 
-        $areas = $this->areasRepository->registrarArea($areas);
+        $pkArea = $this->areasRepository->registrarArea($areas);
 
         return response()->json(
             [
+                'pkArea'  => $pkArea,
                 'mensaje' => 'Se Registro Correctamente el Area',
                 'title'   => 'Registro exitoso'
             ]

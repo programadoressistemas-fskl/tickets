@@ -13,7 +13,9 @@ class PlantasRepository
         $registro->abrev      = $plantas['abrev'];
         $registro->direccion  = $plantas['direccion'];
         $registro->activo     = 1;
-        $registro->save();
+        $registro->save(); 
+
+        return $registro->id_planta;
     }
 
     public function obtenerListaPlantas() {

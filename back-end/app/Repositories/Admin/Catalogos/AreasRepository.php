@@ -13,6 +13,8 @@ class AreasRepository
         $registro->area     = $areas['area'];
         $registro->activo   = 1;
         $registro->save();
+
+        return $registro->id_area;
     }
 
     public function obtenerListaAreas()
