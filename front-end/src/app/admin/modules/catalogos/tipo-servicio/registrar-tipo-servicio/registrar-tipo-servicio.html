@@ -39,7 +39,7 @@
     <button *ngIf="pkTipoServicio == null" class="btn btn-sm btn-primary" (click)="registrarTipoServicio()">
         Registrar
     </button>
-    <button *ngIf="pkTipoServicio != null" class="btn btn-sm btn-primary" (click)="registrarTipoServicio()">
+    <button *ngIf="pkTipoServicio != null" class="btn btn-sm btn-warning" (click)="actualizarTipoServicio()">
         Actualizar
     </button>
     <button class="btn btn-sm btn-danger" (click)="cerrarModal()">

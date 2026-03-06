@@ -96,12 +96,12 @@ export class RegistrarArea implements OnInit {
 		if (this.formArea.invalid) {
 			this.messages.mensajeGenerico('Aún hay campos vacíos o que no cumplen con la estructura correcta.', 'info', 'Los campos requeridos están marcados con un *');
 			return;
-		} 
+		}
 
 		this.messages.mensajeConfirmacionCustom('¿Está seguro de continuar con el registro del area?',
 			'question', 'Actualizar area').then(
 				res => {
-					if(!res.isConfirmed) return; 
+					if (!res.isConfirmed) return;
 
 					this.messages.mensajeEsperar();
 

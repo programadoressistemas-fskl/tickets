@@ -81,6 +81,37 @@ export class RegistrarTipoServicio {
 				});
 	}
 
+	protected actualizarTipoServicio(): void {
+		if (this.formTipoServicio.invalid) {
+			this.messages.mensajeGenerico('Aún hay campos vacíos o que no cumplen con la estructura correcta.', 'info', 'Los campos requeridos están marcados con un *');
+			return;
+		}
+
+		this.messages.mensajeConfirmacionCustom('¿Está seguro de continuar con el registro de tipo Servicio?',
+			'question', 'Actualizar tipo Servicio').then(
+				res => {
+					if (!res.isConfirmed) return;
+
+					this.messages.mensajeEsperar();
+
+					const data: any = {
+						pkTipoServicio: this.pkTipoServicio,
+						tiposServicio: this.formTipoServicio.value
+					};
+
+					this.tiposServicio.actualizarTipoServicio(data).toPromise().then(
+						respuesta => {
+							this.obtenerDetalleTipoServicio(this.pkTipoServicio).then(() => {
+								this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title)
+							});
+						}, error => {
+							this.messages.mensajeGenerico('error', 'error');
+						}
+					)
+				}
+			)
+	}
+
 	get cambiosForm(): boolean {
 		return this.formTipoServicio.dirty;
 	}

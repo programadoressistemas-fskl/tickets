@@ -23,4 +23,8 @@ export class PlantasService {
 		return this.http.get<any>(`${api}/plantas/obtenerDetallePlanta/${pkPlanta}`);
 	}
 
+	public actualizarPlanta(planta: any): Observable<any> {
+		return this.http.put<any>(`${api}/plantas/actualizarPlanta`, planta);
+	}
+
 }

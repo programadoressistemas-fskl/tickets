@@ -22,4 +22,8 @@ export class TiposServicioService {
 	public obtenerDetalleTipoServicio(pkTipoServicio: number): Observable<any> {
 		return this.http.get<any>(`${api}/tiposServicio/obtenerDetalleTipoServicio/${pkTipoServicio}`)
 	}
+
+	public actualizarTipoServicio(tiposServicio: any): Observable<any> {
+		return this.http.put<any>(`${api}/tiposServicio/actualizarTipoServicio`, tiposServicio);
+	}
 }

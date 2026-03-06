@@ -84,6 +84,37 @@ export class RegistrarPlanta {
 				});
 	}
 
+	protected actualizarPlanta(): void {
+		if (this.formPlanta.invalid) {
+			this.messages.mensajeGenerico('Aún hay campos vacíos o que no cumplen con la estructura correcta.', 'info', 'Los campos requeridos están marcados con un *');
+			return;
+		}
+
+		this.messages.mensajeConfirmacionCustom('¿Está seguro de continuar con el registro de planta?',
+			'question', 'Actualizar planta').then(
+				res => {
+					if (!res.isConfirmed) return;
+
+					this.messages.mensajeEsperar();
+
+					const data: any = {
+						pkPlanta: this.pkPlanta,
+						planta: this.formPlanta.value
+					};
+
+					this.plantas.actualizarPlanta(data).toPromise().then(
+						respuesta => {
+							this.obtenerDetallePlanta(this.pkPlanta).then(() => {
+								this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title)
+							});
+						}, error => {
+							this.messages.mensajeGenerico('error', 'error');
+						}
+					)
+				}
+			);
+	}
+
 	get cambiosForm(): boolean {
 		return this.formPlanta.dirty;
 	}
