@@ -1,12 +1,13 @@
 <div class="modal-body dashboard">
     <div class="pagetitle">
         <h4 class="t-bold">
-             {{pkTipoServicio == null ? 'Registrar' : 'Actualizar'}} tiposServicio
+            {{pkTipoServicio == null ? 'Registrar' : 'Actualizar'}} tiposServicio
         </h4>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Tipos Servicio</li>
-                <li class="breadcrumb-item active">{{pkTipoServicio == null ? 'Registrar' : 'Actualizar'}} tiposServicio</li>
+                <li class="breadcrumb-item active">{{pkTipoServicio == null ? 'Registrar' : 'Actualizar'}} tiposServicio
+                </li>
             </ol>
         </nav>
     </div>
@@ -23,9 +24,10 @@
                         </div>
                         <div class="col-lg-8">
                             <label for="descripcion" class="form-label">Descripción:</label>
-                            <textarea class="textarea-dinamico" pTextarea id="descripcion" class="form-control form-control-sm"
-                                placeholder="Descripción" rows="3" formControlName="descripcion">
-                            </textarea> 
+                            <textarea class="textarea-dinamico" pTextarea id="descripcion"
+                                class="form-control form-control-sm" placeholder="Descripción" rows="3"
+                                formControlName="descripcion">
+                            </textarea>
                         </div>
                     </form>
                 </div>
@@ -36,11 +38,11 @@
 <div class="modal-footer">
     <button *ngIf="pkTipoServicio == null" class="btn btn-sm btn-primary" (click)="registrarTipoServicio()">
         Registrar
-    </button> 
-        <button *ngIf="pkTipoServicio != null" class="btn btn-sm btn-primary" (click)="registrarTipoServicio()">
+    </button>
+    <button *ngIf="pkTipoServicio != null" class="btn btn-sm btn-primary" (click)="registrarTipoServicio()">
         Actualizar
     </button>
     <button class="btn btn-sm btn-danger" (click)="cerrarModal()">
-       {{cambiosForm || pkTipoServicio != null ? 'Cancelar' : 'Cerrar'}}
+        {{cambiosForm || pkTipoServicio != null ? 'Cancelar' : 'Cerrar'}}
     </button>
 </div>
