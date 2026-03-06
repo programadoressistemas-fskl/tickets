@@ -12,7 +12,9 @@ class TiposServicioRepository
         $registro->tipo_servicio = $tiposServicio['tipo_servicio'];
         $registro->descripcion  = $tiposServicio['descripcion'];
         $registro->activo       = 1;
-        $registro->save();
+        $registro->save(); 
+
+        return $registro->id_tipo_servicio;
     }
 
     public function obtenerListaTipoServicio() {
