@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalService } from '../../../../services/modal/modal';
 import { MessagesService } from '../../../../services/messages/messages';
@@ -22,6 +22,7 @@ export class RegistrarTurno {
 	constructor(
 		private modal: ModalService,
 		private fb: FormBuilder,
+		private ch: ChangeDetectorRef,
 		private messages: MessagesService,
 		private turnos: TurnosService
 	) { }
@@ -61,12 +62,18 @@ export class RegistrarTurno {
 			'question', 'Registrar turno').then(
 				res => {
 					if (!res.isConfirmed) return;
+					this.messages.mensajeEsperar();
 
 					const turno: any = this.formTurno.value;
 
 					this.turnos.registrarTurno(turno).toPromise().then(
 						respuesta => {
-							this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
+							this.pkTurno = respuesta.pkTurno;
+							this.ch.markForCheck();
+
+							this.obtenerDetalleTurno(respuesta.pkTurno).then(() => {
+								this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
+							})
 						}, error => {
 							this.messages.mensajeGenerico('error', 'error');
 						}
@@ -75,7 +82,26 @@ export class RegistrarTurno {
 			)
 	}
 
+	get cambiosForm(): boolean {
+		return this.formTurno.dirty;
+	}
+
 	public cerrarModal(): void {
-		this.modal.cerrarModal();
+		if (!this.cambiosForm) {
+			this.modal.cerrarModal();
+			return;
+		}
+
+		this.messages.mensajeConfirmacionCustom(
+			'¿Está seguro de cerrar sin guardar cambios?',
+			'question',
+			'Cancelar registro'
+		).then(
+			res => {
+				if (!res.isConfirmed) return;
+
+				this.modal.cerrarModal();
+			}
+		)
 	}
 }
