@@ -17,7 +17,8 @@ class TiposServicioController extends Controller
         $this->tiposServicioService = $TiposServicioService;
     }
 
-    public function registrarTipoServicio(Request $request) {
+    public function registrarTipoServicio(Request $request)
+    {
         try {
             return $this->tiposServicioService->registrarTipoServicio($request->all());
         } catch (\Throwable $error) {
@@ -34,7 +35,8 @@ class TiposServicioController extends Controller
         }
     }
 
-    public function obtenerListaTipoServicio() {
+    public function obtenerListaTipoServicio()
+    {
         try {
             return $this->tiposServicioService->obtenerListaTipoServicio();
         } catch (\Throwable $error) {
@@ -51,7 +53,8 @@ class TiposServicioController extends Controller
         }
     }
 
-    public function obtenerDetalleTipoServicio($pkTipoServicio) {
+    public function obtenerDetalleTipoServicio($pkTipoServicio)
+    {
         try {
             return $this->tiposServicioService->obtenerDetalleTipoServicio($pkTipoServicio);
         } catch (\Throwable $error) {
@@ -68,24 +71,22 @@ class TiposServicioController extends Controller
         }
     }
 
-   public function actualizarTipoServicio(Request $request) {
-       try {
-           $tiposServicio= $this->tiposServicioService->actualizarTipoServicio($request->all());
-           return response()->json([
-               'data'    => $tiposServicio,
-               'mensaje' => 'tipo de servicio actualizado correctamente'
-           ]);
-       } catch (\Throwable $error) {
-           Log::alert('*********************************************');
-           Log::alert('Error al actualizar tipo de servicio');
-           Log::alert($error->getMessage());
-           return response()->json([
-               'mensaje' => 'Ocurrió un error interno'
-           ], 500);
-       }
-   }
+    public function actualizarTipoServicio(Request $request)
+    {
+        try {
+           return  $this->tiposServicioService->actualizarTipoServicio($request->all());
+        } catch (\Throwable $error) {
+            Log::alert('*********************************************');
+            Log::alert('Error al actualizar tipo de servicio');
+            Log::alert($error->getMessage());
+            return response()->json([
+                'mensaje' => 'Ocurrió un error interno'
+            ], 500);
+        }
+    }
 
-    public function cambiarStatustiposServicio($pkTipoServicio) {
+    public function cambiarStatustiposServicio($pkTipoServicio)
+    {
         try {
             return $this->tiposServicioService->cambiarStatustiposServicio($pkTipoServicio);
         } catch (\Throwable $error) {
@@ -101,6 +102,4 @@ class TiposServicioController extends Controller
             );
         }
     }
-
-
 }

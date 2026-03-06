@@ -34,12 +34,12 @@ Route::get('/plantas/cambiarStatusPlanta/{pkPlantas}', [PlantasController::class
 Route::post('/tiposServicio/registrarTipoServicio', [TiposServicioController::class, 'registrarTipoServicio']);
 Route::get('/tiposServicio/obtenerListaTipoServicio', [TiposServicioController::class, 'obtenerListaTipoServicio']);
 Route::get('/tiposServicio/obtenerDetalleTipoServicio/{pkTipoServicio}', [TiposServicioController::class, 'obtenerDetalleTipoServicio']);
-Route::get('/tiposServicio/actualizarTipoServicio', [TiposServicioController::class, 'actualizarTipoServicio']);
+Route::put('/tiposServicio/actualizarTipoServicio', [TiposServicioController::class, 'actualizarTipoServicio']);
 Route::get('/tiposServicio/cambiarStatustiposServicio/{pkTipoServicio}', [TiposServicioController::class, 'cambiarStatustiposServicio']);
 
 // Turnos
 Route::post('/turnos/registrarTurno', [TurnosController::class, 'registrarTurno']);
 Route::get('/turnos/obtenerListaTurnos', [TurnosController::class, 'obtenerListaTurnos']);
 Route::get('/turnos/obtenerDetalleTurno/{pkTurno}', [TurnosController::class, 'obtenerDetalleTurno']);
-Route::post('/turnos/actualizarTurno', [TurnosController::class, 'actualizarTurno']);
+Route::put('/turnos/actualizarTurno', [TurnosController::class, 'actualizarTurno']);
 Route::get('/turnos/cambiarStatusTurno/{pkTurno}', [TurnosController::class, 'cambiarStatusTurno']);

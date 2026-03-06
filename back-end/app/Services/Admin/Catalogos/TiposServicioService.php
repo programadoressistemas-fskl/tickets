@@ -14,18 +14,20 @@ class TiposServicioService
         $this->tiposServicioRepository = $tiposServicioRepository;
     }
 
-    public function registrarTipoServicio($tiposServicios) {
+    public function registrarTipoServicio($tiposServicios)
+    {
         $this->tiposServicioRepository->registrarTipoServicio($tiposServicios);
 
         return response()->json(
             [
-                'mensaje' => 'Se registro correctamente el tipo de servicio',
-                'title'   => 'Registro exitoso'
+                'title'   => 'Registro exitoso',
+                'mensaje' => 'Se registro correctamente el tipo de servicio'
             ]
         );
     }
 
-     public function obtenerListaTipoServicio() {
+    public function obtenerListaTipoServicio()
+    {
         $tiposServicio = $this->tiposServicioRepository->obtenerListaTipoServicio();
 
         return response()->json(
@@ -36,7 +38,8 @@ class TiposServicioService
         );
     }
 
-     public function obtenerDetalleTipoServicio($pkTipoServicio) {
+    public function obtenerDetalleTipoServicio($pkTipoServicio)
+    {
         $tipoServicio = $this->tiposServicioRepository->obtenerDetalleTipoServicio($pkTipoServicio);
 
         return response()->json(
@@ -44,29 +47,30 @@ class TiposServicioService
                 'tipoServicio' => $tipoServicio[0],
                 'mensaje' => 'Se obtuvo correctamente la informacion'
             ]
-        ); 
+        );
+    }
+    public function actualizarTipoServicio($tiposServicio)
+    {
+
+        $this->tiposServicioRepository->actualizarTipoServicio(
+            $tiposServicio['pkTipoServicio'],
+            $tiposServicio['tiposServicio']
+        );
+
+        return response()->json([
+            'title'   => 'Actualización con éxito',
+            'mensaje' => 'Se actualizó correctamente el tipo de servicio'
+        ]);
     }
 
-    public function actualizarTipoServicio($tiposServicio) {
-        $this->tiposServicioRepository->actualizarTipoServicio($tiposServicio['pktipoServicio'], $tiposServicio['tiposServicios']);
-
-        return response()->json( 
-            [
-                'mensaje' => 'Se actualizo correctamente el tipo de servicio'
-            ]
-        );
-    } 
-
-    public function cambiarStatustiposServicio($pkTipoServicio) {
+    public function cambiarStatustiposServicio($pkTipoServicio)
+    {
         $this->tiposServicioRepository->cambiarStatustiposServicio($pkTipoServicio);
 
         return response()->json(
             [
                 'mensaje' => 'Se cambio el status del tipo servicio con exito',
             ]
-        ); 
+        );
     }
-
-
-
 }
