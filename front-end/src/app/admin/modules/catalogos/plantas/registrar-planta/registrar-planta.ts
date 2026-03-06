@@ -6,100 +6,100 @@ import { PlantasService } from '../../../../services/api/plantas/plantas';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-registrar-planta',
-  imports: [CommonModule, ReactiveFormsModule],
-  standalone: true,
-  templateUrl: './registrar-planta.html',
-  styleUrl: './registrar-planta.css',
+	selector: 'app-registrar-planta',
+	imports: [CommonModule, ReactiveFormsModule],
+	standalone: true,
+	templateUrl: './registrar-planta.html',
+	styleUrl: './registrar-planta.css',
 })
 export class RegistrarPlanta {
-  @Input() pkPlanta: any = null;
+	@Input() pkPlanta: any = null;
 
-  protected formPlanta!: FormGroup;
+	protected formPlanta!: FormGroup;
 
-  constructor(
-    private modal: ModalService,
-    private fb: FormBuilder,
-    private messages: MessagesService,
-    private plantas: PlantasService
-  ) { }
+	constructor(
+		private modal: ModalService,
+		private fb: FormBuilder,
+		private messages: MessagesService,
+		private plantas: PlantasService
+	) { }
 
-  async ngOnInit(): Promise<any> {
-    this.messages.mensajeEsperar();
+	async ngOnInit(): Promise<any> {
+		this.messages.mensajeEsperar();
 
-    this.crearFormPlanta();
+		this.crearFormPlanta();
 
-    if (this.pkPlanta != null) await this.obtenerDetallePlanta(this.pkPlanta);
+		if (this.pkPlanta != null) await this.obtenerDetallePlanta(this.pkPlanta);
 
-    this.messages.cerrarMensajes();
-  }
+		this.messages.cerrarMensajes();
+	}
 
-  private crearFormPlanta(): void {
-    this.formPlanta = this.fb.group({
-      planta: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
-      abrev: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
-      direccion: [null, [Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
-    })
-  }
+	private crearFormPlanta(): void {
+		this.formPlanta = this.fb.group({
+			planta: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
+			abrev: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
+			direccion: [null, [Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
+		})
+	}
 
-  public async obtenerDetallePlanta(pkPlanta: number): Promise<any> {
-    return this.plantas.obtenerDetallePlanta(pkPlanta).toPromise().then(
-      respuesta => {
-        const planta = respuesta.planta;
+	public async obtenerDetallePlanta(pkPlanta: number): Promise<any> {
+		return this.plantas.obtenerDetallePlanta(pkPlanta).toPromise().then(
+			respuesta => {
+				const planta = respuesta.planta;
 
-        this.formPlanta.get('planta')?.setValue(planta.planta);
-        this.formPlanta.get('abrev')?.setValue(planta.abrev);
-        this.formPlanta.get('direccion')?.setValue(planta.direccion);
-      }
-    )
-  }
+				this.formPlanta.get('planta')?.setValue(planta.planta);
+				this.formPlanta.get('abrev')?.setValue(planta.abrev);
+				this.formPlanta.get('direccion')?.setValue(planta.direccion);
+			}
+		)
+	}
 
-  protected registrarPlanta(): void {
-    if (this.formPlanta.invalid) {
-      this.messages.mensajeGenerico('Aún hay campos vacíos o que no cumplen con la estructura correcta.', 'info', 'Los campos requeridos están marcados con un *');
-      return;
-    }
+	protected registrarPlanta(): void {
+		if (this.formPlanta.invalid) {
+			this.messages.mensajeGenerico('Aún hay campos vacíos o que no cumplen con la estructura correcta.', 'info', 'Los campos requeridos están marcados con un *');
+			return;
+		}
 
-    this.messages.mensajeConfirmacionCustom('¿Está seguro de continuar con el registro de planta?',
-      'question', 'Registrar planta').then(
-        res => {
-          if (!res.isConfirmed) return;
-          this.messages.mensajeEsperar();
+		this.messages.mensajeConfirmacionCustom('¿Está seguro de continuar con el registro de planta?',
+			'question', 'Registrar planta').then(
+				res => {
+					if (!res.isConfirmed) return;
+					this.messages.mensajeEsperar();
 
-          const planta: any = this.formPlanta.value;
+					const planta: any = this.formPlanta.value;
 
-          this.plantas.registrarPlanta(planta).toPromise().then(
-            respuesta => {
-              this.pkPlanta = respuesta.pkPlanta;
+					this.plantas.registrarPlanta(planta).toPromise().then(
+						respuesta => {
+							this.pkPlanta = respuesta.pkPlanta;
 
-              this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
-            }, error => {
-              this.messages.mensajeGenerico('error', 'error');
-            }
-          )
-        });
-  }
+							this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
+						}, error => {
+							this.messages.mensajeGenerico('error', 'error');
+						}
+					)
+				});
+	}
 
-  get cambiosForm(): boolean {
-    return this.formPlanta.dirty;
-  }
+	get cambiosForm(): boolean {
+		return this.formPlanta.dirty;
+	}
 
-  public cerrarModal(): void {
-    if (!this.cambiosForm) {
-      this.modal.cerrarModal();
-      return;
-    }
+	public cerrarModal(): void {
+		if (!this.cambiosForm) {
+			this.modal.cerrarModal();
+			return;
+		}
 
-    this.messages.mensajeConfirmacionCustom(
-      '¿Está seguro de cerrar sin guardar cambios?',
-      'question',
-      'Cancelar registro'
-    ).then (
-      res => {
-        if(!res.isConfirmed) return; 
+		this.messages.mensajeConfirmacionCustom(
+			'¿Está seguro de cerrar sin guardar cambios?',
+			'question',
+			'Cancelar registro'
+		).then(
+			res => {
+				if (!res.isConfirmed) return;
 
-        this.modal.cerrarModal();
-      }
-    )
-  }
-}
+				this.modal.cerrarModal();
+			}
+		)
+	}
+} 
