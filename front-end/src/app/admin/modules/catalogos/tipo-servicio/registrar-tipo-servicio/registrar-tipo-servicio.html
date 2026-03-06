@@ -34,8 +34,11 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-sm btn-primary" (click)="registrarTipoServicio()">
+    <button *ngIf="pkTipoServicio == null" class="btn btn-sm btn-primary" (click)="registrarTipoServicio()">
         Registrar
+    </button> 
+        <button *ngIf="pkTipoServicio != null" class="btn btn-sm btn-primary" (click)="registrarTipoServicio()">
+        Actualizar
     </button>
     <button class="btn btn-sm btn-danger" (click)="cerrarModal()">
        {{cambiosForm || pkTipoServicio != null ? 'Cancelar' : 'Cerrar'}}

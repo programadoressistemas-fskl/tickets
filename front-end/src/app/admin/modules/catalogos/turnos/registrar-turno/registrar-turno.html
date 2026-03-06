@@ -31,8 +31,8 @@
     <button *ngIf="pkTurno == null" class="btn btn-sm btn-primary" (click)="registrarTurno()">
         Registrar
     </button>
-    <button *ngIf="pkTurno != null" class="btn btn-sm btn-primary" (click)="registrarTurno()">
-        Registrar
+    <button *ngIf="pkTurno != null" class="btn btn-sm btn-warning" (click)="registrarTurno()">
+        Actualizar
     </button>
     <button class="btn btn-sm btn-danger" (click)="cerrarModal()">
         {{cambiosForm || pkTurno != null ? 'Cancelar' : 'Cerrar'}}
