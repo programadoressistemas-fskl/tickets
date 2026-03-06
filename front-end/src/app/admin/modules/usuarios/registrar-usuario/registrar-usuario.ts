@@ -113,6 +113,37 @@ export class RegistrarUsuario {
 			);
 	}
 
+	protected actualizarUsuario(): void {
+		if(this.formUsuario.invalid) {
+			this.messages.mensajeGenerico('Aún hay campos vacíos o que no cumplen con la estructura correcta.', 'info', 'Los campos requeridos están marcados con un *');
+			return;
+		}
+
+		this.messages.mensajeConfirmacionCustom('¿Está seguro de continuar con la actualización del usuario?',
+			'question', 'Actualizar usuario').then(
+				res => {
+					if(!res.isConfirmed) return;
+
+					this.messages.mensajeEsperar();
+
+					const data: any = {
+						pkUsuario: this.pkUsuario,
+						usuario: this.formUsuario.value
+					};
+
+					this.usuarios.actualizarUsuario(data).toPromise().then(
+						respuesta => {
+							this.obtenerDetalleUsuario(this.pkUsuario).then(() => {
+								this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
+							});
+						}, error => {
+							this.messages.mensajeGenerico('error', 'error');
+						}
+					)
+				}
+			);
+	}
+
 	get cambiosForm(): boolean {
 		return this.formUsuario.dirty;
 	}
