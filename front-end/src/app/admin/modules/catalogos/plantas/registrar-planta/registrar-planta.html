@@ -43,6 +43,6 @@
         Registrar
     </button>
     <button class="btn btn-sm btn-danger" (click)="cerrarModal()">
-        Cerrar
+        {{cambiosForm || pkPlanta != null ? 'Cancelar' : 'Cerrar'}}
     </button>
 </div>

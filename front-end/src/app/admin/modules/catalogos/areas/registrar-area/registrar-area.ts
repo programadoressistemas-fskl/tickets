@@ -71,21 +71,46 @@ export class RegistrarArea implements OnInit {
 			).then(res => {
 
 				if (!res.isConfirmed) return;
+				this.messages.mensajeEsperar();
 
 				const area: any = this.formArea.value;
 
 				this.areas.registrarArea(area).toPromise().then(
 					respuesta => {
-						this.messages.mensajeGenerico(respuesta.mensaje, 'success');
-					},
-					error => {
+
+						this.pkArea = respuesta.pkArea;
+
+						this.obtenerDetalleArea(respuesta.pkArea).then(() => {
+							this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
+						});
+
+					}, error => {
 						this.messages.mensajeGenerico('error', 'error');
 					}
 				);
 			});
 	}
 
+	get cambiosForm(): boolean {
+		return this.formArea.dirty;
+	}
+
 	public cerrarModal(): void {
-		this.modal.cerrarModal();
+		if (!this.cambiosForm) {
+			this.modal.cerrarModal();
+			return;
+		}
+
+		this.messages.mensajeConfirmacionCustom(
+			'¿Está seguro de cerrar sin guardar cambios?',
+			'question',
+			'Cancelar registro'
+		).then(
+			res => {
+				if(!res.isConfirmed) return; 
+
+				this.modal.cerrarModal();
+			}
+		)
 	}
 }

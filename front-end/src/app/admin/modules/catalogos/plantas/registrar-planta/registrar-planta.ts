@@ -40,19 +40,19 @@ export class RegistrarPlanta {
       abrev: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
       direccion: [null, [Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
     })
-  }  
+  }
 
   public async obtenerDetallePlanta(pkPlanta: number): Promise<any> {
-		return this.plantas.obtenerDetallePlanta(pkPlanta).toPromise().then(
-			respuesta => {
-				const planta = respuesta.planta;
+    return this.plantas.obtenerDetallePlanta(pkPlanta).toPromise().then(
+      respuesta => {
+        const planta = respuesta.planta;
 
-				this.formPlanta.get('planta')?.setValue(planta.planta);
-				this.formPlanta.get('abrev')?.setValue(planta.abrev);
-				this.formPlanta.get('direccion')?.setValue(planta.direccion);
-			}
-		)
-	}
+        this.formPlanta.get('planta')?.setValue(planta.planta);
+        this.formPlanta.get('abrev')?.setValue(planta.abrev);
+        this.formPlanta.get('direccion')?.setValue(planta.direccion);
+      }
+    )
+  }
 
   protected registrarPlanta(): void {
     if (this.formPlanta.invalid) {
@@ -64,21 +64,42 @@ export class RegistrarPlanta {
       'question', 'Registrar planta').then(
         res => {
           if (!res.isConfirmed) return;
+          this.messages.mensajeEsperar();
 
           const planta: any = this.formPlanta.value;
 
           this.plantas.registrarPlanta(planta).toPromise().then(
             respuesta => {
+              this.pkPlanta = respuesta.pkPlanta;
+
               this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
             }, error => {
               this.messages.mensajeGenerico('error', 'error');
             }
           )
-        }
-      )
+        });
+  }
+
+  get cambiosForm(): boolean {
+    return this.formPlanta.dirty;
   }
 
   public cerrarModal(): void {
-    this.modal.cerrarModal();
+    if (!this.cambiosForm) {
+      this.modal.cerrarModal();
+      return;
+    }
+
+    this.messages.mensajeConfirmacionCustom(
+      '¿Está seguro de cerrar sin guardar cambios?',
+      'question',
+      'Cancelar registro'
+    ).then (
+      res => {
+        if(!res.isConfirmed) return; 
+
+        this.modal.cerrarModal();
+      }
+    )
   }
 }
