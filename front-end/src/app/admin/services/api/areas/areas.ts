@@ -26,5 +26,10 @@ export class AreasService {
 
 	public actualizarArea(area: any): Observable<any> {
 		return this.http.put<any>(`${api}/areas/actualizarArea`, area);
+	}  
+
+		public cambiarStatusArea(pkArea: number): Observable<any> {
+		return this.http.get<any>(`${api}/areas/cambiarStatusArea/${pkArea}`)
 	}
+
 }

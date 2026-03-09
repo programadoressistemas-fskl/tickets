@@ -48,6 +48,28 @@ export class ConsultaAreas implements OnDestroy {
 		)
 	}
 
+	protected cambiarStatus(area: any): void {
+		this.messages.mensajeConfirmacionCustom(
+			`¿Está seguro de ${area.activo ? 'inactivar' : 'activar'} el usuario?`,
+			'question',
+			`${area.activo ? 'Inactivar' : 'Activar'} usuario`
+		).then(res => {
+			if (!res.isConfirmed) return;
+
+			this.messages.mensajeEsperar();
+
+			this.areas.cambiarStatusArea(area.id_area).subscribe(
+				respuesta => {
+					this.obtenerListaAreas().then(() => {
+						this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
+					});
+				}, error => {
+					this.messages.mensajeGenerico('error', 'error');
+				}
+			);
+		});
+	}
+
 	public abrirModalRegistrarArea($pkArea: number): void {
 		const data: any = {
 			pkArea: $pkArea
