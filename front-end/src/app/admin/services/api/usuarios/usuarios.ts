@@ -26,4 +26,8 @@ export class UsuariosService {
 	public actualizarUsuario(usuario: any): Observable<any> {
 		return this.http.put<any>(`${api}/usuarios/actualizarUsuario`, usuario);
 	}
+
+	public cambiarStatusUsuario(id: number): Observable<any> {
+		return this.http.get<any>(`${api}/usuarios/cambiarStatusUsuario/${id}`)
+	}
 }

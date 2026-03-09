@@ -48,6 +48,28 @@ export class ConsultaUsuarios implements OnDestroy {
 		);
 	}
 
+protected cambiarStatus(usuario: any): void {
+    this.messages.mensajeConfirmacionCustom(
+        `¿Está seguro de ${usuario.activo ? 'inactivar' : 'activar'} el usuario?`,
+        'question',
+        `${usuario.activo ? 'Inactivar' : 'Activar'} usuario`
+    ).then(res => {
+        if (!res.isConfirmed) return;
+
+        this.messages.mensajeEsperar();
+
+        this.usuarios.cambiarStatusUsuario(usuario.id_usuario).subscribe(
+            respuesta => {
+				this.obtenerListaUsuarios().then(() => {
+					this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
+				});
+            }, error => {
+                this.messages.mensajeGenerico('error', 'error');
+            }
+        );
+    });
+}
+
 	public abrirModalRegistrarUsuario(pkUsuario: number): void {
 		const data: any = {
 			pkUsuario: pkUsuario
