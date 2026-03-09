@@ -48,6 +48,30 @@ export class ConsultaTiposServicio implements OnDestroy {
 		);
 	}
 
+	protected cambiarStatustiposServicio(tipoServicio: any): void {
+		this.messages.mensajeConfirmacionCustom(
+			`¿Está seguro de ${tipoServicio.activo ? 'inactivar' : 'activar'} el tipo servicio?`,
+			'question',
+			`${tipoServicio.activo ? 'Inactivar' : 'Activar'} tipo servicio`
+		).then(res => {
+			if (!res.isConfirmed) return;
+
+			this.messages.mensajeEsperar();
+
+			this.tiposServicio.cambiarStatustiposServicio(tipoServicio.id_tipo_servicio)
+				.subscribe(
+					respuesta => {
+						this.obtenerListaTipoServicio().then(() => {
+							this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
+						});
+					},
+					error => {
+						this.messages.mensajeGenerico('error', 'error');
+					}
+				);
+		});
+	}
+
 	public abrirModalRegistrarTipoServicio(pkTipoServicio: number): void {
 		const data: any = {
 			pkTipoServicio: pkTipoServicio

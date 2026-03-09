@@ -48,6 +48,28 @@ export class ConsultaTurnos implements OnDestroy {
 		)
 	}
 
+	protected cambiarStatusTurno(turno: any): void {
+		this.messages.mensajeConfirmacionCustom(
+			`¿Está seguro de ${turno.activo ? 'inactivar' : 'activar'} el turno?`,
+			'question',
+			`${turno.activo ? 'Inactivar' : 'Activar'} turno`
+		).then(res => {
+			if (!res.isConfirmed)return; 
+
+			this.messages.mensajeEsperar();
+
+			this.turnos.cambiarStatusTurno(turno.id_turno).subscribe(
+				respuesta => {
+					this.obtenerListaTurnos().then(() => {
+						this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
+					});
+				}, error => {
+					this.messages.mensajeGenerico('error', 'error');
+				}
+			);
+		});
+	}
+
 	public abrirModalRegistrarTurno(pkTurno: number): void {
 		const data: any = {
 			pkTurno: pkTurno

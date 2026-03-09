@@ -68,7 +68,7 @@ protected cambiarStatus(usuario: any): void {
             }
         );
     });
-}
+} 
 
 	public abrirModalRegistrarUsuario(pkUsuario: number): void {
 		const data: any = {

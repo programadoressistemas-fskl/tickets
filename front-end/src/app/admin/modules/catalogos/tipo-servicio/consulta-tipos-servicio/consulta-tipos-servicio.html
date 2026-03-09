@@ -27,7 +27,7 @@
                 <thead>
                     <tr>
                         <th>Tipo Servicio</th>
-                        <th >Descripcion</th>
+                        <th>Descripcion</th>
                         <th>Activo</th>
                         <th>Acciones</th>
                     </tr>
@@ -38,8 +38,17 @@
                         <td>{{tiposServicio.descripcion}}</td>
                         <td>{{tiposServicio.estado}}</td>
                         <td class="text-medium">
-                            <button class="btn btn-sm btn-outline-primary" (click)="abrirModalRegistrarTipoServicio(tiposServicio.id_tipo_servicio)">
+                            <button class="btn btn-sm btn-outline-primary"
+                                (click)="abrirModalRegistrarTipoServicio(tiposServicio.id_tipo_servicio)">
                                 <i class="bi bi-pencil"></i>
+                            </button>
+                            <button *ngIf="!tiposServicio.activo" class="btn btn-sm btn-outline-info"
+                                (click)="cambiarStatustiposServicio(tiposServicio)">
+                                <i class="bi bi-check"></i>
+                            </button>
+                            <button *ngIf="tiposServicio.activo" class="btn btn-sm btn-outline-warning"
+                                (click)="cambiarStatustiposServicio(tiposServicio)">
+                                <i class="bi bi-x"></i>
                             </button>
                         </td>
                     </tr>

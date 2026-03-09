@@ -26,4 +26,8 @@ export class TurnosService {
 	public actualizarTurno(turno: any): Observable<any> {
 		return this.http.put<any>(`${api}/turnos/actualizarTurno`, turno);
 	}
+
+		public cambiarStatusTurno(pkTurno: number): Observable<any> {
+		return this.http.get<any>(`${api}/turnos/cambiarStatusTurno/${pkTurno}`)
+	}
 }

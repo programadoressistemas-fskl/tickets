@@ -26,4 +26,8 @@ export class TiposServicioService {
 	public actualizarTipoServicio(tiposServicio: any): Observable<any> {
 		return this.http.put<any>(`${api}/tiposServicio/actualizarTipoServicio`, tiposServicio);
 	}
+
+	public cambiarStatustiposServicio(pkTipoServicio: number): Observable<any> {
+		return this.http.get<any>(`${api}/tiposServicio/cambiarStatustiposServicio/${pkTipoServicio}`);
+	}
 }

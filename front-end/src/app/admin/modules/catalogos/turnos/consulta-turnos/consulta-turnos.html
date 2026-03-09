@@ -36,8 +36,17 @@
                         <td>{{turno.turno}}</td>
                         <td>{{turno.estado}}</td>
                         <td class="text-medium">
-                            <button class="btn btn-sm btn-outline-primary" (click)="abrirModalRegistrarTurno(turno.id_turno)">
+                            <button class="btn btn-sm btn-outline-primary"
+                                (click)="abrirModalRegistrarTurno(turno.id_turno)">
                                 <i class="bi bi-pencil"></i>
+                            </button>
+                            <button *ngIf="!turno.activo" class="btn btn-sm btn-outline-info"
+                                (click)="cambiarStatusTurno(turno)">
+                                <i class="bi bi-check"></i>
+                            </button>
+                            <button *ngIf="turno.activo" class="btn btn-sm btn-outline-warning"
+                                (click)="cambiarStatusTurno(turno)">
+                                <i class="bi bi-x"></i>
                             </button>
                         </td>
                     </tr>
