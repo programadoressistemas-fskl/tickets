@@ -48,6 +48,28 @@ export class ConsultaPlantas implements OnDestroy {
 		)
 	}
 
+	protected cambiarStatusPlanta(planta: any): void {
+		this.messages.mensajeConfirmacionCustom(
+			`¿Está seguro de ${planta.activo ? 'inactivar' : 'activar'} la planta?`,
+			'question',
+			`${planta.activo ? 'Inactivar' : 'Activar'} planta`
+		).then(res => {
+			if (!res.isConfirmed)return;
+
+			this.messages.mensajeEsperar(); 
+
+			this.plantas.cambiarStatusPlanta(planta.id_planta).subscribe(
+				respuesta => {
+					this.obtnerListaPlantas().then(() => {
+						this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
+					});
+				}, error => {
+					this.messages.mensajeGenerico('error', 'error');
+				}
+			)
+		})
+	}
+
 	public abrirModalRegistrarPlanta(pkPlanta: number): void {
 		const data: any = {
 			pkPlanta: pkPlanta

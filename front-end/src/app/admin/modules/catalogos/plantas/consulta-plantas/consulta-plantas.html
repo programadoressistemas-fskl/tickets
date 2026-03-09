@@ -40,9 +40,18 @@
                         <td>{{planta.direccion}}</td>
                         <td>{{planta.estado}}</td>
                         <td class="text-medium">
-                            <button class="btn btn-sm btn-outline-primary" (click)="abrirModalRegistrarPlanta(planta.id_planta)">
+                            <button class="btn btn-sm btn-outline-primary"
+                                (click)="abrirModalRegistrarPlanta(planta.id_planta)">
                                 <i class="bi bi-pencil"></i>
                             </button>
+                            <button *ngIf="!planta.activo" class="btn btn-sm btn-outline-info"
+                                (click)="cambiarStatusPlanta(planta)">
+                                <i class="bi bi-check"></i>
+                            </button>
+                            <button *ngIf="planta.activo" class="btn btn-sm btn-outline-warning"
+                            (click)="cambiarStatusPlanta(planta)">
+                            <i class="bi bi-x"></i>
+                        </button>
                         </td>
                     </tr>
                 </tbody>
