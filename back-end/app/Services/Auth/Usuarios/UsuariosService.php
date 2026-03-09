@@ -74,13 +74,13 @@ class UsuariosService
         );
     }
 
-    public function cambiarStatusUsuario($id)
-    {
-        $this->usuariosRepository->cambiarStatusUsuario($id);
+    public function cambiarStatusUsuario($id) {
+        $status = $this->usuariosRepository->cambiarStatusUsuario($id);
 
         return response()->json(
             [
-                'mensaje' => 'Se cambio el status del usuario con exito'
+                'title'   => ($status ? 'Activar' : 'Inactivar').' usuario',
+                'mensaje' => 'Se '.($status ? 'activo' : 'inactivo').' el usuario con éxito'
             ]
         );
     }

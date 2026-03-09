@@ -52,9 +52,7 @@ class TiposServicioService
     public function actualizarTipoServicio($tiposServicio)
     {
 
-        $this->tiposServicioRepository->actualizarTipoServicio(
-            $tiposServicio['pkTipoServicio'],
-            $tiposServicio['tiposServicio']
+        $this->tiposServicioRepository->actualizarTipoServicio($tiposServicio['pkTipoServicio'], $tiposServicio['tiposServicio']
         );
 
         return response()->json([
@@ -65,11 +63,12 @@ class TiposServicioService
 
     public function cambiarStatustiposServicio($pkTipoServicio)
     {
-        $this->tiposServicioRepository->cambiarStatustiposServicio($pkTipoServicio);
+      $status =  $this->tiposServicioRepository->cambiarStatustiposServicio($pkTipoServicio);
 
         return response()->json(
             [
-                'mensaje' => 'Se cambio el status del tipo servicio con exito',
+                'title'   => ($status ? 'Activar' : 'Inactivar').' tipo servicio',
+                'mensaje' => 'Se '.($status ? 'activo' : 'inactivo').' el tipo servicio con éxito'
             ]
         );
     }

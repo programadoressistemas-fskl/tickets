@@ -17,7 +17,8 @@ class TurnosController extends Controller
         $this->turnosService = $TurnosService;
     }
 
-    public function registrarTurno(Request $request) {
+    public function registrarTurno(Request $request)
+    {
         try {
             return $this->turnosService->registrarTurno($request->all());
         } catch (\Throwable $error) {
@@ -34,7 +35,8 @@ class TurnosController extends Controller
         }
     }
 
-    public function obtenerListaTurnos() {
+    public function obtenerListaTurnos()
+    {
         try {
             return $this->turnosService->obtenerListaTurnos();
         } catch (\Throwable $error) {
@@ -51,7 +53,8 @@ class TurnosController extends Controller
         }
     }
 
-    public function obtenerDetalleTurno($pkTurno) {
+    public function obtenerDetalleTurno($pkTurno)
+    {
         try {
             return $this->turnosService->obtenerDetalleTurno($pkTurno);
         } catch (\Throwable $error) {
@@ -68,20 +71,16 @@ class TurnosController extends Controller
         }
     }
 
-    public function actualizarTurno(Request $request) {
+    public function actualizarTurno(Request $request)
+    {
         try {
 
-            $turno = $this->turnosService->actualizarTurno($request->all());
-
-            return response()->json([
-                'data' => $turno,
-                'mensaje' => 'Turno actualizada correctamente'
-            ]);
+            return $this->turnosService->actualizarTurno($request->all());
         } catch (\Throwable $error) {
 
             Log::alert('*********************************************');
             Log::alert('Error al actualizar turno');
-            Log::alert($error->getMessage());
+            Log::alert($error);
 
             return response()->json([
                 'mensaje' => 'Ocurrió un error interno'
@@ -89,7 +88,8 @@ class TurnosController extends Controller
         }
     }
 
-    public function cambiarStatusTurno($pkTurno) {
+    public function cambiarStatusTurno($pkTurno)
+    {
         try {
             return $this->turnosService->cambiarStatusTurno($pkTurno);
         } catch (\Throwable $error) {

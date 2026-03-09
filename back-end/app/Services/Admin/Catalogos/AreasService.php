@@ -60,12 +60,14 @@ class AreasService
         );
     }
 
-    public function cambiarStatusArea($pkArea) {
-        $this->areasRepository->cambiarStatusArea($pkArea);
+    public function cambiarStatusArea($pkArea) { 
+
+       $status = $this->areasRepository->cambiarStatusArea($pkArea);
 
         return response()->json(
             [
-                'mensaje' => 'Se cambio el status de Area con exito',
+                'title'   => ($status ? 'Activar' : 'Inactivar').' area',
+                'mensaje' => 'Se '.($status ? 'activo' : 'inactivo').' el area con éxito'
             ]
         );
     }

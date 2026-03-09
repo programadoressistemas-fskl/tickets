@@ -64,5 +64,7 @@ class PlantasRepository
         $plantas = CatPlantas::findOrFail($pkPlantas);
         $plantas->activo = $plantas->activo ? 0 : 1;
         $plantas->save();
+
+        return $plantas->activo;
     }
 }

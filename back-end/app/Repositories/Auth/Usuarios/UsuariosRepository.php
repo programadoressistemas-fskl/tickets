@@ -41,23 +41,25 @@ public function validarUsuarioExistente($correo)
     public function obtenerListaUsuarios()
     {
         $query = TblUsuarios::select(
-            'id_usuario',
-            'nombre',
-            'a_paterno',
-            'a_materno',
-            'numero_telefono',
-            'correo_electronico',
-            'password',
-            'id_area',
-            'puesto',
-            'fecha_registro',
-            DB::raw("
-                             CASE 
-                                 WHEN activo = 1 THEN 'Activo'
-                                 ELSE 'Inactivo'
-                             END as estado
-                         ")
-        );
+                                'id_usuario',
+                                'nombre',
+                                'a_paterno',
+                                'a_materno',
+                                'numero_telefono',
+                                'correo_electronico',
+                                'password',
+                                'id_area',
+                                'puesto',
+                                'fecha_registro',
+                                'activo',
+                                DB::raw("
+                                    CASE 
+                                        WHEN activo = 1 THEN 'Activo'
+                                        ELSE 'Inactivo'
+                                    END as estado
+                                ")
+                            );
+
         return $query->get();
     }
 
@@ -100,6 +102,8 @@ public function validarUsuarioExistente($correo)
         $usuario = TblUsuarios::findOrFail($id);
         $usuario->activo = $usuario->activo ? 0 : 1;
         $usuario->save();
+
+        return $usuario->activo;
     }
 
     public function login($usuario)

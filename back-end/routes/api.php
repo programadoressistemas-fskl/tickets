@@ -14,7 +14,7 @@ Route::post('/usuarios/login', [UsuariosController::class, 'login']);
 Route::get('/usuarios/obtenerListaUsuarios', [UsuariosController::class, 'obtenerListaUsuarios']);
 Route::get('/usuarios/obtenerDetalleUsuario/{pkUsuario}', [UsuariosController::class, 'obtenerDetalleUsuario']);
 Route::put('/usuarios/actualizarUsuario', [UsuariosController::class, 'actualizarUsuario']);
-Route::get('/usuarios/cambiarStatusUsuario/{id}', [UsuariosController::class, 'cambiarStatusDeUsuario']);
+Route::get('/usuarios/cambiarStatusUsuario/{id}', [UsuariosController::class, 'cambiarStatusUsuario']);
 
 // Areas 
 Route::post('/areas/registrarArea', [AreasController::class, 'registrarArea']);

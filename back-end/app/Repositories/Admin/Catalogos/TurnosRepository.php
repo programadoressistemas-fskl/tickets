@@ -43,10 +43,10 @@ class TurnosRepository
                         }
 
     public function actualizarTurno($id, $turno) {
-        $actualizar = CatTurnos::finOrFail($id);
+        $actualizar = CatTurnos::findOrFail($id);
         $actualizar->turno = $turno['turno'];
         $actualizar->save();
-    }
+    } 
 
     public function cambiarStatusTurno($pkTurno) {
         $turno = CatTurnos::findOrFail($pkTurno);

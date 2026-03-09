@@ -22,6 +22,7 @@ class TiposServicioRepository
                                      'id_tipo_servicio',
                                      'tipo_servicio',
                                      'descripcion',
+                                     'activo',
                                      DB::raw("
                                          CASE 
                                              WHEN activo = 1 THEN 'Activo'
@@ -57,6 +58,8 @@ class TiposServicioRepository
     public function cambiarStatustiposServicio($pkTipoServicio) {
         $tiposServicio = CatTiposServicio::findOrFail($pkTipoServicio);
         $tiposServicio->activo = $tiposServicio->activo ? 0 : 1;
-        $tiposServicio->save();
+        $tiposServicio->save(); 
+
+        return $tiposServicio->activo;
     } 
 } 

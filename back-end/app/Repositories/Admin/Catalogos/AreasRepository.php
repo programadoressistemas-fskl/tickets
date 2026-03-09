@@ -60,5 +60,7 @@ class AreasRepository
         $areas = CatAreas::findOrFail($pkArea);
         $areas->activo = $areas->activo ? 0 : 1;
         $areas->save();
+
+        return $areas->activo;
     }
 }

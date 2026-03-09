@@ -54,6 +54,7 @@ class TurnosService
 
         return response()->json(
             [
+                'title'   => 'Actualización con exitó',
                 'mensaje' => 'Se actualizo correctamente el turno'
             ]
         );

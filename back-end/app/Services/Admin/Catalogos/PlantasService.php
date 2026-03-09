@@ -60,11 +60,12 @@ class PlantasService
     }
 
     public function cambiarStatusPlanta($pkPlantas) {
-        $this->plantasRepository->cambiarStatusPlanta($pkPlantas);
+       $status = $this->plantasRepository->cambiarStatusPlanta($pkPlantas);
 
         return response()->json(
             [
-                'mensaje' => 'Se cambio el status de la planta con exito',
+                'title'   => ($status ? 'Activar' : 'Inactivar').' planta',
+                'mensaje' => 'Se '.($status ? 'activo' : 'inactivo').' la planta con éxito'
             ]
         );
     }
