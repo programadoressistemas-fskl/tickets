@@ -98,7 +98,7 @@ export class RegistrarArea implements OnInit {
 			return;
 		}
 
-		this.messages.mensajeConfirmacionCustom('¿Está seguro de continuar con el registro del area?',
+		this.messages.mensajeConfirmacionCustom('¿Está seguro de continuar con la actualización del area?',
 			'question', 'Actualizar area').then(
 				res => {
 					if (!res.isConfirmed) return;

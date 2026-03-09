@@ -17,9 +17,13 @@ export class TurnosService {
 
 	public obtenerListaTurnos(): Observable<any> {
 		return this.http.get<any>(`${api}/turnos/obtenerListaTurnos`);
-	} 
+	}
 
-		public obtenerDetalleTurno(pkTurno: number): Observable<any> {
+	public obtenerDetalleTurno(pkTurno: number): Observable<any> {
 		return this.http.get<any>(`${api}/turnos/obtenerDetalleTurno/${pkTurno}`);
+	}
+
+	public actualizarTurno(turno: any): Observable<any> {
+		return this.http.put<any>(`${api}/turnos/actualizarTurno`, turno);
 	}
 }

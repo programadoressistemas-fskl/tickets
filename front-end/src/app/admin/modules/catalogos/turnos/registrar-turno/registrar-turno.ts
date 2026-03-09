@@ -82,6 +82,37 @@ export class RegistrarTurno {
 			)
 	}
 
+	protected actualizarTurno(): void {
+		if (this.formTurno.invalid) {
+			this.messages.mensajeGenerico('Aún hay campos vacíos o que no cumplen con la estructura correcta.', 'info', 'Los campos requeridos están marcados con un *');
+			return;
+		}
+
+		this.messages.mensajeConfirmacionCustom('¿Está seguro de continuar con la actualización del turno?',
+			'question', 'Actualizar turno').then(
+				res => {
+					if (!res.isConfirmed) return;
+
+					this.messages.mensajeEsperar();
+
+					const data: any = {
+						pkTurno: this.pkTurno,
+						turno: this.formTurno.value
+					}; 
+
+					this.turnos.actualizarTurno(data).toPromise().then(
+						respuesta => {
+							this.obtenerDetalleTurno(this.pkTurno).then(() => {
+								this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title)
+							}); 
+						}, error => {
+							this.messages.mensajeGenerico('error', 'error');
+						}
+					)
+				}
+			)
+	}
+
 	get cambiosForm(): boolean {
 		return this.formTurno.dirty;
 	}
