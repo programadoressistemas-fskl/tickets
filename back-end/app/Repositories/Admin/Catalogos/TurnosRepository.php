@@ -20,6 +20,7 @@ class TurnosRepository
         $query = CatTurnos::select(
                               'id_turno',
                               'turno',
+                              'activo',
                               DB::raw("
                                   CASE 
                                       WHEN activo = 1 THEN 'Activo'
@@ -52,5 +53,7 @@ class TurnosRepository
         $turno = CatTurnos::findOrFail($pkTurno);
         $turno->activo = $turno->activo ? 0 : 1;
         $turno->save(); 
+
+        return $turno->activo;
     }
 }

@@ -61,11 +61,12 @@ class TurnosService
     }
 
     public function cambiarStatusTurno($pkTurno) {
-        $this->turnosRepository->cambiarStatusTurno($pkTurno);
+        $status = $this->turnosRepository->cambiarStatusTurno($pkTurno);
 
         return response()->json(
             [
-                'mensaje' => 'Se actualizo correctamente el status del turno con exito'
+                'title'   => ($status ? 'Activar' : 'Inactivar').' turno',
+                'mensaje' => 'Se '.($status ? 'activo' : 'inactivo').' el turno con éxito'
             ]
         );
     }

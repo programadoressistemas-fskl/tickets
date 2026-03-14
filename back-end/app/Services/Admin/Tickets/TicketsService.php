@@ -1,0 +1,114 @@
+<?php
+
+namespace App\Services\Admin\Tickets;
+
+use App\Repositories\Admin\Catalogos\AreasRepository;
+use App\Repositories\Admin\Catalogos\PlantasRepository;
+use App\Repositories\Admin\Catalogos\TiposServicioRepository;
+use App\Repositories\Admin\Catalogos\TurnosRepository;
+use App\Repositories\Admin\Tickets\TicketsRepository;
+
+class TicketsService
+{
+    protected $ticketsRepository;
+    protected $areasRepository;
+    protected $plantasRepository;
+    protected $turnosRepository;
+    protected $tiposServicioRepository;
+
+    public function __construct(
+        TicketsRepository $TicketsRepository,
+        AreasRepository   $AreasRepository,
+        PlantasRepository $PlantasRepository,
+        TurnosRepository  $TurnosRepository,
+        TiposServicioRepository $TiposServicioRepository
+    ) {
+        $this->ticketsRepository = $TicketsRepository;
+        $this->areasRepository   = $AreasRepository;
+        $this->plantasRepository = $PlantasRepository;
+        $this->turnosRepository  = $TurnosRepository;
+        $this->tiposServicioRepository = $TiposServicioRepository;
+    }
+
+    public function obtenerRecursosRegistroTicket()
+    {
+        $areas   = $this->areasRepository->obtenerListaAreas();
+        $plantas = $this->plantasRepository->obtenerListaPlantas();
+        $turnos  = $this->turnosRepository->obtenerLIstaTurnos();
+        $tiposServicio = $this->tiposServicioRepository->obtenerListaTipoServicio();
+
+        return response()->json(
+            [
+                'mensaje'  => 'Se obtuvo los recursos correctamente',
+                'recursos' => [
+                    'listaareas'   => $areas,
+                    'listaplantas' => $plantas,
+                    'listaturnos'  => $turnos,
+                    'listatiposServicio' => $tiposServicio,
+                ]
+            ]
+        );
+    }
+
+    public function registrarTicket($ticket)
+    {
+
+        $this->ticketsRepository->registrarTicket($ticket);
+
+        return response()->json(
+            [
+                'mensaje' => 'Se registro el ticket con éxito',
+                'title'   => 'Registro exitoso'
+            ]
+        );
+    }
+
+    public function obtenerListaGeneralTickets()
+    {
+        $tickets = $this->ticketsRepository->obtenerListaGeneralTickets();
+
+        return response()->json(
+            [
+                'tickets' => $tickets,
+                'mensaje' => 'Se obtuvo la informacion de tickets',
+            ]
+        );
+    }
+
+    public function obtenerDetalleTicketPorId($pkTickets)
+    {
+        $ticket =  $this->ticketsRepository->obtenerDetalleTicketPorId($pkTickets);
+
+        return response()->json(
+            [
+                'ticket' => $ticket[0],
+                'mensaje' => 'Se obtuvo la informacion correcta'
+            ]
+        );
+    }
+
+    public function actualizarTicket($ticket)
+    {
+        $this->ticketsRepository->actualizarTicket($ticket['pkTicket'], $ticket['ticket']);
+
+        return response()->json(
+            [
+                'title'    => 'Actualización exitosa',
+                'mensajes' => 'Se actualizo correctamente el ticket'
+            ]
+        );
+    }
+
+
+    public function cambiarStatusTicket($pkTicket, $status)
+    {
+        $status = $this->ticketsRepository->cambiarStatusTicket($pkTicket, $status);
+
+        return response()->json(
+            [
+                'title'   => ($status ? '' : '') . ' ticket',
+                'mensaje' => 'Se' . ($status ? '' : '') . ' el ticket con éxito'
+            ]
+        );
+    }
+}
