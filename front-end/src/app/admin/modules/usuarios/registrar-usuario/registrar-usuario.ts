@@ -21,10 +21,10 @@ export class RegistrarUsuario {
 	protected listaAreas: any[] = [];
 
 	constructor(
-		private modal: ModalService,
-		private areas: AreasService,
-		private ch: ChangeDetectorRef,
-		private fb: FormBuilder,
+		private modal: 	  ModalService,
+		private areas: 	  AreasService,
+		private ch:    	  ChangeDetectorRef,
+		private fb:    	  FormBuilder,
 		private messages: MessagesService,
 		private usuarios: UsuariosService
 	) { }
@@ -33,7 +33,7 @@ export class RegistrarUsuario {
 		this.messages.mensajeEsperar();
 
 		this.crearFormUsuario();
-		this.obtenerListaAreas();
+		await this.obtenerListaAreas();
 
 		if (this.pkUsuario != null) await this.obtenerDetalleUsuario(this.pkUsuario);
 
@@ -42,14 +42,14 @@ export class RegistrarUsuario {
 
 	private crearFormUsuario(): void {
 		this.formUsuario = this.fb.group({
-			nombre: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
-			a_paterno: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
-			a_materno: [null, [Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
+			nombre:    			[null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
+			a_paterno: 			[null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
+			a_materno: 			[null, [Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
 			correo_electronico: [null, [Validators.required, Validators.email, Validators.pattern('[a-zA-Zá-úÁ-Ú0-9 .,-_@#$%&+{}()?¿!¡\n\r\t]*')]],
-			numero_telefono: [null, [Validators.pattern('^[0-9]+(\.[0-9]+)?$'), Validators.minLength(10), Validators.maxLength(10)]],
-			password: [null, [Validators.pattern('[a-zA-Zá-úÁ-Ú0-9 .,-_@#$%&+{}()?¿!¡\n\r\t]*')]],
-			id_area: ['', [Validators.required]],
-			puesto: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú0-9 .,-_@#$%&+{}()?¿!¡\n\r\t]*')]]
+			numero_telefono: 	[null, [Validators.pattern('^[0-9]+(\.[0-9]+)?$'), Validators.minLength(10), Validators.maxLength(10)]],
+			password: 			[null, [Validators.pattern('[a-zA-Zá-úÁ-Ú0-9 .,-_@#$%&+{}()?¿!¡\n\r\t]*')]],
+			id_area: 			['', [Validators.required]],
+			puesto:  			[null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú0-9 .,-_@#$%&+{}()?¿!¡\n\r\t]*')]]
 		});
 	}
 
@@ -140,8 +140,7 @@ export class RegistrarUsuario {
 							this.messages.mensajeGenerico('error', 'error');
 						}
 					)
-				}
-			);
+				});
 	}
 
 	get cambiosForm(): boolean {
@@ -163,7 +162,6 @@ export class RegistrarUsuario {
 				if (!res.isConfirmed) return;
 
 				this.modal.cerrarModal();
-			}
-		);
+			});
 	}
 }

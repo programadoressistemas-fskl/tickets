@@ -50,9 +50,9 @@ export class ConsultaAreas implements OnDestroy {
 
 	protected cambiarStatus(area: any): void {
 		this.messages.mensajeConfirmacionCustom(
-			`¿Está seguro de ${area.activo ? 'inactivar' : 'activar'} el usuario?`,
+			`¿Está seguro de ${area.activo ? 'inactivar' : 'activar'} el area?`,
 			'question',
-			`${area.activo ? 'Inactivar' : 'Activar'} usuario`
+			`${area.activo ? 'Inactivar' : 'Activar'} area`
 		).then(res => {
 			if (!res.isConfirmed) return;
 

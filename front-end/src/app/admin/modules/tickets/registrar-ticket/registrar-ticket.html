@@ -1,0 +1,84 @@
+<div class="modal-body dashboard">
+    <div class="pagetitle">
+        <h4 class="t-bold">
+            Tickets
+        </h4>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Tickets</li>
+                <li class="breadcrumb-item active"> Tickets</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="formTicket" class="row g-3" autocomplete="off">
+                        <div class="col-lg-6">
+                            <label for="area" class="form-label">Area:</label>
+                            <select id="area" class="form-select form-select-sm" formControlName="id_area">
+                                <option *ngFor="let area of listaAreas" [value]="area.id_area">
+                                    {{ area.area }}
+                                </option>
+                                <option style="display: none; visibility: hidden;" value="">Selecciona una opción
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="planta" class="form-label">Planta:</label>
+                            <select id="planta" class="form-select form-select-sm" formControlName="id_planta">
+                                <option *ngFor="let planta of listaPlantas" [value]="planta.id_planta">
+                                    {{ planta.planta }}
+                                </option>
+                                <option style="display: none; visibility: hidden;" value="">Selecciona una opción
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="turno" class="form-label">Turno:</label>
+                            <select id="turno" class="form-select form-select-sm" formControlName="id_turno">
+                                <option *ngFor="let turno of listaTurnos" [value]="turno.id_turno">
+                                    {{ turno.turno }}
+                                </option>
+                                <option style="display: none; visibility: hidden;" value="">Selecciona una opción
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="tipo_servicio" class="form-label">Tipo Servicio:</label>
+                            <select id="tipo_servicio" class="form-select form-select-sm"
+                                formControlName="id_tipo_servicio">
+                                <option *ngFor="let tipo_servicio of listatiposServicio" [value]="tipo_servicio.id_tipo_servicio">
+                                    {{ tipo_servicio.tipo_servicio }}
+                                </option>
+                                <option style="display: none; visibility: hidden;" value="">Selecciona una opción
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <label for="descripcion" class="form-label">Descripción:</label>
+                            <textarea class="textarea-dinamico" pTextarea id="descripcion_problema"
+                                class="form-control form-control-sm" placeholder="Descripción" rows="3"
+                                formControlName="descripcion_problema">
+                            </textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button *ngIf="pkTicket == null" class="btn btn-sm btn-primary" (click)="registrarTicket()">
+        Registrar
+    </button>
+    <button class="btn btn-sm btn-danger" (click)="cerrarModal()">
+        {{cambiosForm || pkTicket != null ? 'Cancelar' : 'Cerrar'}}
+    </button>
+</div>
