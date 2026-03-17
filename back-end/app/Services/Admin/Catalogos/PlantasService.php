@@ -20,7 +20,7 @@ class PlantasService
         return response()->json(
             [
                 'pkPlanta' => $pkPlanta,
-                'mensaje'  => 'Se registro correctamente la planta',
+                'mensaje'  => 'Se registro la planta con éxito',
                 'title'    => 'Registro exitoso'
             ]
         );
@@ -32,7 +32,7 @@ class PlantasService
         return response()->json(
             [
                 'plantas' => $plantas,
-                'mensaje' => 'Se obtuvo la informacion correctamente'
+                'mensaje' => 'Se obtuvo la informacion de plantas'
             ]
         );
     }
