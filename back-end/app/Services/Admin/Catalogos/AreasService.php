@@ -21,7 +21,7 @@ class AreasService
         return response()->json(
             [
                 'pkArea'  => $pkArea,
-                'mensaje' => 'Se Registro Correctamente el Area',
+                'mensaje' => 'Se Registro el Area con éxito',
                 'title'   => 'Registro exitoso'
             ]
         );
