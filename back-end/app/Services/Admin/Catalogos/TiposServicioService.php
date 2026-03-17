@@ -20,8 +20,8 @@ class TiposServicioService
 
         return response()->json(
             [
-                'title'   => 'Registro exitoso',
-                'mensaje' => 'Se registro correctamente el tipo de servicio'
+                'mensaje' => 'Se registro el tipo de servicio con éxito',
+                'title'   => 'Registro exitoso'
             ]
         );
     }
@@ -33,7 +33,7 @@ class TiposServicioService
         return response()->json(
             [
                 'tiposServicio' => $tiposServicio,
-                'mensaje' => 'Se obtuvo la informacion correctamente'
+                'mensaje' => 'Se obtuvo la informacion de tipo Servicio'
             ]
         );
     }
