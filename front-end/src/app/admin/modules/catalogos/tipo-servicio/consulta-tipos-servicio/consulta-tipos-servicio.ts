@@ -18,10 +18,10 @@ export class ConsultaTiposServicio implements OnDestroy {
 	private intervalo: any;
 
 	constructor(
-		private modal: ModalService,
+		private modal:         ModalService,
 		private tiposServicio: TiposServicioService,
-		private messages: MessagesService,
-		private ch: ChangeDetectorRef
+		private messages:      MessagesService,
+		private ch:            ChangeDetectorRef
 	) { }
 
 	async ngOnInit(): Promise<any> {

@@ -18,10 +18,10 @@ export class ConsultaTurnos implements OnDestroy {
 	private intervalo: any;
 
 	constructor(
-		private modal: ModalService,
-		private turnos: TurnosService,
+		private modal:    ModalService,
+		private turnos:   TurnosService,
 		private messages: MessagesService,
-		private ch: ChangeDetectorRef
+		private ch:       ChangeDetectorRef
 	) { }
 
 	async ngOnInit(): Promise<any> {

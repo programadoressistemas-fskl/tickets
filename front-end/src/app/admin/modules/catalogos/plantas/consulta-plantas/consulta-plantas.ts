@@ -18,10 +18,10 @@ export class ConsultaPlantas implements OnDestroy {
 	private intervalo: any;
 
 	constructor(
-		private modal: ModalService,
-		private plantas: PlantasService,
+		private modal:    ModalService,
+		private plantas:  PlantasService,
 		private messages: MessagesService,
-		private ch: ChangeDetectorRef
+		private ch: 	  ChangeDetectorRef
 	) { }
 
 	async ngOnInit(): Promise<any> {

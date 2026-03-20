@@ -6,6 +6,7 @@ import { ConsultaAreas } from './admin/modules/catalogos/areas/consulta-areas/co
 import { ConsultaPlantas } from './admin/modules/catalogos/plantas/consulta-plantas/consulta-plantas';
 import { ConsultaTiposServicio } from './admin/modules/catalogos/tipo-servicio/consulta-tipos-servicio/consulta-tipos-servicio';
 import { ConsultaTurnos } from './admin/modules/catalogos/turnos/consulta-turnos/consulta-turnos';
+import { ConsultaTickets } from './admin/modules/tickets/consulta-tickets/consulta-tickets';
 
 export const AppRoutes: Routes = [
 	{
@@ -39,6 +40,11 @@ export const AppRoutes: Routes = [
 			{
 				path: 'consultar-tipo-servicio',
 				component: ConsultaTiposServicio
+			},
+
+			{
+				path: 'consulta-tickets',
+				component: ConsultaTickets
 			}
 		]
 	}

@@ -18,11 +18,11 @@ export class RegistrarPlanta {
 	protected formPlanta!: FormGroup;
 
 	constructor(
-		private modal: ModalService,
-		private fb: FormBuilder,
-		private ch: ChangeDetectorRef,
+		private modal: 	  ModalService,
+		private fb:    	  FormBuilder,
+		private ch:    	  ChangeDetectorRef,
 		private messages: MessagesService,
-		private plantas: PlantasService
+		private plantas:  PlantasService
 	) { }
 
 	async ngOnInit(): Promise<any> {
@@ -37,8 +37,8 @@ export class RegistrarPlanta {
 
 	private crearFormPlanta(): void {
 		this.formPlanta = this.fb.group({
-			planta: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
-			abrev: [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
+			planta:    [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
+			abrev: 	   [null, [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
 			direccion: [null, [Validators.pattern('[a-zA-Zá-úÁ-Ú ]*')]],
 		})
 	}
@@ -99,7 +99,7 @@ export class RegistrarPlanta {
 
 					const data: any = {
 						pkPlanta: this.pkPlanta,
-						planta: this.formPlanta.value
+						planta:   this.formPlanta.value
 					};
 
 					this.plantas.actualizarPlanta(data).toPromise().then(

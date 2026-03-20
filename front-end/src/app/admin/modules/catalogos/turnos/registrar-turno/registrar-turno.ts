@@ -20,11 +20,11 @@ export class RegistrarTurno {
 	protected listaAreas: any[] = [];
 
 	constructor(
-		private modal: ModalService,
-		private fb: FormBuilder,
-		private ch: ChangeDetectorRef,
+		private modal:    ModalService,
+		private fb:       FormBuilder,
+		private ch:       ChangeDetectorRef,
 		private messages: MessagesService,
-		private turnos: TurnosService
+		private turnos:   TurnosService
 	) { }
 
 	async ngOnInit(): Promise<any> {

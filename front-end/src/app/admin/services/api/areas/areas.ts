@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { api } from '../../../../../environments/environments';
-import { RegistrarArea } from '../../../modules/catalogos/areas/registrar-area/registrar-area';
 
 @Injectable({
 	providedIn: 'root',

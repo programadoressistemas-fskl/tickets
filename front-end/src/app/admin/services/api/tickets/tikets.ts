@@ -18,4 +18,13 @@ export class TiketsService {
   public obtenerRecursosRegistroTicket(): Observable<any> {
     return this.http.get<any>(`${api}/tickets/obtenerRecursosRegistroTicket`);
   }
+
+  public obtenerStatusTickets(): Observable<any> {
+    return this.http.get<any>(`${api}/tickets/obtenerStatusTickets`);
+  }
+
+  public obtenerListaGeneralTickets(data: any): Observable<any> {
+    return this.http.post<any>(`${api}/tickets/obtenerListaGeneralTickets`, data);
+  }
+
 }

@@ -18,10 +18,10 @@ export class ConsultaAreas implements OnDestroy {
 	private intervalo: any;
 
 	constructor(
-		private modal: ModalService,
-		private areas: AreasService,
+		private modal:    ModalService,
+		private areas:    AreasService,
 		private messages: MessagesService,
-		private ch: ChangeDetectorRef
+		private ch:       ChangeDetectorRef
 	) { }
 
 	async ngOnInit(): Promise<any> {

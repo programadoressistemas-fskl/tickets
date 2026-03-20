@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ModalService } from '../../../services/modal/modal';
 import { MessagesService } from '../../../services/messages/messages';
 import { TiketsService } from '../../../services/api/tickets/tikets';
-
+ 
 @Component({
   selector: 'app-registrar-ticket',
   imports: [CommonModule, ReactiveFormsModule],
@@ -17,17 +17,17 @@ export class RegistrarTicket {
 
   protected formTicket!: FormGroup;
 
-  protected listaAreas: any[] = [];
-  protected listaPlantas: any[] = [];
-  protected listaTurnos: any[] = [];
+  protected listaAreas:         any[] = [];
+  protected listaPlantas:       any[] = [];
+  protected listaTurnos:        any[] = [];
   protected listatiposServicio: any[] = [];
 
   constructor(
-    private modal: ModalService,
+    private modal:    ModalService,
     private messages: MessagesService,
-    private tickets: TiketsService,
-    private ch: ChangeDetectorRef,
-    private fb: FormBuilder
+    private tickets:  TiketsService,
+    private ch:       ChangeDetectorRef,
+    private fb:       FormBuilder
   ) { }
 
   async ngOnInit(): Promise<any> {
@@ -52,9 +52,9 @@ export class RegistrarTicket {
   private async obtenerRecursosRegistroTicket(): Promise<any> {
     return this.tickets.obtenerRecursosRegistroTicket().toPromise().then(
       respuesta => {
-        this.listaAreas = respuesta.recursos.listaareas;
-        this.listaPlantas = respuesta.recursos.listaplantas;
-        this.listaTurnos = respuesta.recursos.listaturnos;
+        this.listaAreas         = respuesta.recursos.listaareas;
+        this.listaPlantas       = respuesta.recursos.listaplantas;
+        this.listaTurnos        = respuesta.recursos.listaturnos;
         this.listatiposServicio = respuesta.recursos.listatiposServicio
         this.ch.markForCheck();
       }
@@ -62,14 +62,6 @@ export class RegistrarTicket {
   }
 
   protected registrarTicket(): void {
-    console.log('Estado del formulario:', this.formTicket.status);
-    console.log('Campos inválidos:');
-    Object.keys(this.formTicket.controls).forEach(key => {
-      const control = this.formTicket.get(key);
-      if (control?.invalid) {
-        console.log(key, control.errors);
-      }
-    });
     if (this.formTicket.invalid) {
       this.messages.mensajeGenerico('Aún hay campos vacíos o que no cumplen con la estructura correcta.',
         'info', 'Los campos requeridos están marcados con un *'
@@ -85,7 +77,6 @@ export class RegistrarTicket {
           this.messages.mensajeEsperar();
 
           const ticket: any = this.formTicket.value;
-          console.log(this.formTicket.value);
 
           this.tickets.registrarTicket(ticket).toPromise().then(
             respuesta => {
