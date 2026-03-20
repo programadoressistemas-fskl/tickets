@@ -42,7 +42,7 @@ class PlantasService
 
         return response()->json(
             [
-                'planta' => $plantas[0],
+                'planta'  => $plantas[0],
                 'mensaje' => 'Se obtuvo correctamente la informacion'
             ]
         );

@@ -63,9 +63,21 @@ class TicketsService
         );
     }
 
-    public function obtenerListaGeneralTickets()
+    public function obtenerStatusTickets()
     {
-        $tickets = $this->ticketsRepository->obtenerListaGeneralTickets();
+        $tickets = $this->ticketsRepository->obtenerStatusTickets();
+
+        return response()->json(
+            [
+                'tickets' => $tickets,
+                'mensaje' => 'Se obtuvo la informacion de tickets',
+            ]
+        );
+    }
+
+    public function obtenerListaGeneralTickets($pkArea, $pkStatus)
+    {
+        $tickets = $this->ticketsRepository->obtenerListaGeneralTickets($pkArea, $pkStatus);
 
         return response()->json(
             [
@@ -81,7 +93,7 @@ class TicketsService
 
         return response()->json(
             [
-                'ticket' => $ticket[0],
+                'ticket'  => $ticket[0],
                 'mensaje' => 'Se obtuvo la informacion correcta'
             ]
         );

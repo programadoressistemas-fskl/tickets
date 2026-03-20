@@ -21,7 +21,7 @@ class TurnosService
         return response()->json(
             [
                 'pkTurno' => $pkTurno,
-                'mensaje' => 'Se registro corectamente el turno',
+                'mensaje' => 'Se registro el turno con éxito',
                 'title'   => 'Registro exitoso'
             ]
         );
@@ -32,8 +32,8 @@ class TurnosService
 
         return response()->json(
             [
-                'turnos' =>  $turno,
-                'title'   => 'Se obtuvo la informacion correctamente'
+                'turnos'  =>  $turno,
+                'title'   => 'Se obtuvo la informacion correctamente de Turnos'
             ]
         );
     }
@@ -43,7 +43,7 @@ class TurnosService
 
         return response()->json(
             [
-                'turno' => $turno[0],
+                'turno'   => $turno[0],
                 'mensaje' => ' Se obtuvo corectamente la informacion'
             ]
         );

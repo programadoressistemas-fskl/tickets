@@ -17,7 +17,8 @@ class TicketsController extends Controller
         $this->ticketsService = $TicketsService;
     }
 
-    public function obtenerRecursosRegistroTicket() {
+    public function obtenerRecursosRegistroTicket()
+    {
         try {
             return $this->ticketsService->obtenerRecursosRegistroTicket();
         } catch (\Throwable $error) {
@@ -48,6 +49,46 @@ class TicketsController extends Controller
                     'mensaje' => 'Ocurrió un error interno'
                 ],
                 400
+            );
+        }
+    }
+
+    public function obtenerStatusTickets()
+    {
+        try {
+            return $this->ticketsService->obtenerStatusTickets();
+        } catch (\Throwable $error) {
+            Log::alert('*********************************************');
+            Log::alert('Error al obtener información de Status Ticket');
+            Log::alert($error);
+            return response()->json(
+                [
+                    'error' => $error,
+                    'mensaje' => 'Ocurrió un error interno'
+                ],
+                500
+            );
+        }
+    }
+
+    public function obtenerListaGeneralTickets(Request $request)
+    {
+        try {
+            $pkArea = $request->pkArea;
+            $pkStatus = $request->pkStatus;
+
+            return $this->ticketsService->obtenerListaGeneralTickets($pkArea, $pkStatus);
+        } catch (\Throwable $error) {
+            Log::alert('*********************************************');
+            Log::alert('Error al obtener información de Tickets');
+            Log::alert($error);
+
+            return response()->json(
+                [
+                    'error' => $error,
+                    'mensaje' => 'Ocurrió un error interno'
+                ],
+                500
             );
         }
     }

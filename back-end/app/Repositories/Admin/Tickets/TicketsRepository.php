@@ -22,28 +22,33 @@ class TicketsRepository
         $registro->save();
     }
 
-    public function obtenerListaGeneralTickets()
+    public function obtenerStatusTickets()
+    {
+        return DB::table('Cat_Status_Ticket')
+            ->get(); 
+    } 
+
+    public function obtenerListaGeneralTickets($pkArea, $pkStatus)
     {
         $query = TblTickets::select(
-            'id_ticket',
-            'id_area',
-            'id_planta',
-            'id_turno',
-            'id_tipo_servicio',
-            'id_cat_status',
-            'descripcion_problema',
-            'fecha_registro',
-            'fecha_inicio',
-            'fecha_finalizacion',
-            'activo',
-            DB::ram("        
-                            CASE 
-                            WHEN activo = 1 THEN 'Activo'
-                            ELSE 'Inactivo'
-                            END as estado
-            ")
-        );
-
+            'tbl_tickets.id_ticket',
+            'cat_areas.area',
+            'cat_plantas.planta',
+            'cat_tipo_servicio.tipo_servicio',
+            'Cat_Status_Ticket.status',
+            'tbl_tickets.descripcion_problema',
+            'tbl_tickets.fecha_registro',
+            'tbl_tickets.fecha_inicio',
+            'tbl_tickets.fecha_finalizacion',
+        )
+            ->join('cat_areas',         'cat_areas.id_area',                  'tbl_tickets.id_area')
+            ->join('cat_plantas',       'cat_plantas.id_planta',              'tbl_tickets.id_planta')
+            ->join('cat_tipo_servicio', 'cat_tipo_servicio.id_tipo_servicio', 'tbl_tickets.id_tipo_servicio')
+            ->join('Cat_Status_Ticket', 'Cat_Status_Ticket.id_status_ticket', 'tbl_tickets.id_status_ticket')
+            ->where([
+            ['tbl_tickets.id_area', $pkArea],
+            ['tbl_tickets.id_status_ticket', $pkStatus]
+            ]);
         return $query->get();
     }
 
@@ -55,7 +60,7 @@ class TicketsRepository
             'id_planta',
             'id_turno',
             'id_tipo_servicio',
-            'id_cat_status',
+            'id_status_ticket',
             'descripcion_problema',
             'fecha_registro',
             'fecha_inicio',
@@ -71,7 +76,8 @@ class TicketsRepository
         $actualizar->save();
     }
 
-    public function cambiarStatusTicket($pkTicket, $status) {
+    public function cambiarStatusTicket($pkTicket, $status)
+    {
         $ticket = TblTickets::findOrFail($pkTicket);
 
         $ticket->id_status_ticket = $status;

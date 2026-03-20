@@ -23,7 +23,7 @@ class UsuariosService
             return response()->json([
                 'success'  => 204,
                 'title'    => 'El correo electronico existente',
-                'mensaje' => 'Ya existe un registro con el correo electronico escrito'
+                'mensaje'  => 'Ya existe un registro con el correo electronico escrito'
             ]);
         }
 
@@ -45,7 +45,7 @@ class UsuariosService
         return response()->json(
             [
                 'usuarios' => $usuario,
-                'mensaje' => 'Se obtuvo la informacion correctamente'
+                'mensaje'  => 'Se obtuvo la informacion correctamente'
             ]
         );
     }
@@ -107,7 +107,7 @@ class UsuariosService
 
         return response()->json([
             'usuarios' => $resultado,
-            'mensaje' => 'Inicio de sesión correctamente el usuario'
+            'mensaje'  => 'Inicio de sesión correctamente el usuario'
         ]);
     }
 }

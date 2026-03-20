@@ -33,7 +33,7 @@ class TiposServicioService
         return response()->json(
             [
                 'tiposServicio' => $tiposServicio,
-                'mensaje' => 'Se obtuvo la informacion de tipo Servicio'
+                'mensaje'       => 'Se obtuvo la informacion de tipo Servicio'
             ]
         );
     }
@@ -45,7 +45,7 @@ class TiposServicioService
         return response()->json(
             [
                 'tipoServicio' => $tipoServicio[0],
-                'mensaje' => 'Se obtuvo correctamente la informacion'
+                'mensaje'      => 'Se obtuvo correctamente la informacion'
             ]
         );
     }

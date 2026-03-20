@@ -32,7 +32,7 @@ class AreasService
 
         return response()->json(
             [
-                'areas' => $areas,
+                'areas'   => $areas,
                 'mensaje' => 'Se obtuvo la informacion de Areas',
             ]
         );
@@ -43,7 +43,7 @@ class AreasService
 
         return response()->json(
             [
-                'area' => $area[0],
+                'area'    => $area[0],
                 'mensaje' => 'Se obtuvo la informacion correcta'
             ]
         );
