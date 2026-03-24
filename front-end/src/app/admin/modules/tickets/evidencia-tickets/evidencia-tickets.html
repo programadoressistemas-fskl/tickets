@@ -1,0 +1,52 @@
+<div class="modal-body dashboard">
+    <div class="pagetitle">
+        <h4 class="t-bold">Agregar Evidencia Tickets</h4>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <form class="row g-3" autocomplete="off">
+
+                        <div class="col-lg-6">
+                            <label class="btn btn-primary">
+                                Subir imagen
+                                <input type="file" hidden multiple accept="image/*" (change)="onFileSelected($event)">
+                            </label>
+
+                            <div class="d-flex flex-wrap gap-3 mt-3">
+
+                                <div *ngFor="let img of images; let i = index" class="position-relative">
+
+                                    <img [src]="img" class="img-thumbnail" width="150">
+
+                                    <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0"
+                                        (click)="removeImage(i)">
+                                        ✖
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button *ngIf="pkTicket == null" class="btn btn-sm btn-primary">
+        Guardar
+    </button>
+
+    <button class="btn btn-sm btn-danger" (click)="cerrarModal()">
+        {{ cambiosForm || pkTicket != null ? 'Cancelar' : 'Cerrar' }}
+    </button>
+</div>

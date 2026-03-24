@@ -1,13 +1,19 @@
 import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { AppRoutes } from './app.routes';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AuthInterceptor } from './interceptors/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(AppRoutes),
-    importProvidersFrom(ModalModule.forRoot())
+    importProvidersFrom(ModalModule.forRoot()),
+
+    provideHttpClient(
+      withInterceptors([AuthInterceptor])
+    )
   ]
 };

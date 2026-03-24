@@ -4,6 +4,7 @@ import { UsuariosService } from '../../../services/api/usuarios/usuarios';
 import { ModalService } from '../../../services/modal/modal';
 import { RegistrarUsuario } from '../registrar-usuario/registrar-usuario';
 import { MessagesService } from '../../../services/messages/messages';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
 	selector: 'app-consulta-usuarios',
@@ -40,35 +41,59 @@ export class ConsultaUsuarios implements OnDestroy {
 	}
 
 	public async obtenerListaUsuarios(): Promise<any> {
-		return this.usuarios.obtenerListaUsuarios().toPromise().then(
-			respuesta => {
-				this.datosTabla = respuesta.usuarios;
-				this.ch.markForCheck();
-			}
-		);
+		try {
+			const respuesta = await firstValueFrom(this.usuarios.obtenerListaUsuarios());
+			this.datosTabla = respuesta.usuarios;
+			this.ch.markForCheck();
+		} catch (error: any) {
+			const respuesta = error.error || {
+				message: 'Error inesperado',
+				title: 'Error'
+			};
+
+			this.messages.mensajeGenerico(
+				respuesta.message,
+				'error',
+				respuesta.title
+			);
+		}
 	}
 
-protected cambiarStatus(usuario: any): void {
-    this.messages.mensajeConfirmacionCustom(
-        `¿Está seguro de ${usuario.activo ? 'inactivar' : 'activar'} el usuario?`,
-        'question',
-        `${usuario.activo ? 'Inactivar' : 'Activar'} usuario`
-    ).then(res => {
-        if (!res.isConfirmed) return;
+	protected cambiarStatus(usuario: any): void {
+		this.messages.mensajeConfirmacionCustom(
+			`¿Está seguro de ${usuario.activo ? 'inactivar' : 'activar'} el usuario?`,
+			'question',
+			`${usuario.activo ? 'Inactivar' : 'Activar'} usuario`
+		).then(res => {
+			if (!res.isConfirmed) return;
 
-        this.messages.mensajeEsperar();
+			this.messages.mensajeEsperar();
 
-        this.usuarios.cambiarStatusUsuario(usuario.id_usuario).subscribe(
-            respuesta => {
-				this.obtenerListaUsuarios().then(() => {
-					this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
-				});
-            }, error => {
-                this.messages.mensajeGenerico('error', 'error');
-            }
-        );
-    });
-} 
+			this.usuarios.cambiarStatusUsuario(usuario.id_usuario).subscribe(
+				respuesta => {
+					this.obtenerListaUsuarios().then(() => {
+						this.messages.mensajeGenerico(
+							respuesta.message, 
+							'success',
+							respuesta.title
+						);
+					});
+				},
+				error => {
+					const respuesta = error.error || {
+						message: 'Error inesperado',
+						title: 'Error'
+					};
+
+					this.messages.mensajeGenerico(
+						respuesta.message,
+						'error',
+						respuesta.title
+					);
+				}
+			);
+		});
+	}
 
 	public abrirModalRegistrarUsuario(pkUsuario: number): void {
 		const data: any = {
