@@ -8,14 +8,16 @@ use App\Http\Controllers\Admin\Tickets\TicketsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\Usuarios\UsuariosController;
 
-// Modulo Usuarios
+Route::middleware('static.token')->group(function () {
+    // Modulo Usuarios
+    Route::post('/usuarios/registrarUsuario', [UsuariosController::class, 'registrarUsuario']);
+    Route::post('/usuarios/login', [UsuariosController::class, 'login']);
+    Route::get('/usuarios/obtenerListaUsuarios', [UsuariosController::class, 'obtenerListaUsuarios']);
+    Route::get('/usuarios/obtenerDetalleUsuario/{pkUsuario}', [UsuariosController::class, 'obtenerDetalleUsuario']);
+    Route::put('/usuarios/actualizarUsuario', [UsuariosController::class, 'actualizarUsuario']);
+    Route::get('/usuarios/cambiarStatusUsuario/{id}', [UsuariosController::class, 'cambiarStatusUsuario']);
 
-Route::post('/usuarios/registrarUsuario', [UsuariosController::class, 'registrarUsuario']);
-Route::post('/usuarios/login', [UsuariosController::class, 'login']);
-Route::get('/usuarios/obtenerListaUsuarios', [UsuariosController::class, 'obtenerListaUsuarios']);
-Route::get('/usuarios/obtenerDetalleUsuario/{pkUsuario}', [UsuariosController::class, 'obtenerDetalleUsuario']);
-Route::put('/usuarios/actualizarUsuario', [UsuariosController::class, 'actualizarUsuario']);
-Route::get('/usuarios/cambiarStatusUsuario/{id}', [UsuariosController::class, 'cambiarStatusUsuario']);
+});
 
 // Areas 
 Route::post('/areas/registrarArea', [AreasController::class, 'registrarArea']);
