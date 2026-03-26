@@ -50,10 +50,10 @@ class TicketsService
         );
     }
 
-    public function registrarTicket($ticket)
+    public function registrarTicket($ticket, $files)
     {
 
-        $this->ticketsRepository->registrarTicket($ticket);
+        $this->ticketsRepository->registrarTicket($ticket, $files);
 
         return response()->json(
             [

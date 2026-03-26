@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class TicketsRepository
 {
-    public function registrarTicket($ticket)
+    public function registrarTicket($ticket, $files)
     {
         $registro = new TblTickets();
 
@@ -20,13 +20,29 @@ class TicketsRepository
         $registro->descripcion_problema = $ticket['descripcion_problema'];
         $registro->fecha_registro       = Carbon::now();
         $registro->save();
+
+        if ($files) {
+            foreach ($files as $file) {
+
+                $filename = time() . '_' . $file->getClientOriginalName();
+
+                $path = $file->storeAs('tickets', $filename, 'public');
+
+                DB::table('tbl_tickets_evidencia')->insert([
+                    'id_ticket'     => $registro->id_ticket,
+                    'url_evidencia' => $path
+                ]);
+            }
+        }
+
+        return $registro;
     }
 
     public function obtenerStatusTickets()
     {
         return DB::table('Cat_Status_Ticket')
-            ->get(); 
-    } 
+            ->get();
+    }
 
     public function obtenerListaGeneralTickets($pkArea, $pkStatus)
     {
@@ -46,8 +62,8 @@ class TicketsRepository
             ->join('cat_tipo_servicio', 'cat_tipo_servicio.id_tipo_servicio', 'tbl_tickets.id_tipo_servicio')
             ->join('Cat_Status_Ticket', 'Cat_Status_Ticket.id_status_ticket', 'tbl_tickets.id_status_ticket')
             ->where([
-            ['tbl_tickets.id_area', $pkArea],
-            ['tbl_tickets.id_status_ticket', $pkStatus]
+                ['tbl_tickets.id_area', $pkArea],
+                ['tbl_tickets.id_status_ticket', $pkStatus]
             ]);
         return $query->get();
     }
@@ -65,7 +81,9 @@ class TicketsRepository
             'fecha_registro',
             'fecha_inicio',
             'fecha_finalizacion',
-        );
+        )
+
+        ->where('id_usuario', $pkTicket);
         return $query->get();
     }
 

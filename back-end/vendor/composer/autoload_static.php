@@ -560,6 +560,7 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
         'App\\Http\\Controllers\\Admin\\Tickets\\TicketsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Tickets/TicketsController.php',
         'App\\Http\\Controllers\\Auth\\Usuarios\\UsuariosController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/Usuarios/UsuariosController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Middleware\\StaticTokenMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/StaticTokenMiddleware.php',
         'App\\Models\\CatAreas' => __DIR__ . '/../..' . '/app/Models/CatAreas.php',
         'App\\Models\\CatPlantas' => __DIR__ . '/../..' . '/app/Models/CatPlantas.php',
         'App\\Models\\CatTiposServicio' => __DIR__ . '/../..' . '/app/Models/CatTiposServicio.php',

@@ -106,8 +106,7 @@ public function validarUsuarioExistente($correo)
         return $usuario->activo;
     }
 
-    public function login($usuario)
-    {
+    public function login($usuario) {
         $usuarioEncontrado = TblUsuarios::where('correo_electronico', $usuario['correo_electronico'])
             ->first();
 

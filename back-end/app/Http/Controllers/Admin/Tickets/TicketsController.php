@@ -35,21 +35,22 @@ class TicketsController extends Controller
         }
     }
 
-    public function registrarTicket(Request $request)
-    {
+    public function registrarTicket(Request $request) {
         try {
-            return $this->ticketsService->registrarTicket($request->all());
+
+            $ticket = $request->all();
+            $files  = $request->file('images');
+
+            return $this->ticketsService->registrarTicket($ticket, $files);
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al registrar el Ticket');
             Log::alert($error);
-            return response()->json(
-                [
-                    'error' => $error,
-                    'mensaje' => 'Ocurrió un error interno'
-                ],
-                400
-            );
+
+            return response()->json([
+                'error' => $error,
+                'mensaje' => 'Ocurrió un error interno'
+            ], 400);
         }
     }
 

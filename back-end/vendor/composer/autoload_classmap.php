@@ -15,6 +15,7 @@ return array(
     'App\\Http\\Controllers\\Admin\\Tickets\\TicketsController' => $baseDir . '/app/Http/Controllers/Admin/Tickets/TicketsController.php',
     'App\\Http\\Controllers\\Auth\\Usuarios\\UsuariosController' => $baseDir . '/app/Http/Controllers/Auth/Usuarios/UsuariosController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Middleware\\StaticTokenMiddleware' => $baseDir . '/app/Http/Middleware/StaticTokenMiddleware.php',
     'App\\Models\\CatAreas' => $baseDir . '/app/Models/CatAreas.php',
     'App\\Models\\CatPlantas' => $baseDir . '/app/Models/CatPlantas.php',
     'App\\Models\\CatTiposServicio' => $baseDir . '/app/Models/CatTiposServicio.php',
