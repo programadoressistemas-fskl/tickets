@@ -1,27 +1,22 @@
 <div class="modal-body dashboard">
   <div class="pagetitle">
     <h4 class="t-bold">
-      {{ pkTicket ? 'Evidencias del Ticket' : 'Tickets' }}
+      {{ pkTicket == null ? 'Registrar' : 'Actualizar'}} ticket
     </h4>
+
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"
-            (click)="pkTicket = null"
-            style="cursor: pointer;">
+        <li class="breadcrumb-item" (click)="pkTicket = null" style="cursor: pointer;">
           Tickets
         </li>
 
-        <li class="breadcrumb-item active" *ngIf="!pkTicket">
-          Tickets
-        </li>
-
-        <li class="breadcrumb-item active"
-            *ngIf="pkTicket">
+        <li class="breadcrumb-item active" *ngIf="pkTicket">
           Evidencias
         </li>
 
-        <li class="breadcrumb-item"*ngIf="!pkTicket" (click)="pkTicket = 1"style="cursor: pointer;">
-          Evidencias </li>
+        <li class="breadcrumb-item" *ngIf="!pkTicket" (click)="pkTicket = 1" style="cursor: pointer;">
+          Evidencias
+        </li>
       </ol>
     </nav>
   </div>
@@ -41,6 +36,8 @@
                   <option *ngFor="let area of listaAreas" [value]="area.id_area">
                     {{ area.area }}
                   </option>
+                  <option style="display: none; visibility: hidden;" value="">Selecciona una opción
+                  </option>
                 </select>
               </div>
 
@@ -49,6 +46,8 @@
                 <select class="form-select form-select-sm" formControlName="id_planta">
                   <option *ngFor="let planta of listaPlantas" [value]="planta.id_planta">
                     {{ planta.planta }}
+                  </option>
+                  <option style="display: none; visibility: hidden;" value="">Selecciona una opción
                   </option>
                 </select>
               </div>
@@ -59,6 +58,8 @@
                   <option *ngFor="let turno of listaTurnos" [value]="turno.id_turno">
                     {{ turno.turno }}
                   </option>
+                  <option style="display: none; visibility: hidden;" value="">Selecciona una opción
+                  </option>
                 </select>
               </div>
 
@@ -68,14 +69,14 @@
                   <option *ngFor="let tipo of listatiposServicio" [value]="tipo.id_tipo_servicio">
                     {{ tipo.tipo_servicio }}
                   </option>
+                  <option style="display: none; visibility: hidden;" value="">Selecciona una opción
+                  </option>
                 </select>
               </div>
 
               <div class="col-lg-12">
                 <label class="form-label">Descripción:</label>
-                <textarea class="form-control form-control-sm"
-                          rows="3"
-                          formControlName="descripcion_problema">
+                <textarea class="form-control form-control-sm" rows="3" formControlName="descripcion_problema">
                 </textarea>
               </div>
 
@@ -90,31 +91,19 @@
 
   <div *ngIf="pkTicket">
 
-    <form class="row g-3" autocomplete="off">
+    <form class="row g-3 text-center" style="width: 100% !important;">
 
-      <div class="col-lg-6">
-        <label class="btn btn-primary">
+      <div class="col-lg-12">
+        <label class="btn btn-sm btn-primary">
           Subir imagen
-          <input type="file"
-                 hidden
-                 multiple
-                 accept="image/*"
-                 (change)="onFileSelected($event)">
+          <input type="file" hidden multiple accept="image/*" (change)="onFileSelected($event)">
         </label>
 
-        <div class="d-flex flex-wrap gap-3 mt-3">
-
-          <div *ngFor="let img of images; let i = index"
-               class="position-relative">
-
-            <img [src]="img"
-                 class="img-thumbnail"
-                 width="150">
-
-            <button type="button"
-                    class="btn btn-danger btn-sm position-absolute top-0 end-0"
-                    (click)="removeImage(i)">
-              ✖
+        <div class="row" style="margin-top: 20px;">
+          <div *ngFor="let img of images; let i = index" class="col-xxl-4 col-lg-6 col-12 position-relative">
+            <img [src]="img" style="width: 100% !important;">
+            <button type="button" class="btn btn-sm btn-danger btn-sm position-absolute top-0 end-0" (click)="removeImage(i)">
+              <i class="bi bi-x"></i>&nbsp;
             </button>
 
           </div>
@@ -130,14 +119,11 @@
 
 <div class="modal-footer">
 
-  <button *ngIf="!pkTicket"
-          class="btn btn-sm btn-primary"
-          (click)="registrarTicket()">
-    Registrar
+  <button class="btn btn-sm btn-primary" (click)="registrarTicket()">
+    {{ pkTicket ? 'Registrar' : 'Siguiente' }}
   </button>
 
-  <button class="btn btn-sm btn-danger"
-          (click)="cerrarModal()">
+  <button class="btn btn-sm btn-danger" (click)="cerrarModal()">
     {{ cambiosForm || pkTicket ? 'Cancelar' : 'Cerrar' }}
   </button>
 

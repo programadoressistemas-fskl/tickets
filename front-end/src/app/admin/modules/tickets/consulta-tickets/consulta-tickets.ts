@@ -5,6 +5,7 @@ import { MessagesService } from '../../../services/messages/messages';
 import { TiketsService } from '../../../services/api/tickets/tikets';
 import { AreasService } from '../../../services/api/areas/areas';
 import { FormsModule } from '@angular/forms';
+import { RegistrarTicket } from '../registrar-ticket/registrar-ticket';
 
 @Component({
 	selector: 'app-consulta-tickets',
@@ -96,6 +97,13 @@ export class ConsultaTickets implements OnDestroy {
 		)
 	}
 
+	public abrirModalRegistrarTickets(pkTicket: number): void {
+		const data: any = {
+			pkTicket: pkTicket
+		};
+
+		this.modal.abrirModalConComponente(RegistrarTicket, data, 'lg-modal');
+	}
 	ngOnDestroy(): void {
 		(this.intervalo);
 	}

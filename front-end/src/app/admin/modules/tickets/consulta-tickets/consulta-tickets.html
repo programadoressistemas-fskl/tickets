@@ -49,6 +49,7 @@
                         <th>Tipo Servicio</th>
                         <th>Descripción</th>
                         <th>Status</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,6 +60,10 @@
                         <td>{{ticket.descripcion_problema}}</td>
                         <td>{{ticket.status}}</td>
                         <td class="text-medium">
+                            <button class="btn btn-sm btn-outline-primary"
+                                (click)="abrirModalRegistrarTickets(ticket.id_ticket)">
+                                <i class="bi bi-pencil"></i>
+                            </button>
                         </td>
                     </tr>
                 </tbody>

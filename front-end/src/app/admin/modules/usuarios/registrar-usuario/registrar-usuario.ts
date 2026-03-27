@@ -61,7 +61,7 @@ export class RegistrarUsuario {
 			}
 		)
 	}
-
+	
 	public async obtenerDetalleUsuario(pkUsuario: number): Promise<any> {
 		return this.usuarios.obtenerDetalleUsuario(pkUsuario).toPromise().then(
 			respuesta => {
@@ -160,7 +160,6 @@ export class RegistrarUsuario {
 		).then(
 			res => {
 				if (!res.isConfirmed) return;
-
 				this.modal.cerrarModal();
 			});
 	}

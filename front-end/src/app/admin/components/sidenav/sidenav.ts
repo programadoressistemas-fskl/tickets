@@ -7,7 +7,6 @@ import { RegistrarPlanta } from '../../modules/catalogos/plantas/registrar-plant
 import { RegistrarTipoServicio } from '../../modules/catalogos/tipo-servicio/registrar-tipo-servicio/registrar-tipo-servicio';
 import { RegistrarTurno } from '../../modules/catalogos/turnos/registrar-turno/registrar-turno';
 import { RegistrarTicket } from '../../modules/tickets/registrar-ticket/registrar-ticket';
-import { EvidenciaTickets } from '../../modules/tickets/evidencia-tickets/evidencia-tickets';
 
 @Component({
 	selector: 'app-sidenav',
@@ -43,9 +42,5 @@ export class Sidenav {
 
 	public abrirModalRegistrarTickets(): void {
 		this.modal.abrirModalConComponente(RegistrarTicket, {}, 'md-modal');
-	}
-
-	public abrirModalEvidenciaTickets(): void {
-		this.modal.abrirModalConComponente(EvidenciaTickets, {}, 'md-modal');
 	}
 }
