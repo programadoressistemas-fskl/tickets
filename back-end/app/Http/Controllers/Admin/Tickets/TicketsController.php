@@ -35,7 +35,8 @@ class TicketsController extends Controller
         }
     }
 
-    public function registrarTicket(Request $request) {
+    public function registrarTicket(Request $request)
+    {
         try {
 
             $ticket = $request->all();
@@ -91,6 +92,41 @@ class TicketsController extends Controller
                 ],
                 500
             );
+        }
+    }
+
+    public function obtenerDetalleTicket($pkTicket)
+    {
+        try {
+            return $this->ticketsService->obtenerDetalleTicket($pkTicket);
+        } catch (\Throwable $error) {
+            Log::alert('*********************************************');
+            Log::alert('Error al obtener información de Ticket porPK');
+            Log::alert($error);
+
+            return response()->json(
+                [
+                    'error' => $error,
+                    'mensaje' => 'Ocurrió un error interno'
+                ],
+                500
+            );
+        }
+    }
+
+    public function actualizarTicket(Request $request)
+    {
+        try {
+            return $this->ticketsService->actualizarTicket($request->all());
+        } catch (\Throwable $error) {
+
+            Log::alert('*********************************************');
+            Log::alert('Error al actualizar usuario');
+            Log::alert($error->getMessage());
+
+            return response()->json([
+                'mensaje' => 'Ocurrió un error interno'
+            ], 500);
         }
     }
 }

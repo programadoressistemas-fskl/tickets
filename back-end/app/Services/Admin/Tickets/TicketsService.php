@@ -87,14 +87,16 @@ class TicketsService
         );
     }
 
-    public function obtenerDetalleTicketPorId($pkTickets)
+    public function obtenerDetalleTicket($pkTickets)
     {
-        $ticket =  $this->ticketsRepository->obtenerDetalleTicketPorId($pkTickets);
+        $ticket     = $this->ticketsRepository->obtenerDetalleTicket($pkTickets);
+        $evidencias = $this->ticketsRepository->obtenerEvidenciasTicket($pkTickets);
 
         return response()->json(
             [
-                'ticket'  => $ticket[0],
-                'mensaje' => 'Se obtuvo la informacion correcta'
+                'ticket'      => $ticket[0],
+                'evidencias'  => $evidencias,
+                'mensaje'     => 'Se obtuvo la informacion correcta'
             ]
         );
     }

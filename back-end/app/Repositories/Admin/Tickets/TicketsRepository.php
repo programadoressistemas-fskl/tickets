@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class TicketsRepository
 {
-    public function registrarTicket($ticket, $files)
-    {
+    public function registrarTicket($ticket, $files) {
         $registro = new TblTickets();
 
         $registro->id_area              = $ticket['id_area'];
@@ -38,14 +37,12 @@ class TicketsRepository
         return $registro;
     }
 
-    public function obtenerStatusTickets()
-    {
+    public function obtenerStatusTickets() {
         return DB::table('Cat_Status_Ticket')
             ->get();
     }
 
-    public function obtenerListaGeneralTickets($pkArea, $pkStatus)
-    {
+    public function obtenerListaGeneralTickets($pkArea, $pkStatus) {
         $query = TblTickets::select(
             'tbl_tickets.id_ticket',
             'cat_areas.area',
@@ -68,34 +65,38 @@ class TicketsRepository
         return $query->get();
     }
 
-    public function obtenerDetalleTicketPorId($pkTicket)
-    {
+    public function obtenerDetalleTicket($pkTicket) {
         $query = TblTickets::select(
-            'id_ticket',
-            'id_area',
-            'id_planta',
-            'id_turno',
-            'id_tipo_servicio',
-            'id_status_ticket',
-            'descripcion_problema',
-            'fecha_registro',
-            'fecha_inicio',
-            'fecha_finalizacion',
-        )
-
-        ->where('id_usuario', $pkTicket);
+                               'id_ticket',
+                               'id_area',
+                               'id_planta',
+                               'id_turno',
+                               'id_tipo_servicio',
+                               'id_status_ticket',
+                               'descripcion_problema',
+                               'fecha_registro',
+                               'fecha_inicio',
+                               'fecha_finalizacion'
+                           )
+                           ->where('tbl_tickets.id_ticket', $pkTicket);
         return $query->get();
     }
 
-    public function actualizarTicket($id, $ticket)
-    {
+    public function obtenerEvidenciasTicket ($pkTicket) {
+        $query = DB::table('tbl_tickets_evidencia')
+                   ->select('url_evidencia')
+                   ->where('id_ticket', $pkTicket);
+
+        return $query->pluck('url_evidencia');
+    }
+
+    public function actualizarTicket($id, $ticket) {
         $actualizar = TblTickets::findOrFail($id);
         $actualizar->ticket = $ticket['ticket'];
         $actualizar->save();
     }
 
-    public function cambiarStatusTicket($pkTicket, $status)
-    {
+    public function cambiarStatusTicket($pkTicket, $status) {
         $ticket = TblTickets::findOrFail($pkTicket);
 
         $ticket->id_status_ticket = $status;

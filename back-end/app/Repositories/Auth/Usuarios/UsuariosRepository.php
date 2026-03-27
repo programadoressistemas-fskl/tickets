@@ -77,7 +77,7 @@ public function validarUsuarioExistente($correo)
             'puesto',
             'fecha_registro',
             'activo'
-        )
+        ) 
             ->where('id_usuario', $pkUsuario);
 
         return $query->get();
