@@ -16,6 +16,13 @@ return Application::configure(basePath: dirname(__DIR__))
             'static.token' => \App\Http\Middleware\StaticTokenMiddleware::class,
         ]);
     })
+
+    // Sesiones
+    ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->alias([
+            'auth.token' => \App\Http\Middleware\AuthTokenMiddleware::class,
+        ]);
+    })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();

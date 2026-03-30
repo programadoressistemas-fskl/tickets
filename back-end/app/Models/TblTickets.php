@@ -19,10 +19,14 @@ class TblTickets extends Model
         'id_turno', 
         'id_tipo_servicio', 
         'id_status_ticket',
-        'descripcion_problema', 
-        'fecha_registro', 
+        'descripcion_problema',
+        'id_usuario_registro', 
+        'fecha_registro',
+        'id_usuario_inicio', 
         'fecha_inicio',
-        'fecha_finalizacion',
-        'id_status_ticket'
+        'id_usuario_cancelacion',
+        'fecha_cancelacion',
+        'id_usuario_finalizacion',
+        'fecha_finalizacion'
     ];
 }

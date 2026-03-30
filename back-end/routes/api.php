@@ -8,10 +8,9 @@ use App\Http\Controllers\Admin\Tickets\TicketsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\Usuarios\UsuariosController;
 
-Route::middleware('static.token')->group(function () {
-    // Modulo Usuarios
+Route::post('/usuarios/login', [UsuariosController::class, 'login']);
+Route::middleware(['auth.token'])->group(function () {
     Route::post('/usuarios/registrarUsuario', [UsuariosController::class, 'registrarUsuario']);
-    Route::post('/usuarios/login', [UsuariosController::class, 'login']);
     Route::get('/usuarios/obtenerListaUsuarios', [UsuariosController::class, 'obtenerListaUsuarios']);
     Route::get('/usuarios/obtenerDetalleUsuario/{pkUsuario}', [UsuariosController::class, 'obtenerDetalleUsuario']);
     Route::put('/usuarios/actualizarUsuario', [UsuariosController::class, 'actualizarUsuario']);

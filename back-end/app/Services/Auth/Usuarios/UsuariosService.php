@@ -3,7 +3,8 @@
 namespace App\Services\Auth\Usuarios;
 
 use App\Repositories\Auth\Usuarios\UsuariosRepository;
-
+use Illuminate\Support\Str;
+use App\Models\TblSessions;
 
 class UsuariosService
 {
@@ -74,13 +75,14 @@ class UsuariosService
         );
     }
 
-    public function cambiarStatusUsuario($id) {
+    public function cambiarStatusUsuario($id)
+    {
         $status = $this->usuariosRepository->cambiarStatusUsuario($id);
 
         return response()->json(
             [
-                'title'   => ($status ? 'Activar' : 'Inactivar').' usuario',
-                'mensaje' => 'Se '.($status ? 'activo' : 'inactivo').' el usuario con éxito'
+                'title'   => ($status ? 'Activar' : 'Inactivar') . ' usuario',
+                'mensaje' => 'Se ' . ($status ? 'activo' : 'inactivo') . ' el usuario con éxito'
             ]
         );
     }
@@ -105,9 +107,17 @@ class UsuariosService
             ]);
         }
 
+        $token = Str::random(60);
+
+        TblSessions::create([
+            'id_usuario' => $resultado->id_usuario,
+            'token'      => hash('sha256', $token) 
+        ]);
+
         return response()->json([
             'usuarios' => $resultado,
-            'mensaje'  => 'Inicio de sesión correctamente el usuario'
+            'token'    => $token,
+            'mensaje'  => 'Inicio de sesión correctamente'
         ]);
     }
 }
