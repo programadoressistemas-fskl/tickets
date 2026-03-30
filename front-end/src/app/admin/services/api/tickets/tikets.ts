@@ -31,7 +31,7 @@ export class TiketsService {
     return this.http.get<any>(`${api}/tickets/obtenerDetalleTickets/${$pkTicket}`,);
   }
 
-  public actualizarTicket(ticket: any): Observable<any> {
-    return this.http.put<any>(`${api}/usuarios/actualizarUsuario`, ticket);
+  public actualizarTicket(formData: FormData): Observable<any> {
+    return this.http.post<any>(`${api}/tickets/actualizarTicket`, formData);
   }
 }

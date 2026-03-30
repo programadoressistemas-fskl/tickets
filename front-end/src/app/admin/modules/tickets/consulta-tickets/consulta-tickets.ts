@@ -84,7 +84,7 @@ export class ConsultaTickets implements OnDestroy {
 	}
 
 	protected async obtenerListaGeneralTickets(): Promise<any> {
-		const data: any = {
+		const data:   any = {
 			pkArea:   this.id_area,
 			pkStatus: this.id_status
 		};
