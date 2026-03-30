@@ -168,8 +168,6 @@ export class RegistrarTicket implements OnInit {
   }
 
   protected actualizarTicket(): void {
-
-    // 🔥 VALIDACIÓN DE ID (CLAVE PARA EVITAR ERROR 500)
     if (!this.pkTicket) {
       this.messages.mensajeGenerico(
         'No existe el ID del ticket para actualizar.',
@@ -189,72 +187,58 @@ export class RegistrarTicket implements OnInit {
 
     this.messages.mensajeConfirmacionCustom(
       '¿Está seguro de continuar con la actualización del ticket?',
-      'question',
-      'Actualizar ticket'
-    ).then(res => {
+      'question', 'Actualizar ticket').then(
+        res => {
 
-      if (!res.isConfirmed) return;
+          if (!res.isConfirmed) return;
 
-      this.messages.mensajeEsperar();
+          this.messages.mensajeEsperar();
 
-      const formData = new FormData();
+          const formData = new FormData();
 
-      // ✅ Campos del formulario
-      Object.keys(this.formTicket.value).forEach(key => {
-        formData.append(key, this.formTicket.value[key]);
-      });
-
-      // ✅ ID (YA VALIDADO)
-      formData.append('pkTicket', String(this.pkTicket));
-
-      console.log('PK TICKET:', this.pkTicket);
-      console.log('ENVIANDO FORM DATA:', this.formTicket.value);
-
-      // ✅ Imágenes
-      if (this.files && this.files.length > 0) {
-        this.files.forEach(file => {
-          formData.append('images[]', file);
-        });
-      }
-
-      // ✅ Request
-      this.tickets.actualizarTicket(formData).subscribe({
-        next: (respuesta: any) => {
-
-          console.log('RESPUESTA BACKEND:', respuesta);
-
-          const id = respuesta?.pkTicket || this.pkTicket;
-
-          if (!id) {
-            this.messages.mensajeGenerico(
-              'No se pudo obtener el ID del ticket.',
-              'error'
-            );
-            return;
-          }
-
-          this.obtenerDetalleTickets(id).then(() => {
-            this.messages.mensajeGenerico(
-              respuesta.mensajes,
-              'success',
-              respuesta.title
-            );
+          Object.keys(this.formTicket.value).forEach(key => {
+            formData.append(key, this.formTicket.value[key]);
           });
 
-        },
+          formData.append('pkTicket', String(this.pkTicket));
 
-        error: (error) => {
-          console.error('ERROR BACKEND:', error);
+          if (this.files && this.files.length > 0) {
+            this.files.forEach(file => {
+              formData.append('images[]', file);
+            });
+          }
 
-          this.messages.mensajeGenerico(
-            'Ocurrió un error al actualizar el ticket.',
-            'error'
-          );
-        }
+          this.tickets.actualizarTicket(formData).subscribe({
+            next: (respuesta: any) => {
+              const id = respuesta?.pkTicket || this.pkTicket;
+              if (!id) {
+                this.messages.mensajeGenerico(
+                  'No se pudo obtener el ID del ticket.',
+                  'error'
+                );
+                return;
+              }
 
-      });
+              this.obtenerDetalleTickets(id).then(() => {
+                this.messages.mensajeGenerico(
+                  respuesta.mensajes,
+                  'success',
+                  respuesta.title
+                );
+              });
 
-    });
+            },
+
+            error: (error) => {
+              this.messages.mensajeGenerico(
+                'Ocurrió un error al actualizar el ticket.',
+                'error'
+              );
+            }
+
+          });
+
+        });
   }
 
   get cambiosForm(): boolean {

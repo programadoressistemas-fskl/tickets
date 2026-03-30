@@ -4,7 +4,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { AppRoutes } from './app.routes';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { AuthInterceptor } from './interceptors/auth-interceptor';
+import { authInterceptor } from './interceptors/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(ModalModule.forRoot()),
 
     provideHttpClient(
-      withInterceptors([AuthInterceptor])
+      withInterceptors([authInterceptor])
     )
   ]
 };
