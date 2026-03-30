@@ -89,7 +89,7 @@ class TicketsService
 
     public function obtenerDetalleTicket($pkTickets)
     {
-        $ticket     = $this->ticketsRepository->obtenerDetalleTicket($pkTickets);
+        $ticket = $this->ticketsRepository->obtenerDetalleTicket($pkTickets);
         $evidencias = $this->ticketsRepository->obtenerEvidenciasTicket($pkTickets);
 
         return response()->json(
@@ -103,14 +103,28 @@ class TicketsService
 
     public function actualizarTicket($ticket)
     {
-        $this->ticketsRepository->actualizarTicket($ticket['pkTicket'], $ticket['ticket']);
+        $id = $ticket['pkTicket'];
 
-        return response()->json(
-            [
-                'title'    => 'Actualización exitosa',
-                'mensajes' => 'Se actualizo correctamente el ticket'
-            ]
-        );
+        $this->ticketsRepository->actualizarTicket($id, $ticket);
+
+        if (request()->hasFile('images')) {
+
+            $rutas = [];
+
+            foreach (request()->file('images') as $file) {
+
+                $ruta = $file->store('tickets', 'public'); 
+                $rutas[] = $ruta;
+            }
+
+            $this->ticketsRepository->actualizarEvidencias($id, $rutas);
+        }
+
+        return response()->json([
+            'title'    => 'Actualización exitosa',
+            'mensajes' => 'Se actualizó correctamente el ticket',
+            'pkTicket' => $id
+        ]);
     }
 
 

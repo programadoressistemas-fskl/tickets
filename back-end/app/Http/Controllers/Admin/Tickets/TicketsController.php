@@ -117,11 +117,14 @@ class TicketsController extends Controller
     public function actualizarTicket(Request $request)
     {
         try {
-            return $this->ticketsService->actualizarTicket($request->all());
+
+            $data = $request->all();
+        
+            return $this->ticketsService->actualizarTicket($data);
         } catch (\Throwable $error) {
 
             Log::alert('*********************************************');
-            Log::alert('Error al actualizar usuario');
+            Log::alert('Error al actualizar ticket');
             Log::alert($error->getMessage());
 
             return response()->json([
