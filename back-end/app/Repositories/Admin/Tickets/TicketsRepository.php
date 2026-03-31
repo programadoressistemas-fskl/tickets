@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Admin\Tickets;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\TblTickets;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -11,14 +13,22 @@ class TicketsRepository
     public function registrarTicket($ticket, $files)
     {
         $registro = new TblTickets();
+        $userId = request()->id_usuario_auth;
 
-        $registro->id_area              = $ticket['id_area'];
-        $registro->id_planta            = $ticket['id_planta'];
-        $registro->id_turno             = $ticket['id_turno'];
-        $registro->id_tipo_servicio     = $ticket['id_tipo_servicio'];
-        $registro->id_status_ticket     = 1;
-        $registro->descripcion_problema = $ticket['descripcion_problema'];
-        $registro->fecha_registro       = Carbon::now();
+        $registro->id_area                 = $ticket['id_area'];
+        $registro->id_planta               = $ticket['id_planta'];
+        $registro->id_turno                = $ticket['id_turno'];
+        $registro->id_tipo_servicio        = $ticket['id_tipo_servicio'];
+        $registro->id_status_ticket        = 1;
+        $registro->descripcion_problema    = $ticket['descripcion_problema'];
+        $registro->id_usuario_registro     = $userId;
+        $registro->fecha_registro          = Carbon::now();
+        $registro->id_usuario_inicio       = 1;
+        $registro->fecha_inicio            = Carbon::now();
+        $registro->id_usuario_cancelacion  = 1;
+        $registro->fecha_cancelacion       = Carbon::now();
+        $registro->id_usuario_finalizacion = 1;
+        $registro->fecha_finalizacion      = Carbon::now();
         $registro->save();
 
         if ($files) {
