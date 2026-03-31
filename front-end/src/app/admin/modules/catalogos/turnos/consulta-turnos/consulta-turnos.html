@@ -26,6 +26,7 @@
             <table class="table table-striped table-hover text-center">
                 <thead>
                     <tr>
+                        <th>Folio</th>
                         <th>Turno</th>
                         <th>Activo</th>
                         <th>Acciones</th>
@@ -33,6 +34,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let turno of datosTabla">
+                        <td>{{turno.folio}}</td>
                         <td>{{turno.turno}}</td>
                         <td>{{turno.estado}}</td>
                         <td class="text-medium">
