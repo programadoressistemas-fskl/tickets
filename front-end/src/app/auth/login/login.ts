@@ -5,6 +5,7 @@ import { LoginService } from '../services/login/login';
 import { MessagesService } from '../../admin/services/messages/messages';
 import { Router } from '@angular/router';
 
+
 @Component({
 	selector: 'app-login',
 	standalone: true,
@@ -29,15 +30,8 @@ export class Login implements OnInit {
 
 	private crearFormLogin(): void {
 		this.formLogin = this.fb.group({
-			correo: [null, [
-				Validators.required,
-				Validators.email,
-				Validators.pattern('[a-zA-Zá-úÁ-Ú0-9 .,-_:@#$%&+{}()?¿!¡\n]*')
-			]],
-			password: [null, [
-				Validators.required,
-				Validators.pattern('[a-zA-Zá-úÁ-Ú0-9 .,-_:@#$%&+{}()?¿!¡\n]*')
-			]]
+			correo:   [null, [Validators.required,Validators.email,Validators.pattern('[a-zA-Zá-úÁ-Ú0-9 .,-_:@#$%&+{}()?¿!¡\n]*')]],
+			password: [null, [Validators.required,Validators.pattern('[a-zA-Zá-úÁ-Ú0-9 .,-_:@#$%&+{}()?¿!¡\n]*')]]
 		});
 	}
 
@@ -71,9 +65,8 @@ export class Login implements OnInit {
 					return;
 				}
 
-				// 🔐 GUARDAR TOKEN (CLAVE)
 				if (respuesta.token) {
-					localStorage.setItem('token', respuesta.token);
+					localStorage.setItem('token_tickets_faske', respuesta.token);
 				}
 
 				this.messages.cerrarMensajes();

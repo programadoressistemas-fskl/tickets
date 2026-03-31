@@ -52,6 +52,7 @@ export class RegistrarTicket implements OnInit {
       id_turno: ['', Validators.required],
       id_tipo_servicio: ['', Validators.required],
       descripcion_problema: [null, [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$')]]
+      
     });
   }
 
