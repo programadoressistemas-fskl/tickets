@@ -26,6 +26,7 @@
             <table class="table table-striped table-hover text-center">
                 <thead>
                     <tr>
+                        <th>Folio</th>
                         <th>Planta</th>
                         <th>Abrev</th>
                         <th>Direccion</th>
@@ -35,6 +36,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let planta of datosTabla">
+                        <td>{{planta.folio}}</td>
                         <td>{{planta.planta}}</td>
                         <td>{{planta.abrev}}</td>
                         <td>{{planta.direccion}}</td>
