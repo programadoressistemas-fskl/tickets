@@ -20,7 +20,7 @@ class AreasRepository
     public function obtenerListaAreas()
     {
         $query = CatAreas::select(
-            'id_area',
+            DB::raw("CONCAT('tk-', cat_areas.id_area) as folio"),
             'area',
             'activo',
             DB::raw("

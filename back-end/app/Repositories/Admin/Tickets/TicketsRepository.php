@@ -13,7 +13,7 @@ class TicketsRepository
     public function registrarTicket($ticket, $files)
     {
         $registro = new TblTickets();
-        $userId = request()->id_usuario_auth;
+        $userId   = request()->id_usuario_auth;
 
         $registro->id_area                 = $ticket['id_area'];
         $registro->id_planta               = $ticket['id_planta'];
@@ -57,7 +57,7 @@ class TicketsRepository
     public function obtenerListaGeneralTickets($pkArea, $pkStatus)
     {
         $query = TblTickets::select(
-            'tbl_tickets.id_ticket',
+            DB::raw("CONCAT('tk-', tbl_tickets.id_ticket) as folio"),
             'cat_areas.area',
             'cat_plantas.planta',
             'cat_tipo_servicio.tipo_servicio',

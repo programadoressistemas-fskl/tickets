@@ -41,7 +41,7 @@ public function validarUsuarioExistente($correo)
     public function obtenerListaUsuarios()
     {
         $query = TblUsuarios::select(
-                                'id_usuario',
+                                DB::raw("CONCAT('tk-', tbl_usuarios.id_usuario) as folio"),
                                 'nombre',
                                 'a_paterno',
                                 'a_materno',
@@ -66,17 +66,17 @@ public function validarUsuarioExistente($correo)
     public function obtenerDetalleUsuario($pkUsuario)
     {
         $query = TblUsuarios::select(
-            'id_usuario',
-            'nombre',
-            'a_paterno',
-            'a_materno',
-            'numero_telefono',
-            'correo_electronico',
-            'password',
-            'id_area',
-            'puesto',
-            'fecha_registro',
-            'activo'
+                                'id_usuario',
+                                'nombre',
+                                'a_paterno',
+                                'a_materno',
+                                'numero_telefono',
+                                'correo_electronico',
+                                'password',
+                                'id_area',
+                                'puesto',
+                                'fecha_registro',
+                                'activo'
         ) 
             ->where('id_usuario', $pkUsuario);
 
