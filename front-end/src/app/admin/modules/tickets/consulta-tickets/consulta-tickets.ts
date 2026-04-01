@@ -105,6 +105,6 @@ export class ConsultaTickets implements OnDestroy {
 		this.modal.abrirModalConComponente(RegistrarTicket, data, 'lg-modal');
 	}
 	ngOnDestroy(): void {
-		(this.intervalo);
+		clearInterval(this.intervalo);
 	}
 }

@@ -7,7 +7,7 @@ import { ConsultaPlantas } from './admin/modules/catalogos/plantas/consulta-plan
 import { ConsultaTiposServicio } from './admin/modules/catalogos/tipo-servicio/consulta-tipos-servicio/consulta-tipos-servicio';
 import { ConsultaTurnos } from './admin/modules/catalogos/turnos/consulta-turnos/consulta-turnos';
 import { ConsultaTickets } from './admin/modules/tickets/consulta-tickets/consulta-tickets';
-
+import { AuthGuard } from '../app/guards/admin-guard-guard';
 export const AppRoutes: Routes = [
 	{
 		path: 'login',
@@ -16,6 +16,8 @@ export const AppRoutes: Routes = [
 	{
 		path: '',
 		component: Home,
+		canActivate: [AuthGuard],
+		canActivateChild: [AuthGuard],
 		children: [
 			{
 				path: 'consulta-usuarios',
