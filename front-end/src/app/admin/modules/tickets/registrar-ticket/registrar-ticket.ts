@@ -58,7 +58,6 @@ export class RegistrarTicket implements OnInit {
 
   public async obtenerDetalleTickets(pkTicket: number): Promise<void> {
     try {
-
       const respuesta: any = await this.tickets.obtenerDetalleTickets(pkTicket).toPromise();
 
       if (!respuesta || !respuesta.ticket) return;
@@ -169,25 +168,15 @@ export class RegistrarTicket implements OnInit {
   }
 
   protected actualizarTicket(): void {
-    if (!this.pkTicket) {
-      this.messages.mensajeGenerico(
-        'No existe el ID del ticket para actualizar.',
-        'error'
-      );
-      return;
-    }
 
     if (this.formTicket.invalid) {
-      this.messages.mensajeGenerico(
-        'Aún hay campos vacíos o que no cumplen con la estructura correcta.',
-        'info',
-        'Los campos requeridos están marcados con un *'
+      this.messages.mensajeGenerico( 'Aún hay campos vacíos o que no cumplen con la estructura correcta.',
+        'info', 'Los campos requeridos están marcados con un *'
       );
       return;
     }
 
-    this.messages.mensajeConfirmacionCustom(
-      '¿Está seguro de continuar con la actualización del ticket?',
+    this.messages.mensajeConfirmacionCustom('¿Está seguro de continuar con la actualización del ticket?',
       'question', 'Actualizar ticket').then(
         res => {
 
@@ -196,7 +185,7 @@ export class RegistrarTicket implements OnInit {
           this.messages.mensajeEsperar();
 
           const formData = new FormData();
-
+ 
           Object.keys(this.formTicket.value).forEach(key => {
             formData.append(key, this.formTicket.value[key]);
           });
