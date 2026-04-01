@@ -122,7 +122,6 @@ class TicketsRepository {
             ->delete();
 
         foreach ($evidencias as $url_evidencia) {
-
             DB::table('tbl_tickets_evidencia')->insert([
                 'id_ticket'     => $id_ticket,
                 'url_evidencia' => $url_evidencia

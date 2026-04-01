@@ -113,7 +113,6 @@ class TicketsService
             $rutas = [];
 
             foreach (request()->file('images') as $file) {
-
                 $ruta = $file->store('tickets', 'public');
                 $rutas[] = $ruta;
             }
