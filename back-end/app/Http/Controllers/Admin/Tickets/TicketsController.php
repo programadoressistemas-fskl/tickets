@@ -76,8 +76,8 @@ class TicketsController extends Controller
     public function obtenerListaGeneralTickets(Request $request)
     {
         try {
-            $pkArea = $request->pkArea;
-            $pkStatus = $request->pkStatus;
+            $pkArea = $request->all()['pkArea'];
+            $pkStatus = $request->all()['pkStatus'];
 
             return $this->ticketsService->obtenerListaGeneralTickets($pkArea, $pkStatus);
         } catch (\Throwable $error) {

@@ -20,7 +20,7 @@ class PlantasRepository
 
     public function obtenerListaPlantas() {
         $query = CatPlantas::select(
-                                DB::raw("CONCAT('TK-', cat_plantas.id_planta) as folio"),
+                                'id_planta',
                                 'planta',
                                 'abrev',
                                 'direccion',

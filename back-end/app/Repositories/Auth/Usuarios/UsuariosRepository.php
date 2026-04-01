@@ -41,7 +41,7 @@ public function validarUsuarioExistente($correo)
     public function obtenerListaUsuarios()
     {
         $query = TblUsuarios::select(
-                                DB::raw("CONCAT('tk-', tbl_usuarios.id_usuario) as folio"),
+                                'id_usuario',
                                 'nombre',
                                 'a_paterno',
                                 'a_materno',

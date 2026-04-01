@@ -18,7 +18,7 @@ class TurnosRepository
 
     public function obtenerListaTurnos() {
         $query = CatTurnos::select(
-                              DB::raw("CONCAT('TK-', cat_turnos.id_turno) as folio"),
+                              'id_turno',
                               'turno',
                               'activo',
                               DB::raw("

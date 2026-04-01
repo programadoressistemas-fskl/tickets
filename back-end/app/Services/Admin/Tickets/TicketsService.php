@@ -2,11 +2,13 @@
 
 namespace App\Services\Admin\Tickets;
 
+use Illuminate\Http\Request;
 use App\Repositories\Admin\Catalogos\AreasRepository;
 use App\Repositories\Admin\Catalogos\PlantasRepository;
 use App\Repositories\Admin\Catalogos\TiposServicioRepository;
 use App\Repositories\Admin\Catalogos\TurnosRepository;
 use App\Repositories\Admin\Tickets\TicketsRepository;
+use Illuminate\Support\Facades\Log;
 
 class TicketsService
 {
@@ -75,16 +77,15 @@ class TicketsService
         );
     }
 
+
     public function obtenerListaGeneralTickets($pkArea, $pkStatus)
     {
         $tickets = $this->ticketsRepository->obtenerListaGeneralTickets($pkArea, $pkStatus);
 
-        return response()->json(
-            [
-                'tickets' => $tickets,
-                'mensaje' => 'Se obtuvo la informacion de tickets',
-            ]
-        );
+        return response()->json([
+            'tickets' => $tickets,
+            'mensaje' => 'Se obtuvo la informacion de tickets',
+        ]);
     }
 
     public function obtenerDetalleTicket($pkTickets)
@@ -113,7 +114,7 @@ class TicketsService
 
             foreach (request()->file('images') as $file) {
 
-                $ruta = $file->store('tickets', 'public'); 
+                $ruta = $file->store('tickets', 'public');
                 $rutas[] = $ruta;
             }
 
