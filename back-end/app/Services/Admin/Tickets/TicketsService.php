@@ -63,7 +63,18 @@ class TicketsService
                 'title'   => 'Registro exitoso'
             ]
         );
-    }
+    } 
+
+    public function cancelarTicket($id_ticket) {
+        $tickets = $this->ticketsRepository->cancelarTicket($id_ticket);
+
+        return response()->json(
+            [
+                'tickets' => $tickets,
+                'mensaje' => 'Se ha cancelado con exito el ticket'
+            ]
+        );
+    } 
 
     public function obtenerStatusTickets()
     {
@@ -125,7 +136,8 @@ class TicketsService
             'mensajes' => 'Se actualizó correctamente el ticket',
             'pkTicket' => $id
         ]);
-    }
+    } 
+
 
 
     public function cambiarStatusTicket($pkTicket, $status)

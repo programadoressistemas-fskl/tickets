@@ -55,6 +55,28 @@ class TicketsController extends Controller
         }
     }
 
+    public function cancelarTicket($id_ticket)
+    {
+        try {
+
+            $ticket = $this->ticketsService->cancelarTicket($id_ticket);
+
+            return response()->json([
+                'ticket' => $ticket,
+                'mensaje' => 'Se ha cancelado con éxito el ticket'
+            ]);
+        } catch (\Throwable $error) {
+
+            Log::alert('*********************************************');
+            Log::alert('Error al cancelar ticket');
+            Log::alert($error->getMessage());
+
+            return response()->json([
+                'mensaje' => $error->getMessage()
+            ], 400);
+        }
+    }
+
     public function obtenerStatusTickets()
     {
         try {
@@ -119,7 +141,7 @@ class TicketsController extends Controller
         try {
 
             $data = $request->all();
-        
+
             return $this->ticketsService->actualizarTicket($data);
         } catch (\Throwable $error) {
 

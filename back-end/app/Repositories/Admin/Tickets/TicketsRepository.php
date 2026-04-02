@@ -9,9 +9,10 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class TicketsRepository {
-    public function registrarTicket($ticket, $files)
+class TicketsRepository
 {
+    public function registrarTicket($ticket, $files)
+    {
         $registro = new TblTickets();
         $userId   = request()->id_usuario_auth;
 
@@ -42,6 +43,15 @@ class TicketsRepository {
         return $registro;
     }
 
+    public function cancelarTicket($id_ticket) {
+        $ticket = TblTickets::findOrFail($id_ticket);
+
+        $ticket->fecha_cancelacion = Carbon::now();
+        $ticket->save();
+
+        return $ticket;
+    }
+
     public function obtenerStatusTickets()
     {
         return DB::table('Cat_Status_Ticket')
@@ -51,25 +61,25 @@ class TicketsRepository {
     public function obtenerListaGeneralTickets($pkArea, $pkStatus)
     {
         $query = TblTickets::select(
-                               DB::raw("CONCAT('tk-', tbl_tickets.id_ticket) as folio"),
-                               'tbl_tickets.id_ticket',
-                               'cat_areas.area',
-                               'cat_plantas.planta',
-                               'cat_tipo_servicio.tipo_servicio',
-                               'Cat_Status_Ticket.status',
-                               'tbl_tickets.descripcion_problema',
-                               'tbl_tickets.fecha_registro',
-                               'tbl_tickets.fecha_inicio',
-                               'tbl_tickets.fecha_finalizacion'
-                           )
-                           ->join('cat_areas',         'cat_areas.id_area',                  'tbl_tickets.id_area')
-                           ->join('cat_plantas',       'cat_plantas.id_planta',              'tbl_tickets.id_planta')
-                           ->join('cat_tipo_servicio', 'cat_tipo_servicio.id_tipo_servicio', 'tbl_tickets.id_tipo_servicio')
-                           ->join('Cat_Status_Ticket', 'Cat_Status_Ticket.id_status_ticket', 'tbl_tickets.id_status_ticket')
-                           ->where([
-                               ['tbl_tickets.id_area', $pkArea],
-                               ['tbl_tickets.id_status_ticket', $pkStatus]
-                           ]);
+            DB::raw("CONCAT('tk-', tbl_tickets.id_ticket) as folio"),
+            'tbl_tickets.id_ticket',
+            'cat_areas.area',
+            'cat_plantas.planta',
+            'cat_tipo_servicio.tipo_servicio',
+            'Cat_Status_Ticket.status',
+            'tbl_tickets.descripcion_problema',
+            'tbl_tickets.fecha_registro',
+            'tbl_tickets.fecha_inicio',
+            'tbl_tickets.fecha_finalizacion'
+        )
+            ->join('cat_areas',         'cat_areas.id_area',                  'tbl_tickets.id_area')
+            ->join('cat_plantas',       'cat_plantas.id_planta',              'tbl_tickets.id_planta')
+            ->join('cat_tipo_servicio', 'cat_tipo_servicio.id_tipo_servicio', 'tbl_tickets.id_tipo_servicio')
+            ->join('Cat_Status_Ticket', 'Cat_Status_Ticket.id_status_ticket', 'tbl_tickets.id_status_ticket')
+            ->where([
+                ['tbl_tickets.id_area', $pkArea],
+                ['tbl_tickets.id_status_ticket', $pkStatus]
+            ]);
 
         return $query->get();
     }
@@ -77,16 +87,16 @@ class TicketsRepository {
     public function obtenerDetalleTicket($pkTicket)
     {
         $query = TblTickets::select(
-                               'id_ticket',
-                               'id_area',
-                               'id_planta',
-                               'id_turno',
-                               'id_tipo_servicio',
-                               'id_status_ticket',
-                               'descripcion_problema',
-                               'fecha_registro',
-                               'fecha_inicio',
-                               'fecha_finalizacion'
+            'id_ticket',
+            'id_area',
+            'id_planta',
+            'id_turno',
+            'id_tipo_servicio',
+            'id_status_ticket',
+            'descripcion_problema',
+            'fecha_registro',
+            'fecha_inicio',
+            'fecha_finalizacion'
         )
             ->where('tbl_tickets.id_ticket', $pkTicket);
         return $query->get();
