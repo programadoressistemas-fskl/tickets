@@ -111,6 +111,17 @@ class TicketsService
                 'mensaje'     => 'Se obtuvo la informacion correcta'
             ]
         );
+    } 
+
+    public function eliminarEvidenciaTicket($id) {
+        $evidencia = $this->ticketsRepository->eliminarEvidenciaTicket($id);
+
+        return response()->json(
+            [
+                'evidencias' => $evidencia,
+                'mensaje'    => 'Evidencia eliminada correctamente'
+            ]
+        );
     }
 
     public function actualizarTicket($ticket)

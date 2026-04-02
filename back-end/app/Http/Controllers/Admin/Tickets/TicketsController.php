@@ -134,6 +134,27 @@ class TicketsController extends Controller
                 500
             );
         }
+    } 
+
+        public function eliminarEvidenciaTicket($id_ticket_evidencia) {
+        try {
+
+            $ticket = $this->ticketsService->eliminarEvidenciaTicket($id_ticket_evidencia);
+
+            return response()->json([
+                'ticket' => $ticket,
+                'mensaje' => 'Se ha eliminado con éxito la evidencia'
+            ]);
+        } catch (\Throwable $error) {
+
+            Log::alert('*********************************************');
+            Log::alert('Error al eliminar evidencia');
+            Log::alert($error->getMessage());
+
+            return response()->json([
+                'mensaje' => $error->getMessage()
+            ], 400);
+        }
     }
 
     public function actualizarTicket(Request $request)

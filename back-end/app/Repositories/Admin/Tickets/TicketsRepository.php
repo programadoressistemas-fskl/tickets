@@ -43,7 +43,8 @@ class TicketsRepository
         return $registro;
     }
 
-    public function cancelarTicket($id_ticket) {
+    public function cancelarTicket($id_ticket)
+    {
         $ticket = TblTickets::findOrFail($id_ticket);
 
         $ticket->fecha_cancelacion = Carbon::now();
@@ -105,11 +106,21 @@ class TicketsRepository
     public function obtenerEvidenciasTicket($pkTicket)
     {
         $query = DB::table('tbl_tickets_evidencia')
-            ->select('url_evidencia')
+            ->select(
+                'id_ticket_evidencia',
+                DB::raw('CONCAT("http://localhost:8000/storage/", url_evidencia) AS url_evidencia')
+            )
             ->where('id_ticket', $pkTicket);
 
-        return $query->pluck('url_evidencia');
+        return $query->get();
     }
+
+    public function eliminarEvidenciaTicket($id_ticket_evidencia)
+    {
+        DB::table('tbl_tickets_evidencia')
+          ->where('id_ticket_evidencia', $id_ticket_evidencia)
+          ->delete();
+    } 
 
     public function actualizarTicket($id, $ticket)
     {
