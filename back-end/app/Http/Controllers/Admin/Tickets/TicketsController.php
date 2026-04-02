@@ -139,33 +139,23 @@ class TicketsController extends Controller
         public function eliminarEvidenciaTicket($id_ticket_evidencia) {
         try {
 
-            $ticket = $this->ticketsService->eliminarEvidenciaTicket($id_ticket_evidencia);
-
-            return response()->json([
-                'ticket' => $ticket,
-                'mensaje' => 'Se ha eliminado con éxito la evidencia'
-            ]);
+            return $this->ticketsService->eliminarEvidenciaTicket($id_ticket_evidencia);
         } catch (\Throwable $error) {
-
             Log::alert('*********************************************');
-            Log::alert('Error al eliminar evidencia');
+            Log::alert('Error al eliminar evidencia ticket');
             Log::alert($error->getMessage());
 
             return response()->json([
-                'mensaje' => $error->getMessage()
-            ], 400);
+                'mensaje' => 'Ocurrió un error interno'
+            ], 500);
         }
     }
 
     public function actualizarTicket(Request $request)
     {
         try {
-
-            $data = $request->all();
-
-            return $this->ticketsService->actualizarTicket($data);
+            return $this->ticketsService->actualizarTicket($request->all());
         } catch (\Throwable $error) {
-
             Log::alert('*********************************************');
             Log::alert('Error al actualizar ticket');
             Log::alert($error->getMessage());

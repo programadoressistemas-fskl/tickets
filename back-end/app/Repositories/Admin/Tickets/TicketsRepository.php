@@ -124,15 +124,14 @@ class TicketsRepository
 
     public function actualizarTicket($id, $ticket)
     {
-        $ticket = TblTickets::findOrFail($id);
-
-        $ticket->id_area              = $ticket['id_area'];
-        $ticket->id_planta            = $ticket['id_planta'];
-        $ticket->id_turno             = $ticket['id_turno'];
-        $ticket->id_tipo_servicio     = $ticket['id_tipo_servicio'];
-        $ticket->descripcion_problema = $ticket['descripcion_problema'];
-
-        $ticket->save();
+        TblTickets::where('id_ticket', $id)
+                  ->update([
+                      'id_area'              => $ticket['id_area'],
+                      'id_planta'            => $ticket['id_planta'],
+                      'id_turno'             => $ticket['id_turno'],
+                      'id_tipo_servicio'     => $ticket['id_tipo_servicio'],
+                      'descripcion_problema' => $ticket['descripcion_problema']
+                  ]);
     }
 
     public function actualizarEvidencias($id_ticket, $evidencias)

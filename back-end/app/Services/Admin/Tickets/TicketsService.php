@@ -131,7 +131,6 @@ class TicketsService
         $this->ticketsRepository->actualizarTicket($id, $ticket);
 
         if (request()->hasFile('images')) {
-
             $rutas = [];
 
             foreach (request()->file('images') as $file) {
