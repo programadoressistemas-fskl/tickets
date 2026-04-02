@@ -27,15 +27,19 @@ export class TiketsService {
     return this.http.post<any>(`${api}/tickets/obtenerListaGeneralTickets`, data);
   }
 
-  public obtenerDetalleTickets($pkTicket: number): Observable<any> {
-    return this.http.get<any>(`${api}/tickets/obtenerDetalleTickets/${$pkTicket}`,);
+  public obtenerDetalleTicket($pkTicket: number): Observable<any> {
+    return this.http.get<any>(`${api}/tickets/obtenerDetalleTicket/${$pkTicket}`,);
   }
 
   public actualizarTicket(formData: FormData): Observable<any> {
     return this.http.post<any>(`${api}/tickets/actualizarTicket`, formData);
   }
 
+  public eliminarEvidenciaTicket(id_ticket_evidencia: number): Observable<any> {
+    return this.http.delete<any>(`${api}/tickets/eliminarEvidenciaTicket/${id_ticket_evidencia}`);
+  }
+
   public cancelarTicket(id: number): Observable<any> {
-  return this.http.post<any>(`${api}/tickets/cancelar/${id}`, {});
-}
+    return this.http.post<any>(`${api}/tickets/cancelar/${id}`, {});
+  }
 }

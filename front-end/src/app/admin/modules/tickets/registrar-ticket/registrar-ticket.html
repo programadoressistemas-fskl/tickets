@@ -92,11 +92,11 @@
 
 								<div *ngFor="let img of images; let i = index" class="position-relative">
 
-									<img [src]="img" width="120" height="120" class="rounded border"
+									<img [src]="img.url_evidencia" width="120" height="120" class="rounded border"
 										style="object-fit: cover;">
 
 									<button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0"
-										(click)="removeImage(i)" style="padding: 2px 6px;">
+										(click)="eliminarEvidenciaTicket(i, img.id_ticket_evidencia)" style="padding: 2px 6px;">
 										<i class="bi bi-x"></i>
 									</button>
 

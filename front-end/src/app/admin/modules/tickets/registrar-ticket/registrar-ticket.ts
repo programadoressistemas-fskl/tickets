@@ -23,7 +23,7 @@ export class RegistrarTicket implements OnInit {
 	protected listaTurnos: any[] = [];
 	protected listatiposServicio: any[] = [];
 
-	images: string[] = [];
+	images: any[] = [];
 	files: File[] = [];
 
 	constructor(
@@ -40,7 +40,7 @@ export class RegistrarTicket implements OnInit {
 		this.crearFormTicket();
 		await this.obtenerRecursosRegistroTicket();
 
-		if (this.pkTicket != null) await this.obtenerDetalleTickets(this.pkTicket);
+		if (this.pkTicket != null) await this.obtenerDetalleTicket(this.pkTicket);
 
 		this.messages.cerrarMensajes();
 	}
@@ -55,27 +55,24 @@ export class RegistrarTicket implements OnInit {
 		});
 	}
 
-	public async obtenerDetalleTickets(pkTicket: number): Promise<void> {
-		try {
-			const respuesta: any = await this.tickets.obtenerDetalleTickets(pkTicket).toPromise();
+	public async obtenerDetalleTicket(pkTicket: number): Promise<void> {
+		return this.tickets.obtenerDetalleTicket(pkTicket).toPromise().then(
+			respuesta => {
+				const ticket = respuesta.ticket;
+				const evidencias = respuesta.evidencias || [];
 
-			if (!respuesta || !respuesta.ticket) return;
+				this.formTicket.get('id_area')?.setValue(ticket.id_area);
+				this.formTicket.get('id_planta')?.setValue(ticket.id_planta);
+				this.formTicket.get('id_turno')?.setValue(ticket.id_turno);
+				this.formTicket.get('id_tipo_servicio')?.setValue(ticket.id_tipo_servicio);
+				this.formTicket.get('descripcion_problema')?.setValue(ticket.descripcion_problema);
 
-			const ticket = respuesta.ticket;
-			const evidencias = respuesta.evidencias || [];
-
-			this.formTicket.get('id_area')?.setValue(ticket.id_area);
-			this.formTicket.get('id_planta')?.setValue(ticket.id_planta);
-			this.formTicket.get('id_turno')?.setValue(ticket.id_turno);
-			this.formTicket.get('id_tipo_servicio')?.setValue(ticket.id_tipo_servicio);
-			this.formTicket.get('descripcion_problema')?.setValue(ticket.descripcion_problema);
-
-			this.images = evidencias.map((url: string) => `http://localhost:8000/storage/${url}`);
-			this.ch.detectChanges();
-
-		} catch (error) {
-			this.messages.mensajeGenerico('error', 'error');
-		}
+				this.images = evidencias;
+				this.ch.detectChanges();
+			}, error => {
+				this.messages.mensajeGenerico('error', 'error');
+			}
+		);
 	}
 
 	private async obtenerRecursosRegistroTicket(): Promise<void> {
@@ -107,7 +104,10 @@ export class RegistrarTicket implements OnInit {
 
 			const reader = new FileReader();
 			reader.onload = (e: any) => {
-				this.images.push(e.target.result);
+				this.images.push({
+					id_ticket_evidencia: 0,
+					url_evidencia: e.target.result
+				});
 				this.ch.detectChanges();
 			};
 
@@ -117,10 +117,29 @@ export class RegistrarTicket implements OnInit {
 		event.target.value = '';
 	}
 
-	protected removeImage(index: number): void {
-		this.images.splice(index, 1);
-		this.files.splice(index, 1);
-		this.ch.detectChanges();
+	protected eliminarEvidenciaTicket(index: number, id_ticket_evidencia: number): void {
+		this.messages.mensajeConfirmacionCustom(
+			'¿Está seguro de eliminar la evidencia del ticket?',
+			'question',
+			'Eliminar evidencia'
+		).then(
+			res => {
+				if (!res.isConfirmed) return;
+
+				this.messages.mensajeEsperar();
+				this.tickets.eliminarEvidenciaTicket(id_ticket_evidencia).toPromise().then(
+					respuesta => {
+						this.images.splice(index, 1);
+						this.files.splice(index, 1);
+						this.ch.detectChanges();
+						
+						this.messages.cerrarMensajes();
+					}, error => {
+						this.messages.mensajeGenerico('error', 'error');
+					}
+				);
+			}
+		);
 	}
 
 	protected registrarTicket(): void {
@@ -151,7 +170,7 @@ export class RegistrarTicket implements OnInit {
 					this.tickets.registrarTicket(formData).toPromise().then(
 						(respuesta: any) => {
 
-							this.obtenerDetalleTickets(respuesta.pkTicket).then(() => {
+							this.obtenerDetalleTicket(respuesta.pkTicket).then(() => {
 								this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
 							})
 							this.messages.mensajeGenerico(respuesta.mensaje, 'success', respuesta.title);
@@ -208,7 +227,7 @@ export class RegistrarTicket implements OnInit {
 								return;
 							}
 
-							this.obtenerDetalleTickets(id).then(() => {
+							this.obtenerDetalleTicket(id).then(() => {
 								this.messages.mensajeGenerico(
 									respuesta.mensajes,
 									'success',
