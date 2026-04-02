@@ -19,18 +19,18 @@ export class ConsultaTickets implements OnDestroy {
 
 	private intervalo: any;
 
-	protected listaAreas:  any[] = [];
+	protected listaAreas: any[] = [];
 	protected listaStatus: any[] = [];
 
-	protected id_area:   any = '';
+	protected id_area: any = '';
 	protected id_status: any = '';
 
 	constructor(
-		private modal:    ModalService,
-		private tickets:  TiketsService,
-		private areas:    AreasService,
+		private modal: ModalService,
+		private tickets: TiketsService,
+		private areas: AreasService,
 		private messages: MessagesService,
-		private ch: 	  ChangeDetectorRef
+		private ch: ChangeDetectorRef
 	) { }
 
 	async ngOnInit(): Promise<any> {
@@ -84,17 +84,48 @@ export class ConsultaTickets implements OnDestroy {
 	}
 
 	protected async obtenerListaGeneralTickets(): Promise<any> {
-		const data:   any = {
-			pkArea:   this.id_area,
+		const data: any = {
+			pkArea: this.id_area,
 			pkStatus: this.id_status
 		};
 
 		return this.tickets.obtenerListaGeneralTickets(data).toPromise().then(
-			respuesta => { 
+			respuesta => {
 				this.datosTabla = respuesta.tickets;
 				this.ch.markForCheck();
 			}
 		)
+	}
+
+	protected cancelarTicket(id_ticket: number): void {
+		this.messages.mensajeConfirmacionCustom(
+			'¿Está seguro de continuar con la cancelación del ticket?',
+			'question',
+			'Cancelar ticket'
+		).then(res => {
+
+			if (!res.isConfirmed) return;
+
+			this.messages.mensajeEsperar();
+
+			this.tickets.cancelarTicket(id_ticket).subscribe({
+				next: (respuesta: any) => {
+
+					this.messages.mensajeGenerico(
+						respuesta.mensaje, 'success', 'Cancelar ticket'
+					);
+					this.obtenerListaGeneralTickets();
+				},
+
+				error: (error) => {
+					this.messages.mensajeGenerico(
+						error?.error?.mensaje || 'Ocurrió un error al cancelar el ticket.',
+						'error'
+					);
+				}
+			});
+
+		});
 	}
 
 	public abrirModalRegistrarTickets(pkTicket: number): void {

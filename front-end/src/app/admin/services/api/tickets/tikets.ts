@@ -34,4 +34,8 @@ export class TiketsService {
   public actualizarTicket(formData: FormData): Observable<any> {
     return this.http.post<any>(`${api}/tickets/actualizarTicket`, formData);
   }
+
+  public cancelarTicket(id: number): Observable<any> {
+  return this.http.post<any>(`${api}/tickets/cancelar/${id}`, {});
+}
 }
