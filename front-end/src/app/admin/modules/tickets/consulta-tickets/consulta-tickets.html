@@ -22,15 +22,36 @@
                         <option style="display: none; visibility: hidden;" value="">Selecciona una opción
                         </option>
                     </select>
+                    
+                    <label class="form-label">Status:</label>
 
-                    <label for="status" class="form-label">Status:</label>
-                    <select id="status" class="form-select form-select-sm" [(ngModel)]="id_status"
-                        (change)="busquedaFiltros()">
-                        <option value="" style="display: none; visibility: hidden;">Selecciona una opción</option>
-                        <option *ngFor="let status of listaStatus" [value]="status.id_status_ticket">
-                            {{ status.status }}
-                        </option>
-                    </select>
+                    <div class="dropdown w-100">
+
+                        <button class="form-select form-select-sm text-start" type="button" data-bs-toggle="dropdown">
+
+                            {{ getStatusNombre(id_status) || 'Selecciona una opción' }}
+
+                        </button>
+
+                        <div class="dropdown-menu w-100 p-2">
+
+                            <div *ngFor="let status of listaStatus" class="form-check">
+
+                                <input class="form-check-input" type="radio" name="status"
+                                    [value]="status.id_status_ticket" [(ngModel)]="id_status"
+                                    (change)="busquedaFiltros()" id="status{{status.id_status_ticket}}">
+
+                                <label class="form-check-label w-100" for="status{{status.id_status_ticket}}">
+
+                                    {{ status.status }}
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                     <div class="botonera">
                         <button class="btn btn-success btn-sm">
@@ -60,7 +81,10 @@
                         <td>{{ticket.planta}}</td>
                         <td>{{ticket.tipo_servicio}}</td>
                         <td>{{ticket.descripcion_problema}}</td>
-                        <td>{{ticket.status}}</td>
+                        <td>
+                            <i class="bi" [ngClass]="getStatusIcon(ticket.status)"></i>
+                            {{ ticket.status }}
+                        </td>
                         <td class="text-medium">
                             <button class="btn btn-sm btn-outline-primary"
                                 (click)="abrirModalRegistrarTickets(ticket.id_ticket)">
