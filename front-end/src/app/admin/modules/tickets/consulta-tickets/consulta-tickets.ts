@@ -128,6 +128,28 @@ export class ConsultaTickets implements OnDestroy {
 		});
 	}
 
+	getStatusIcon(status: string): string {
+		switch (status?.toLowerCase()) {
+			case 'pendiente':
+				return 'bi-hourglass-split text-warning';
+			case 'en proceso':
+				return 'bi-gear-fill text-primary';
+			case 'en espera':
+				return 'bi-pause-circle-fill text-secondary';
+			case 'terminado':
+				return 'bi-check-circle-fill text-success';
+			case 'cancelado':
+				return 'bi-x-circle-fill text-danger';
+			default:
+				return 'bi-question-circle text-dark';
+		}
+	}
+
+	getStatusNombre(id: any): string {
+		const s = this.listaStatus.find(x => x.id_status_ticket == id);
+		return s ? s.status : '';
+	}
+
 	public abrirModalRegistrarTickets(pkTicket: number): void {
 		const data: any = {
 			pkTicket: pkTicket
