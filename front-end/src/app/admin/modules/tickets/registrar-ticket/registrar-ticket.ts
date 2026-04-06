@@ -129,11 +129,13 @@ export class RegistrarTicket implements OnInit {
 				this.messages.mensajeEsperar();
 				this.tickets.eliminarEvidenciaTicket(id_ticket_evidencia).toPromise().then(
 					respuesta => {
-						this.images.splice(index, 1);
-						this.files.splice(index, 1);
-						this.ch.detectChanges();
-						
-						this.messages.cerrarMensajes();
+						this.obtenerDetalleTicket(respuesta.pkTicket).then(() => {
+							this.images.splice(index, 1);
+							this.files.splice(index, 1);
+							this.ch.detectChanges();
+	
+							this.messages.cerrarMensajes();
+						});
 					}, error => {
 						this.messages.mensajeGenerico('error', 'error');
 					}

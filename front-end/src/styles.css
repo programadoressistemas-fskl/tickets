@@ -10973,6 +10973,11 @@ body {
   color: #004060;
 }
 
+/* Navbar color */
+.navbar-custom {
+    background: linear-gradient(90deg, #0e4057, #23627f);
+}
+
 .sb-sidenav {
   display: flex;
   flex-direction: column;

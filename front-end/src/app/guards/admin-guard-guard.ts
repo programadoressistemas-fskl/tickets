@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   ) {}
 
   checkAuth(): boolean {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token_tickets_faske');
 
     if (token) {
       return true;

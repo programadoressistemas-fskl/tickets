@@ -34,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let usuario of datosTabla">
+                    <tr *ngFor="let usuario of datosTabla; let i = index" [ngClass]="i % 2 === 0 ? 'table-info bg-opacity-25' : ''">
                         <td>{{usuario.nombre}}</td>
                         <td>{{usuario.numero_telefono}}</td>
                         <td>{{usuario.correo_electronico}}</td>
