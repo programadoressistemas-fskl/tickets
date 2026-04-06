@@ -30,4 +30,8 @@ export class UsuariosService {
 	public cambiarStatusUsuario(id: number): Observable<any> {
 		return this.http.get<any>(`${api}/usuarios/cambiarStatusUsuario/${id}`)
 	}
+
+	public cerrarSesion(): Observable<any> {
+		return this.http.post<any>(`${api}/usuarios/cerrarSesion`, {});
+	}
 }
