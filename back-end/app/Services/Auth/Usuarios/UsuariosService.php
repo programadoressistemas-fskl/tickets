@@ -120,4 +120,27 @@ class UsuariosService
             'mensaje'  => 'Inicio de sesión correctamente'
         ]);
     }
+
+    public function cerrarSesion($request)
+{
+    $header = $request->header('Authorization');
+
+    if (!$header || !str_starts_with($header, 'Bearer ')) {
+        return response()->json([
+            'success' => false,
+            'mensaje' => 'Token no proporcionado'
+        ], 401);
+    }
+
+    $token = str_replace('Bearer ', '', $header);
+
+    $eliminado = $this->usuariosRepository->cerrarSesion($token);
+
+    return response()->json([
+        'success' => (bool) $eliminado,
+        'mensaje' => $eliminado
+            ? 'Sesión cerrada con éxito'
+            : 'No se encontró la sesión'
+    ]);
+}
 }

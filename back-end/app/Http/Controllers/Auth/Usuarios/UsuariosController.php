@@ -123,4 +123,19 @@ class UsuariosController extends Controller
             );
         }
     }
+
+    public function cerrarSesion(Request $request)
+    {
+        try {
+            return $this->usuariosService->cerrarSesion($request);
+        } catch (\Throwable $error) {
+            Log::alert('*********************************************');
+            Log::alert('Error al cerrar sesión');
+            Log::alert($error->getMessage());
+
+            return response()->json([
+                'mensaje' => 'Ocurrió un error interno'
+            ], 500);
+        }
+    }
 }

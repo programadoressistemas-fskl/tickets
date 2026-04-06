@@ -148,8 +148,6 @@ class TicketsService
         ]);
     } 
 
-
-
     public function cambiarStatusTicket($pkTicket, $status)
     {
         $status = $this->ticketsRepository->cambiarStatusTicket($pkTicket, $status);
@@ -160,5 +158,5 @@ class TicketsService
                 'mensaje' => 'Se' . ($status ? '' : '') . ' el ticket con éxito'
             ]
         );
-    }
+    } 
 }

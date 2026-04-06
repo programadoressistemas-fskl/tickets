@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\Usuarios\UsuariosController;
 
 Route::post('/usuarios/login', [UsuariosController::class, 'login']);
+
 Route::middleware(['auth.token'])->group(function () {
+    Route::post('/usuarios/cerrarSesion', [UsuariosController::class, 'cerrarSesion']);
     Route::post('/usuarios/registrarUsuario', [UsuariosController::class, 'registrarUsuario']);
     Route::get('/usuarios/obtenerListaUsuarios', [UsuariosController::class, 'obtenerListaUsuarios']);
     Route::get('/usuarios/obtenerDetalleUsuario/{pkUsuario}', [UsuariosController::class, 'obtenerDetalleUsuario']);
