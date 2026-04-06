@@ -1,64 +1,127 @@
-#layoutAuthentication {
-    background-color: #121416 !important;
+/* FONDO DERECHO */
+.login-right {
+    background-color: #f4f4f4;
 }
 
+/* CONTENEDOR LOGIN */
+.login-box {
+    width: 100%;
+    max-width: 420px;
+}
+
+/* IZQUIERDA (IMAGEN CONTROLADA) */
+.login-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: url('../../../assets/images/login-imagen.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    height: 100vh;
+}
+
+.logo-img {
+    max-width: 260px;
+    width: 100%;
+}
+
+/* CENTRAR TODO EL BLOQUE */
+.login-left {
+    justify-content: center !important; 
+}
+
+.login-content {
+    text-align: center;
+}
+
+.titulo-login {
+    color: #1c4d69; 
+    font-weight: 600;
+}
+
+.login-left img {
+    width: 85%;
+    height: auto;
+    object-fit: contain;
+}
+
+.login-content {
+    max-width: 400px;
+    z-index: 2;
+}
+
+.login-content h2 {
+    font-size: 2.2rem;
+}
+
+.login-content p {
+    font-size: 1rem;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* CARD */
 .card {
-    border-radius: 10px !important;
+    border-radius: 12px !important;
     animation: fadeInUp 0.8s ease-in-out;
 }
 
-/* Efecto de iluminación azul para el Modal */
+/* GLOW */
 .card-glow {
-    box-shadow: 0 0 25px rgba(13, 110, 253, 0.2) !important; /* Brillo azul sutil */
-    border: 1px solid rgba(13, 110, 253, 0.1) !important;
+    background-color: #193c57; 
+    border-radius: 12px;
+    box-shadow: 
+        0 0 0 2px rgba(0, 170, 255, 0.2), 
+        0 10px 25px rgba(0, 170, 255, 0.25),
+        0 4px 10px rgba(0, 0, 0, 0.1);       
 }
 
-/* Efecto de iluminación para el Logo */
+/* LOGO */
 .logo-glow {
-    filter: drop-shadow(0 0 15px rgba(0, 123, 255, 0.4)); /* Brillo que sigue la forma del logo */
-    transition: filter 0.3s ease;
+    filter: drop-shadow(0 0 15px rgba(0, 123, 255, 0.4));
+    transition: 0.3s;
 }
 
 .logo-glow:hover {
     filter: drop-shadow(0 0 20px rgba(0, 123, 255, 0.6));
 }
 
+/* INPUT */
 .form-control:focus {
-    border-color: #0d6efd !important; /* Cambiamos a azul el borde al escribir para combinar */
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1) !important;
+    border-color: #0d6efd !important;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.1) !important;
 }
 
-.btn-dark {
-    background-color: #212529 !important;
-    border: none !important;
-    font-weight: 600;
-    transition: all 0.3s ease;
+/* BOTON */
+.btn-warning {
+    background-color: #f4c542;
+    border: none;
+    font-weight: bold;
 }
 
-.btn-dark:hover {
-    background-color: #000000 !important;
-    box-shadow: 0 0 15px rgba(13, 110, 253, 0.3); /* Brillo azul al botón también */
+.btn-warning:hover {
+    background-color: #e0b233;
 }
 
-/* Tus animaciones originales */
+/* ANIMACION */
 @keyframes fadeInUp {
     from {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-/* Responsive */
-@media (max-width: 576px) {
-    #layoutAuthentication_content .mt-5 {
-        margin-top: 2rem !important;
-    }
-    .card-body {
-        padding-left: 1.5rem !important;
-        padding-right: 1.5rem !important;
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .login-left {
+        display: none;
     }
 }
