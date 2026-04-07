@@ -8,25 +8,29 @@ import { MessagesService } from '../messages/messages';
 export class SessionService {
 
   private timeout: any;
-  private tiempoInactividad = 60000; 
+  private tiempoInactividad = 60000;
 
   constructor(
     private router: Router,
     private messages: MessagesService
-  ) {}
+  ) { }
 
-iniciarContador() {
+  iniciarContador() {
 
-  const token = localStorage.getItem('token_tickets_faske');
+    const token = localStorage.getItem('token_tickets_faske');
 
-  if (!token) return;
+    if (!token) return;
 
-  this.resetTimer();
+    if (this.router.url.includes('login')) return;
 
-  window.addEventListener('mousemove', () => this.resetTimer());
-  window.addEventListener('keydown', () => this.resetTimer());
-  window.addEventListener('click', () => this.resetTimer());
-}
+    clearTimeout(this.timeout);
+
+    this.resetTimer();
+
+    window.addEventListener('mousemove', () => this.resetTimer());
+    window.addEventListener('keydown', () => this.resetTimer());
+    window.addEventListener('click', () => this.resetTimer());
+  }
 
   resetTimer() {
     clearTimeout(this.timeout);
@@ -36,7 +40,19 @@ iniciarContador() {
     }, this.tiempoInactividad);
   }
 
+  limpiarSesion() {
+    clearTimeout(this.timeout);
+
+    window.removeEventListener('mousemove', () => this.resetTimer());
+    window.removeEventListener('keydown', () => this.resetTimer());
+    window.removeEventListener('click', () => this.resetTimer());
+  }
+
   expirarSesion() {
+
+    const token = localStorage.getItem('token_tickets_faske');
+    if (!token) return;
+
     localStorage.removeItem('token_tickets_faske');
 
     this.messages.mensajeGenerico(
