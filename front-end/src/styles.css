@@ -11251,3 +11251,10 @@ body {
 .t-bold {
   font-weight: bold !important;
 }
+
+/*!
+Estilo de modal
+ */
+.hidden-modal {
+	display: none !important;
+}

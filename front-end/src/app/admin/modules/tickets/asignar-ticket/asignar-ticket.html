@@ -1,0 +1,48 @@
+<div class="modal-body dashboard">
+    <div class="pagetitle">
+        <h4 class="t-bold">
+            Asignar ticket
+        </h4>
+
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Tickets</li>
+                <li class="breadcrumb-item active">
+                    Asignar ticket
+                </li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row align-items-center p-3">
+
+                        <div class="col">
+                            <select class="form-select form-select-sm">
+                                <option value="">Asignar a:</option>
+
+                                <option *ngFor="let usuario of listaUsuarios" [value]="usuario.id">
+                                    {{ usuario.nombre }}
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-sm btn-primary" (click)="asignarTicket()">
+        Asignar
+    </button>
+
+    <button class="btn btn-sm btn-danger" (click)="cerrarModal()">
+        Cancelar
+    </button>
+</div>

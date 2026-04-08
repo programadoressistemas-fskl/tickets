@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ModalService } from '../../../services/modal/modal';
 import { MessagesService } from '../../../services/messages/messages';
 import { TiketsService } from '../../../services/api/tickets/tikets';
+import { AsignarTicket } from '../asignar-ticket/asignar-ticket'
 
 @Component({
 	selector: 'app-registrar-ticket',
@@ -133,7 +134,7 @@ export class RegistrarTicket implements OnInit {
 							this.images.splice(index, 1);
 							this.files.splice(index, 1);
 							this.ch.detectChanges();
-	
+
 							this.messages.cerrarMensajes();
 						});
 					}, error => {
@@ -250,6 +251,10 @@ export class RegistrarTicket implements OnInit {
 
 				});
 	}
+
+	protected abrirAsignar(): void {
+
+		this.modal.abrirModalConComponente( AsignarTicket, { pkTicket: this.pkTicket }, 'md-modal');}
 
 	get cambiosForm(): boolean {
 		return this.formTicket.dirty || this.images.length > 0;

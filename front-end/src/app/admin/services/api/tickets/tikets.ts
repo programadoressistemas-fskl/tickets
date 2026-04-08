@@ -42,4 +42,12 @@ export class TiketsService {
   public cancelarTicket(id: number): Observable<any> {
     return this.http.post<any>(`${api}/tickets/cancelar/${id}`, {});
   }
+
+  public obtenerUsuariosAsignacion(): Observable<any> {
+    return this.http.get<any>(`${api}/tickets/obtenerUsuariosAsignacion`);
+  }
+
+  public asignarTicket(data: any): Observable<any> {
+    return this.http.post<any>(`${api}/tickets/asignarTicket`, data);
+  }
 }

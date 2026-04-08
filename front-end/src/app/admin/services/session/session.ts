@@ -8,28 +8,37 @@ import { MessagesService } from '../messages/messages';
 export class SessionService {
 
   private timeout: any;
-  private tiempoInactividad = 60000;
+  private tiempoInactividad = 120000; 
+
+  private listenersActivos = false;
+
+  private mousemoveFn = () => this.resetTimer();
+  private keydownFn = () => this.resetTimer();
+  private clickFn = () => this.resetTimer();
 
   constructor(
     private router: Router,
     private messages: MessagesService
-  ) { }
+  ) {}
 
   iniciarContador() {
 
     const token = localStorage.getItem('token_tickets_faske');
 
-    if (!token) return;
+    if (!token || this.router.url.includes('login')) {
+      this.detenerContador();
+      return;
+    }
 
-    if (this.router.url.includes('login')) return;
+    if (this.listenersActivos) return;
 
-    clearTimeout(this.timeout);
+    this.listenersActivos = true;
 
     this.resetTimer();
 
-    window.addEventListener('mousemove', () => this.resetTimer());
-    window.addEventListener('keydown', () => this.resetTimer());
-    window.addEventListener('click', () => this.resetTimer());
+    window.addEventListener('mousemove', this.mousemoveFn);
+    window.addEventListener('keydown', this.keydownFn);
+    window.addEventListener('click', this.clickFn);
   }
 
   resetTimer() {
@@ -40,18 +49,16 @@ export class SessionService {
     }, this.tiempoInactividad);
   }
 
-  limpiarSesion() {
-    clearTimeout(this.timeout);
-
-    window.removeEventListener('mousemove', () => this.resetTimer());
-    window.removeEventListener('keydown', () => this.resetTimer());
-    window.removeEventListener('click', () => this.resetTimer());
-  }
-
   expirarSesion() {
 
     const token = localStorage.getItem('token_tickets_faske');
-    if (!token) return;
+
+    if (!token) {
+      this.detenerContador();
+      return;
+    }
+
+    this.detenerContador();
 
     localStorage.removeItem('token_tickets_faske');
 
@@ -62,5 +69,17 @@ export class SessionService {
     );
 
     this.router.navigate(['/login']);
+  }
+
+  detenerContador() {
+    clearTimeout(this.timeout);
+
+    if (!this.listenersActivos) return;
+
+    window.removeEventListener('mousemove', this.mousemoveFn);
+    window.removeEventListener('keydown', this.keydownFn);
+    window.removeEventListener('click', this.clickFn);
+
+    this.listenersActivos = false;
   }
 }

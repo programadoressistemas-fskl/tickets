@@ -42,5 +42,6 @@ export class Sidenav {
 
 	public abrirModalRegistrarTickets(): void {
 		this.modal.abrirModalConComponente(RegistrarTicket, {}, 'md-modal');
-	}
+	} 
+
 }
