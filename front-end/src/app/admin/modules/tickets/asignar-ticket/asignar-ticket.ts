@@ -16,7 +16,7 @@ import { TiketsService } from '../../../services/api/tickets/tikets';
 })
 export class AsignarTicket implements OnInit {
 
-  @Input() pkTicket: any = null; 
+  @Input() pkTicket: any = null;
 
   protected formTicket!: FormGroup;
   protected listaUsuarios: any[] = [];
@@ -58,11 +58,15 @@ export class AsignarTicket implements OnInit {
 
   public asignarTicket(): void {
 
+    console.log('🟡 Click asignar');
+
     this.messages.mensajeConfirmacionCustom(
       '¿Está seguro de asignar el ticket?',
       'question',
       'Asignar ticket'
     ).then(res => {
+
+      console.log('🟢 Confirmación:', res);
 
       if (!res.isConfirmed) return;
 
@@ -73,8 +77,13 @@ export class AsignarTicket implements OnInit {
         idUsuario: this.formTicket.value.idUsuario
       };
 
+      // 🔥 AQUÍ VA EL LOG
+      console.log('🚀 DATA A ENVIAR:', data);
+
       this.tickets.asignarTicket(data).toPromise().then(
         (respuesta: any) => {
+
+          console.log('✅ RESPUESTA BACKEND:', respuesta);
 
           this.messages.mensajeGenerico(
             respuesta.mensaje,
@@ -84,6 +93,8 @@ export class AsignarTicket implements OnInit {
           this.modal.cerrarModal();
 
         }, error => {
+
+          console.error('❌ ERROR BACKEND:', error);
 
           this.messages.mensajeGenerico('error', 'error');
         }

@@ -23,6 +23,7 @@ export class RegistrarTicket implements OnInit {
 	protected listaPlantas: any[] = [];
 	protected listaTurnos: any[] = [];
 	protected listatiposServicio: any[] = [];
+	protected listaUsuarios: any[] = [];
 
 	images: any[] = [];
 	files: File[] = [];
@@ -40,6 +41,7 @@ export class RegistrarTicket implements OnInit {
 
 		this.crearFormTicket();
 		await this.obtenerRecursosRegistroTicket();
+		await this.obtenerUsuarios();
 
 		if (this.pkTicket != null) await this.obtenerDetalleTicket(this.pkTicket);
 
@@ -52,7 +54,8 @@ export class RegistrarTicket implements OnInit {
 			id_planta: ['', Validators.required],
 			id_turno: ['', Validators.required],
 			id_tipo_servicio: ['', Validators.required],
-			descripcion_problema: [null, [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$')]]
+			descripcion_problema: [null, [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$')]],
+			idUsuario: [[]]
 		});
 	}
 
@@ -61,12 +64,14 @@ export class RegistrarTicket implements OnInit {
 			respuesta => {
 				const ticket = respuesta.ticket;
 				const evidencias = respuesta.evidencias || [];
+				const usuarios = respuesta.usuarios_asignados || [];
 
 				this.formTicket.get('id_area')?.setValue(ticket.id_area);
 				this.formTicket.get('id_planta')?.setValue(ticket.id_planta);
 				this.formTicket.get('id_turno')?.setValue(ticket.id_turno);
 				this.formTicket.get('id_tipo_servicio')?.setValue(ticket.id_tipo_servicio);
 				this.formTicket.get('descripcion_problema')?.setValue(ticket.descripcion_problema);
+				this.formTicket.get('idUsuario')?.setValue(usuarios);
 
 				this.images = evidencias;
 				this.ch.detectChanges();
@@ -74,6 +79,20 @@ export class RegistrarTicket implements OnInit {
 				this.messages.mensajeGenerico('error', 'error');
 			}
 		);
+	}
+
+	public getNombreUsuario(id: number): string {
+		const usuario = this.listaUsuarios.find(u => u.id_usuario == id);
+		return usuario ? usuario.nombre : '';
+	}
+
+	private async obtenerUsuarios(): Promise<void> {
+		try {
+			const res: any = await this.tickets.obtenerUsuariosAsignacion().toPromise();
+			this.listaUsuarios = res.usuarios;
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	private async obtenerRecursosRegistroTicket(): Promise<void> {
@@ -188,6 +207,7 @@ export class RegistrarTicket implements OnInit {
 				});
 	}
 
+
 	protected actualizarTicket(): void {
 
 		if (this.formTicket.invalid) {
@@ -196,6 +216,7 @@ export class RegistrarTicket implements OnInit {
 			);
 			return;
 		}
+
 
 		this.messages.mensajeConfirmacionCustom('¿Está seguro de continuar con la actualización del ticket?',
 			'question', 'Actualizar ticket').then(
@@ -254,7 +275,8 @@ export class RegistrarTicket implements OnInit {
 
 	protected abrirAsignar(): void {
 
-		this.modal.abrirModalConComponente( AsignarTicket, { pkTicket: this.pkTicket }, 'md-modal');}
+		this.modal.abrirModalConComponente(AsignarTicket, { pkTicket: this.pkTicket }, 'md-modal');
+	}
 
 	get cambiosForm(): boolean {
 		return this.formTicket.dirty || this.images.length > 0;

@@ -18,19 +18,21 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="row align-items-center p-3">
+                    <form [formGroup]="formTicket">
 
-                        <div class="col">
-                            <select class="form-select form-select-sm">
-                                <option value="">Asignar a:</option>
+                        <div class="row align-items-center p-3">
 
-                                <option *ngFor="let usuario of listaUsuarios" [value]="usuario.id">
+                            <select class="form-select form-select-sm" formControlName="idUsuario" multiple>
+
+                                <option *ngFor="let usuario of listaUsuarios" [ngValue]="usuario.id_usuario">
                                     {{ usuario.nombre }}
                                 </option>
+
                             </select>
+
                         </div>
 
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

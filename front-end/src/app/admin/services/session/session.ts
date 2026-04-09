@@ -8,7 +8,7 @@ import { MessagesService } from '../messages/messages';
 export class SessionService {
 
   private timeout: any;
-  private tiempoInactividad = 120000; 
+  private tiempoInactividad = 120000;
 
   private listenersActivos = false;
 
@@ -19,7 +19,7 @@ export class SessionService {
   constructor(
     private router: Router,
     private messages: MessagesService
-  ) {}
+  ) { }
 
   iniciarContador() {
 
@@ -49,27 +49,36 @@ export class SessionService {
     }, this.tiempoInactividad);
   }
 
-  expirarSesion() {
+ expirarSesion() {
 
-    const token = localStorage.getItem('token_tickets_faske');
+  const token = localStorage.getItem('token_tickets_faske');
 
-    if (!token) {
-      this.detenerContador();
-      return;
-    }
-
+  if (!token) {
     this.detenerContador();
-
-    localStorage.removeItem('token_tickets_faske');
-
-    this.messages.mensajeGenerico(
-      'Tu sesión expiró por inactividad',
-      'warning',
-      'Sesión expirada'
-    );
-
-    this.router.navigate(['/login']);
+    return;
   }
+
+  this.detenerContador();
+
+  // 🔥 limpiar sesión
+  localStorage.clear();
+  sessionStorage.clear();
+
+  // 🔥 mostrar mensaje (NO lo tocamos)
+  this.messages.mensajeGenerico(
+    'Tu sesión expiró por inactividad',
+    'warning',
+    'Sesión expirada'
+  );
+
+  // 🔥 primero navega
+  this.router.navigate(['/login']);
+
+  // 🔥 luego limpia TODA la app (esto quita el form de atrás)
+  setTimeout(() => {
+    window.location.replace('/login');
+  }, 100);
+}
 
   detenerContador() {
     clearTimeout(this.timeout);
