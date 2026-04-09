@@ -123,7 +123,7 @@ class TicketsController extends Controller
             return $this->ticketsService->obtenerDetalleTicket($pkTicket);
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
-            Log::alert('Error al obtener información de Ticket porPK');
+            Log::alert('Error al obtener información de Usuario');
             Log::alert($error);
 
             return response()->json(
@@ -134,9 +134,49 @@ class TicketsController extends Controller
                 500
             );
         }
-    } 
+    }
 
-        public function eliminarEvidenciaTicket($id_ticket_evidencia) {
+    public function obtenerUsuariosAsignacion()
+    {
+        try {
+            return $this->ticketsService->obtenerUsuariosAsignacion();
+        } catch (\Throwable $error) {
+            Log::alert('*********************************************');
+            Log::alert('Error al obtener información de Usuario');
+            Log::alert($error);
+
+            return response()->json(
+                [
+                    'error' => $error,
+                    'mensaje' => 'Ocurrió un error interno'
+                ],
+                500
+            );
+        }
+    }
+
+    public function asignarTicket(Request $request)
+    {
+        try {
+
+            return $this->ticketsService->asignarTicket(
+                $request->input('pkTicket'),
+                $request->input('idUsuario')
+            );
+        } catch (\Throwable $error) {
+
+            Log::alert('*********************************************');
+            Log::alert('Error al asignar Ticket');
+            Log::alert($error->getMessage());
+
+            return response()->json([
+                'mensaje' => 'Ocurrió un error interno'
+            ], 500);
+        }
+    }
+
+    public function eliminarEvidenciaTicket($id_ticket_evidencia)
+    {
         try {
 
             return $this->ticketsService->eliminarEvidenciaTicket($id_ticket_evidencia);

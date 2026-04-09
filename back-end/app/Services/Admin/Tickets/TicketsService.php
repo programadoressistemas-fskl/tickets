@@ -8,6 +8,7 @@ use App\Repositories\Admin\Catalogos\PlantasRepository;
 use App\Repositories\Admin\Catalogos\TiposServicioRepository;
 use App\Repositories\Admin\Catalogos\TurnosRepository;
 use App\Repositories\Admin\Tickets\TicketsRepository;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class TicketsService
@@ -63,9 +64,10 @@ class TicketsService
                 'title'   => 'Registro exitoso'
             ]
         );
-    } 
+    }
 
-    public function cancelarTicket($id_ticket) {
+    public function cancelarTicket($id_ticket)
+    {
         $tickets = $this->ticketsRepository->cancelarTicket($id_ticket);
 
         return response()->json(
@@ -74,7 +76,7 @@ class TicketsService
                 'mensaje' => 'Se ha cancelado con exito el ticket'
             ]
         );
-    } 
+    }
 
     public function obtenerStatusTickets()
     {
@@ -101,19 +103,59 @@ class TicketsService
 
     public function obtenerDetalleTicket($pkTickets)
     {
-        $ticket = $this->ticketsRepository->obtenerDetalleTicket($pkTickets);
+        $data = $this->ticketsRepository->obtenerDetalleTicket($pkTickets);
         $evidencias = $this->ticketsRepository->obtenerEvidenciasTicket($pkTickets);
 
         return response()->json(
             [
-                'ticket'      => $ticket[0],
-                'evidencias'  => $evidencias,
-                'mensaje'     => 'Se obtuvo la informacion correcta'
+                'ticket'             => $data['ticket'],
+                'usuarios_asignados' => $data['usuarios_asignados'],
+                'evidencias'         => $evidencias,
+                'mensaje'            => 'Se obtuvo la informacion correcta'
             ]
         );
-    } 
+    }
 
-    public function eliminarEvidenciaTicket($id) {
+    public function obtenerUsuariosAsignacion()
+    {
+        $usuarios = $this->ticketsRepository->obtenerUsuariosAsignacion();
+
+        return response()->json(
+            [
+                'usuarios' => $usuarios
+            ]
+        );
+    }
+
+    public function asignarTicket($pkTicket, $idUsuario)
+    {
+        DB::beginTransaction();
+
+        if (!$pkTicket || !is_array($idUsuario)) {
+            return response()->json([
+                'mensaje' => 'Datos inválidos'
+            ], 400);
+        }
+
+        foreach ($idUsuario as $usuario) {
+
+            $ticket = [
+                'id_ticket'  => $pkTicket,
+                'id_usuario' => $usuario
+            ];
+
+            $this->ticketsRepository->asignarTicket($ticket);
+        }
+
+        DB::commit();
+
+        return response()->json([
+            'mensaje' => 'Usuarios asignados correctamente'
+        ]);
+    }
+
+    public function eliminarEvidenciaTicket($id)
+    {
         $evidencia = $this->ticketsRepository->eliminarEvidenciaTicket($id);
 
         return response()->json(
@@ -146,7 +188,7 @@ class TicketsService
             'mensajes' => 'Se actualizó correctamente el ticket',
             'pkTicket' => $id
         ]);
-    } 
+    }
 
     public function cambiarStatusTicket($pkTicket, $status)
     {
@@ -158,5 +200,5 @@ class TicketsService
                 'mensaje' => 'Se' . ($status ? '' : '') . ' el ticket con éxito'
             ]
         );
-    } 
+    }
 }

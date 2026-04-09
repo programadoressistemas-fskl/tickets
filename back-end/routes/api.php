@@ -60,6 +60,8 @@ Route::middleware(['auth.token'])->group(function () {
     Route::post('/tickets/registrarTicket', [TicketsController::class, 'registrarTicket']);
     Route::post('/tickets/obtenerListaGeneralTickets', [TicketsController::class, 'obtenerListaGeneralTickets']);
     Route::get('/tickets/obtenerDetalleTicket/{pkTickets}', [TicketsController::class, 'obtenerDetalleTicket']);
+    Route::get('/tickets/obtenerUsuariosAsignacion', [TicketsController::class, 'obtenerUsuariosAsignacion']);
+    Route::post('/tickets/asignarTicket', [TicketsController::class, 'asignarTicket']);
     Route::post('/tickets/actualizarTicket', [TicketsController::class, 'actualizarTicket']);
     Route::get('/tickets/obtenerStatusTickets', [TicketsController::class, 'obtenerStatusTickets']);
     Route::delete('/tickets/eliminarEvidenciaTicket/{id_ticket_evidencia}', [TicketsController::class, 'eliminarEvidenciaTicket']);

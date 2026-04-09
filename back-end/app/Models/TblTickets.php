@@ -22,7 +22,7 @@ class TblTickets extends Model
         'descripcion_problema',
         'id_usuario_registro', 
         'fecha_registro',
-        'id_usuario_inicio', 
+        'id_usuario_inicio',
         'fecha_inicio',
         'id_usuario_cancelacion',
         'fecha_cancelacion',

@@ -5,6 +5,8 @@ namespace App\Repositories\Admin\Tickets;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\TblTickets;
+use App\Models\TblUsuarios;
+use App\Models\TblTicketsAsignacion;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -62,7 +64,7 @@ class TicketsRepository
     public function obtenerListaGeneralTickets($pkArea, $pkStatus)
     {
         $query = TblTickets::select(
-            DB::raw("CONCAT('tk-', tbl_tickets.id_ticket) as folio"),
+            DB::raw("CONCAT('TK-', tbl_tickets.id_ticket) as folio"),
             'tbl_tickets.id_ticket',
             'cat_areas.area',
             'cat_plantas.planta',
@@ -87,7 +89,7 @@ class TicketsRepository
 
     public function obtenerDetalleTicket($pkTicket)
     {
-        $query = TblTickets::select(
+        $ticket = TblTickets::select(
             'id_ticket',
             'id_area',
             'id_planta',
@@ -99,8 +101,16 @@ class TicketsRepository
             'fecha_inicio',
             'fecha_finalizacion'
         )
-            ->where('tbl_tickets.id_ticket', $pkTicket);
-        return $query->get();
+            ->where('id_ticket', $pkTicket)
+            ->first();
+
+        $usuariosAsignados = TblTicketsAsignacion::where('id_ticket', $pkTicket)
+            ->pluck('id_usuario');
+
+        return [
+            'ticket' => $ticket,
+            'usuarios_asignados' => $usuariosAsignados
+        ];
     }
 
     public function obtenerEvidenciasTicket($pkTicket)
@@ -118,20 +128,20 @@ class TicketsRepository
     public function eliminarEvidenciaTicket($id_ticket_evidencia)
     {
         DB::table('tbl_tickets_evidencia')
-          ->where('id_ticket_evidencia', $id_ticket_evidencia)
-          ->delete();
-    } 
+            ->where('id_ticket_evidencia', $id_ticket_evidencia)
+            ->delete();
+    }
 
     public function actualizarTicket($id, $ticket)
     {
         TblTickets::where('id_ticket', $id)
-                  ->update([
-                      'id_area'              => $ticket['id_area'],
-                      'id_planta'            => $ticket['id_planta'],
-                      'id_turno'             => $ticket['id_turno'],
-                      'id_tipo_servicio'     => $ticket['id_tipo_servicio'],
-                      'descripcion_problema' => $ticket['descripcion_problema']
-                  ]);
+            ->update([
+                'id_area'              => $ticket['id_area'],
+                'id_planta'            => $ticket['id_planta'],
+                'id_turno'             => $ticket['id_turno'],
+                'id_tipo_servicio'     => $ticket['id_tipo_servicio'],
+                'descripcion_problema' => $ticket['descripcion_problema']
+            ]);
     }
 
     public function actualizarEvidencias($id_ticket, $evidencias)
@@ -148,6 +158,21 @@ class TicketsRepository
             ]);
         }
     }
+
+    public function obtenerUsuariosAsignacion()
+    {
+        return TblUsuarios::select('id_usuario', 'nombre')->get();
+    }
+
+    public function asignarTicket($ticket)
+    {
+        $registro = new TblTicketsAsignacion();
+        $registro->id_ticket        = $ticket['id_ticket'];
+        $registro->id_usuario       = $ticket['id_usuario'];
+        $registro->fecha_asignacion = Carbon::now();
+        $registro->save();
+    }
+
 
     public function cambiarStatusTicket($pkTicket, $status)
     {
