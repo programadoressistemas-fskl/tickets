@@ -25,6 +25,8 @@ export class RegistrarTicket implements OnInit {
 	protected listatiposServicio: any[] = [];
 	protected listaUsuarios: any[] = [];
 
+	protected usuariosAsignados: any[] = [];
+
 	images: any[] = [];
 	files: File[] = [];
 
@@ -64,18 +66,18 @@ export class RegistrarTicket implements OnInit {
 			respuesta => {
 				const ticket = respuesta.ticket;
 				const evidencias = respuesta.evidencias || [];
-				const usuarios = respuesta.usuarios_asignados || [];
+				this.usuariosAsignados = respuesta.usuarios_asignados || [];
 
 				this.formTicket.get('id_area')?.setValue(ticket.id_area);
 				this.formTicket.get('id_planta')?.setValue(ticket.id_planta);
 				this.formTicket.get('id_turno')?.setValue(ticket.id_turno);
 				this.formTicket.get('id_tipo_servicio')?.setValue(ticket.id_tipo_servicio);
 				this.formTicket.get('descripcion_problema')?.setValue(ticket.descripcion_problema);
-				this.formTicket.get('idUsuario')?.setValue(usuarios);
 
 				this.images = evidencias;
 				this.ch.detectChanges();
 			}, error => {
+				this.modal.cerrarModal();
 				this.messages.mensajeGenerico('error', 'error');
 			}
 		);
@@ -274,7 +276,6 @@ export class RegistrarTicket implements OnInit {
 	}
 
 	protected abrirAsignar(): void {
-
 		this.modal.abrirModalConComponente(AsignarTicket, { pkTicket: this.pkTicket }, 'md-modal');
 	}
 

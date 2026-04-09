@@ -114,9 +114,9 @@
 								: 'Usuario asignado:' }}
 							</label>
 
-							<span *ngFor="let id of formTicket.get('idUsuario')?.value; let i = index">
-								{{ getNombreUsuario(id) }}<span
-									*ngIf="i < formTicket.get('idUsuario')?.value.length - 1">, </span>
+							<span *ngFor="let nombre of usuariosAsignados; let i = index">
+								{{ nombre }}<span
+									*ngIf="i < usuariosAsignados.length - 1">, </span>
 							</span>
 
 						</div>

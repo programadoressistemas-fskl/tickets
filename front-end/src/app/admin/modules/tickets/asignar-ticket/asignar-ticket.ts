@@ -6,11 +6,12 @@ import { firstValueFrom } from 'rxjs';
 import { ModalService } from '../../../services/modal/modal';
 import { MessagesService } from '../../../services/messages/messages';
 import { TiketsService } from '../../../services/api/tickets/tikets';
+import { DropdownComponent } from '../../../components/dropdown/dropdown';
 
 @Component({
   selector: 'app-asignar-ticket',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, DropdownComponent],
   templateUrl: './asignar-ticket.html',
   styleUrl: './asignar-ticket.css',
 })
@@ -56,6 +57,10 @@ export class AsignarTicket implements OnInit {
     }
   }
 
+  get usuariosSeleccionados (): any[] {
+    return this.listaUsuarios.filter(item => item.checked);
+  }
+
   public asignarTicket(): void {
     this.messages.mensajeConfirmacionCustom(
       '¿Está seguro de asignar el ticket?',
@@ -69,7 +74,7 @@ export class AsignarTicket implements OnInit {
 
       const data = {
         pkTicket: this.pkTicket,
-        idUsuario: this.formTicket.value.idUsuario
+        idUsuario: this.usuariosSeleccionados.map(item => item.value)
       };
 
       this.tickets.asignarTicket(data).toPromise().then(

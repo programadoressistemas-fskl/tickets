@@ -19,19 +19,9 @@
             <div class="card">
                 <div class="card-body">
                     <form [formGroup]="formTicket">
-
                         <div class="row align-items-center p-3">
-
-                            <select class="form-select form-select-sm" formControlName="idUsuario" multiple>
-
-                                <option *ngFor="let usuario of listaUsuarios" [ngValue]="usuario.id_usuario">
-                                    {{ usuario.nombre }}
-                                </option>
-
-                            </select>
-
+                            <app-dropdown [options]="listaUsuarios"></app-dropdown>
                         </div>
-
                     </form>
                 </div>
             </div>
