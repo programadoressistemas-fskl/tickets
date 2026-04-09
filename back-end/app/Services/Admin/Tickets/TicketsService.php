@@ -20,33 +20,33 @@ class TicketsService
     protected $tiposServicioRepository;
 
     public function __construct(
-        TicketsRepository $TicketsRepository,
-        AreasRepository   $AreasRepository,
-        PlantasRepository $PlantasRepository,
-        TurnosRepository  $TurnosRepository,
+        TicketsRepository       $TicketsRepository,
+        AreasRepository         $AreasRepository,
+        PlantasRepository       $PlantasRepository,
+        TurnosRepository        $TurnosRepository,
         TiposServicioRepository $TiposServicioRepository
     ) {
-        $this->ticketsRepository = $TicketsRepository;
-        $this->areasRepository   = $AreasRepository;
-        $this->plantasRepository = $PlantasRepository;
-        $this->turnosRepository  = $TurnosRepository;
+        $this->ticketsRepository       = $TicketsRepository;
+        $this->areasRepository         = $AreasRepository;
+        $this->plantasRepository       = $PlantasRepository;
+        $this->turnosRepository        = $TurnosRepository;
         $this->tiposServicioRepository = $TiposServicioRepository;
     }
 
     public function obtenerRecursosRegistroTicket()
     {
-        $areas   = $this->areasRepository->obtenerListaAreas();
-        $plantas = $this->plantasRepository->obtenerListaPlantas();
-        $turnos  = $this->turnosRepository->obtenerLIstaTurnos();
+        $areas         = $this->areasRepository->obtenerListaAreas();
+        $plantas       = $this->plantasRepository->obtenerListaPlantas();
+        $turnos        = $this->turnosRepository->obtenerLIstaTurnos();
         $tiposServicio = $this->tiposServicioRepository->obtenerListaTipoServicio();
 
         return response()->json(
             [
                 'mensaje'  => 'Se obtuvo los recursos correctamente',
                 'recursos' => [
-                    'listaareas'   => $areas,
-                    'listaplantas' => $plantas,
-                    'listaturnos'  => $turnos,
+                    'listaareas'         => $areas,
+                    'listaplantas'       => $plantas,
+                    'listaturnos'        => $turnos,
                     'listatiposServicio' => $tiposServicio,
                 ]
             ]
@@ -103,26 +103,16 @@ class TicketsService
 
     public function obtenerDetalleTicket($pkTickets)
     {
-        $data = $this->ticketsRepository->obtenerDetalleTicket($pkTickets);
-        $evidencias = $this->ticketsRepository->obtenerEvidenciasTicket($pkTickets);
+        $ticket            = $this->ticketsRepository->obtenerDetalleTicket($pkTickets);
+        $usuariosAsignados = $this->ticketsRepository->obtenerUsuariosAsignadosTicket($pkTickets);
+        $evidencias        = $this->ticketsRepository->obtenerEvidenciasTicket($pkTickets);
 
         return response()->json(
             [
-                'ticket'             => $data['ticket'],
-                'usuarios_asignados' => $data['usuarios_asignados'],
+                'ticket'             => $ticket,
+                'usuarios_asignados' => $usuariosAsignados,
                 'evidencias'         => $evidencias,
                 'mensaje'            => 'Se obtuvo la informacion correcta'
-            ]
-        );
-    }
-
-    public function obtenerUsuariosAsignacion()
-    {
-        $usuarios = $this->ticketsRepository->obtenerUsuariosAsignacion();
-
-        return response()->json(
-            [
-                'usuarios' => $usuarios
             ]
         );
     }
@@ -136,6 +126,8 @@ class TicketsService
                 'mensaje' => 'Datos inválidos'
             ], 400);
         }
+
+        $this->ticketsRepository->depurarAsignacionesTicket($pkTicket);
 
         foreach ($idUsuario as $usuario) {
 
@@ -152,6 +144,24 @@ class TicketsService
         return response()->json([
             'mensaje' => 'Usuarios asignados correctamente'
         ]);
+    }
+
+    public function obtenerUsuariosAsignacion()
+    {
+        $usuarios = $this->ticketsRepository->obtenerUsuariosAsignacion();
+        $usuarios = $usuarios->map(function ($value) {
+            return [
+                'value' => $value->id_usuario,
+                'label' => $value->nombre,
+                'checked' => false
+            ];
+        });
+
+        return response()->json(
+            [
+                'usuarios' => $usuarios
+            ]
+        );
     }
 
     public function eliminarEvidenciaTicket($id)

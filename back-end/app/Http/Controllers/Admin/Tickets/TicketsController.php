@@ -136,25 +136,6 @@ class TicketsController extends Controller
         }
     }
 
-    public function obtenerUsuariosAsignacion()
-    {
-        try {
-            return $this->ticketsService->obtenerUsuariosAsignacion();
-        } catch (\Throwable $error) {
-            Log::alert('*********************************************');
-            Log::alert('Error al obtener información de Usuario');
-            Log::alert($error);
-
-            return response()->json(
-                [
-                    'error' => $error,
-                    'mensaje' => 'Ocurrió un error interno'
-                ],
-                500
-            );
-        }
-    }
-
     public function asignarTicket(Request $request)
     {
         try {
@@ -172,6 +153,25 @@ class TicketsController extends Controller
             return response()->json([
                 'mensaje' => 'Ocurrió un error interno'
             ], 500);
+        }
+    }
+
+    public function obtenerUsuariosAsignacion()
+    {
+        try {
+            return $this->ticketsService->obtenerUsuariosAsignacion();
+        } catch (\Throwable $error) {
+            Log::alert('*********************************************');
+            Log::alert('Error al obtener información de Usuario');
+            Log::alert($error);
+
+            return response()->json(
+                [
+                    'error' => $error,
+                    'mensaje' => 'Ocurrió un error interno'
+                ],
+                500
+            );
         }
     }
 

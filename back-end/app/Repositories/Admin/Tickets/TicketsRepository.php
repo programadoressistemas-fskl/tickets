@@ -104,13 +104,17 @@ class TicketsRepository
             ->where('id_ticket', $pkTicket)
             ->first();
 
-        $usuariosAsignados = TblTicketsAsignacion::where('id_ticket', $pkTicket)
-            ->pluck('id_usuario');
+        
 
-        return [
-            'ticket' => $ticket,
-            'usuarios_asignados' => $usuariosAsignados
-        ];
+        return $ticket;
+    }
+
+    public function obtenerUsuariosAsignadosTicket ($pkTicket) {
+        $usuariosAsignados = TblTicketsAsignacion::where('tbl_tickets_asignacion.id_ticket', $pkTicket)
+                                                 ->join('tbl_usuarios', 'tbl_usuarios.id_usuario', 'tbl_tickets_asignacion.id_usuario')
+                                                 ->pluck('tbl_usuarios.nombre');
+
+        return $usuariosAsignados;
     }
 
     public function obtenerEvidenciasTicket($pkTicket)
@@ -159,9 +163,8 @@ class TicketsRepository
         }
     }
 
-    public function obtenerUsuariosAsignacion()
-    {
-        return TblUsuarios::select('id_usuario', 'nombre')->get();
+    public function depurarAsignacionesTicket ($pkTicket) {
+        TblTicketsAsignacion::where('id_ticket', $pkTicket)->delete();
     }
 
     public function asignarTicket($ticket)
@@ -173,6 +176,10 @@ class TicketsRepository
         $registro->save();
     }
 
+    public function obtenerUsuariosAsignacion()
+    {
+        return TblUsuarios::select('id_usuario', 'nombre')->get();
+    }
 
     public function cambiarStatusTicket($pkTicket, $status)
     {
