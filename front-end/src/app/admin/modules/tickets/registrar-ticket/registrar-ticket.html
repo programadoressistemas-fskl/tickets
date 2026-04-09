@@ -107,10 +107,18 @@
 						</div>
 
 						<div>
-							<label class="form-label">Usuarios Asignados:</label>
-							<span *ngFor="let id of formTicket.get('idUsuario')?.value">
-								{{ getNombreUsuario(id) }}
+
+							<label class="form-label">
+								{{ (formTicket.get('idUsuario')?.value?.length || 0) > 1
+								? 'Usuarios asignados:'
+								: 'Usuario asignado:' }}
+							</label>
+
+							<span *ngFor="let id of formTicket.get('idUsuario')?.value; let i = index">
+								{{ getNombreUsuario(id) }}<span
+									*ngIf="i < formTicket.get('idUsuario')?.value.length - 1">, </span>
 							</span>
+
 						</div>
 					</form>
 
