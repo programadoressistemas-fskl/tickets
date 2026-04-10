@@ -31,7 +31,7 @@
 
 <div class="modal-footer">
     <button class="btn btn-sm btn-primary" (click)="asignarTicket()">
-        Asignar
+        {{ pkTicket != null ? 'Reasignar' : 'Asignar' }}
     </button>
 
     <button class="btn btn-sm btn-danger" (click)="cerrarModal()">

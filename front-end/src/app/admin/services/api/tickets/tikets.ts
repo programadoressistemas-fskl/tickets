@@ -43,8 +43,8 @@ export class TiketsService {
     return this.http.post<any>(`${api}/tickets/cancelar/${id}`, {});
   }
 
-  public obtenerUsuariosAsignacion(): Observable<any> {
-    return this.http.get<any>(`${api}/tickets/obtenerUsuariosAsignacion`);
+  public obtenerUsuariosAsignacion($pkTicket: number): Observable<any> {
+    return this.http.get<any>(`${api}/tickets/obtenerUsuariosAsignacion/${$pkTicket}`);
   }
 
   public asignarTicket(data: any): Observable<any> {

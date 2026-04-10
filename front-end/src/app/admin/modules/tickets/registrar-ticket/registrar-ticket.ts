@@ -23,7 +23,6 @@ export class RegistrarTicket implements OnInit {
 	protected listaPlantas: any[] = [];
 	protected listaTurnos: any[] = [];
 	protected listatiposServicio: any[] = [];
-	protected listaUsuarios: any[] = [];
 
 	protected usuariosAsignados: any[] = [];
 
@@ -43,7 +42,6 @@ export class RegistrarTicket implements OnInit {
 
 		this.crearFormTicket();
 		await this.obtenerRecursosRegistroTicket();
-		await this.obtenerUsuarios();
 
 		if (this.pkTicket != null) await this.obtenerDetalleTicket(this.pkTicket);
 
@@ -81,20 +79,6 @@ export class RegistrarTicket implements OnInit {
 				this.messages.mensajeGenerico('error', 'error');
 			}
 		);
-	}
-
-	public getNombreUsuario(id: number): string {
-		const usuario = this.listaUsuarios.find(u => u.id_usuario == id);
-		return usuario ? usuario.nombre : '';
-	}
-
-	private async obtenerUsuarios(): Promise<void> {
-		try {
-			const res: any = await this.tickets.obtenerUsuariosAsignacion().toPromise();
-			this.listaUsuarios = res.usuarios;
-		} catch (error) {
-			console.error(error);
-		}
 	}
 
 	private async obtenerRecursosRegistroTicket(): Promise<void> {
@@ -276,7 +260,7 @@ export class RegistrarTicket implements OnInit {
 	}
 
 	protected abrirAsignar(): void {
-		this.modal.abrirModalConComponente(AsignarTicket, { pkTicket: this.pkTicket }, 'md-modal');
+		this.modal.abrirModalConComponente(AsignarTicket, {pkTicket: this.pkTicket, folio: `TK-${this.pkTicket}` }, 'md-modal');
 	}
 
 	get cambiosForm(): boolean {

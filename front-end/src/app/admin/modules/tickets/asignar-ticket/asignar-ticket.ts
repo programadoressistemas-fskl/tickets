@@ -18,6 +18,7 @@ import { DropdownComponent } from '../../../components/dropdown/dropdown';
 export class AsignarTicket implements OnInit {
 
   @Input() pkTicket: any = null;
+  @Input() folio: any = null;
 
   protected formTicket!: FormGroup;
   protected listaUsuarios: any[] = [];
@@ -44,28 +45,38 @@ export class AsignarTicket implements OnInit {
   }
 
   private async obtenerUsuariosAsignacion(): Promise<void> {
-    try {
-      const respuesta: any = await firstValueFrom(
-        this.tickets.obtenerUsuariosAsignacion()
-      );
-
-      this.listaUsuarios = respuesta.usuarios;
-      this.ch.detectChanges();
-
-    } catch (error) {
-      this.messages.mensajeGenerico('error', 'error');
-    }
+    return this.tickets.obtenerUsuariosAsignacion(this.pkTicket).toPromise().then(
+      respuesta => {
+        this.listaUsuarios = respuesta.usuarios;
+        this.ch.detectChanges();
+      }, error => {
+        this.messages.mensajeGenerico('error', 'error');
+      }
+    );
   }
 
-  get usuariosSeleccionados (): any[] {
+  get usuariosSeleccionados(): any[] {
     return this.listaUsuarios.filter(item => item.checked);
   }
 
+  private getNombresSeleccionados(): string {
+
+    return this.usuariosSeleccionados
+      .map(u => u.label)
+      .join(', ');
+  }
+
   public asignarTicket(): void {
+    const nombres = this.getNombresSeleccionados();
+    const esReasignacion = this.pkTicket != null;
+
+    const accion = esReasignacion ? 'reasignar' : 'asignar';
+    const titulo = esReasignacion ? 'Reasignar ticket' : 'Asignar ticket';
+
     this.messages.mensajeConfirmacionCustom(
-      '¿Está seguro de asignar el ticket?',
+      `¿Estás seguro de ${accion} el ticket ${this.folio} a ${nombres}?`,
       'question',
-      'Asignar ticket'
+      titulo
     ).then(res => {
 
       if (!res.isConfirmed) return;
@@ -88,8 +99,11 @@ export class AsignarTicket implements OnInit {
           this.modal.cerrarModal();
 
         }, error => {
-          
-          this.messages.mensajeGenerico('error', 'error');
+
+          this.messages.mensajeGenerico(
+            error?.error?.mensaje || 'Ocurrió un error',
+            'error'
+          );
         }
       );
 
