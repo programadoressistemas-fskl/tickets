@@ -127,6 +127,12 @@ class TicketsService
             ], 400);
         }
 
+        if (empty($idUsuario)) {
+            return response()->json([
+                'mensaje' => 'Debes asignar al menos a un usuario'
+            ], 400);
+        }
+
         $this->ticketsRepository->depurarAsignacionesTicket($pkTicket);
 
         foreach ($idUsuario as $usuario) {
@@ -146,22 +152,22 @@ class TicketsService
         ]);
     }
 
-    public function obtenerUsuariosAsignacion()
+    public function obtenerUsuariosAsignacion($pkTicket)
     {
         $usuarios = $this->ticketsRepository->obtenerUsuariosAsignacion();
-        $usuarios = $usuarios->map(function ($value) {
+        $asignados = $this->ticketsRepository->obtenerIdsUsuariosAsignadosTicket($pkTicket);
+
+        $usuarios = $usuarios->map(function ($value) use ($asignados) {
             return [
                 'value' => $value->id_usuario,
                 'label' => $value->nombre,
-                'checked' => false
+                'checked' => $asignados->contains($value->id_usuario)
             ];
         });
 
-        return response()->json(
-            [
-                'usuarios' => $usuarios
-            ]
-        );
+        return response()->json([
+            'usuarios' => $usuarios
+        ]);
     }
 
     public function eliminarEvidenciaTicket($id)

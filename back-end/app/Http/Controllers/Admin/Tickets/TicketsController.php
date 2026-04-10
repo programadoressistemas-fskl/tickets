@@ -156,10 +156,10 @@ class TicketsController extends Controller
         }
     }
 
-    public function obtenerUsuariosAsignacion()
+    public function obtenerUsuariosAsignacion($pkTicket)
     {
         try {
-            return $this->ticketsService->obtenerUsuariosAsignacion();
+            return $this->ticketsService->obtenerUsuariosAsignacion($pkTicket);
         } catch (\Throwable $error) {
             Log::alert('*********************************************');
             Log::alert('Error al obtener información de Usuario');
